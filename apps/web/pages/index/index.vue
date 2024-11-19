@@ -1,13 +1,13 @@
 <template>
-  <Header />
-  <HeroSection />
-  <Comparative />
-  <MetricsSection />
-  <KPISection />
-  <CTASection />
-  <ApplicationsSection />
-  <Pricing />
-  <Footer />
+  <nuxt-layout>
+    <HeroSection />
+    <Comparative />
+    <MetricsSection />
+    <KPISection />
+    <CTASection />
+    <ApplicationsSection />
+    <Pricing />
+  </nuxt-layout>
 </template>
 
 <script lang="ts" setup>

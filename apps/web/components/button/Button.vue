@@ -1,5 +1,7 @@
 <template>
-  <button :class="[`inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition ${variantClasses[props.variant]}`]">
+  <button :class="[`inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition ${variantClasses[props.variant]}`, {
+    'w-full': props.block
+  }]">
     <slot />
   </button>
 </template>
@@ -8,7 +10,8 @@
 interface Props {
   variant?: 'primary' | 'secondary' | 'filled' | 'outline' | 'text';
   arrow?: 'left' | 'right';
-  to?: string
+  to?: string;
+  block?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
