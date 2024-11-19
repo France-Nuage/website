@@ -1,5 +1,5 @@
 {
-  "name": "@france-nuage/web",
+  "name": "@france-nuage/platform",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,17 +13,16 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "nuxt": "^3.14.159",
-    "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "volta": {
+    "node": "22.11.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "sass-embedded": "^1.81.0",
     "tailwindcss": "^3.4.15"
-  },
-  "volta": {
-    "node": "22.11.0"
   }
 }
