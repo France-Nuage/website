@@ -7,6 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import Comparative from './local-components/comparative.vue';
 import KPISection from './local-components/KPISection.vue';
+import Comparative from './local-components/Comparative.vue';
 </script>
