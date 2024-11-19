@@ -1,23 +1,75 @@
-## Getting Started
+# Nuxt Minimal Starter
 
-First, run the development server:
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+## Setup
+
+Make sure to install dependencies:
 
 ```bash
-pnpm dev
+# npm
+npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development Server
 
-You can start editing the page by modifying `src/app.vue`. The page auto-updates as you edit the file.
+Start the development server on `http://localhost:3000`:
 
-## Learn More
+```bash
+# npm
+npm run dev
 
-To learn more about Vue3, take a look at the following resources:
+# pnpm
+pnpm dev
 
-- [Vue Official Documentation](https://vuejs.org/guide/) - learn about Vue framework for building web user interfaces.
+# yarn
+yarn dev
 
-## Deploy on Vercel
+# bun
+bun run dev
+```
 
-You can easily deploy your Vue app by using the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme).
+## Production
 
-Check out our [Vite deployment documentation](https://vercel.com/docs/frameworks/vite) for more details.
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
