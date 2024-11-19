@@ -1,55 +1,50 @@
 <template>
-    <div class="bg-white py-24 sm:py-32">
+    <div class="bg-white py-8 sm:py-8">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:text-center">
-          <h2 class="text-base/7 font-semibold text-indigo-600">Deploy faster</h2>
-          <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">Everything you need to deploy your app</p>
-          <p class="mt-6 text-lg/8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
-        </div>
         <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-            <div v-for="feature in features" :key="feature.name" class="flex flex-col">
-              <dt class="flex items-center gap-x-3 text-base/7 font-semibold text-gray-900">
-                <component :is="feature.icon" class="size-5 flex-none text-indigo-600" aria-hidden="true" />
-                {{ feature.name }}
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-base/7 text-gray-600">
-                <p class="flex-auto">{{ feature.description }}</p>
-                <p class="mt-6">
-                  <a :href="feature.href" class="text-sm/6 font-semibold text-indigo-600">Learn more <span aria-hidden="true">→</span></a>
-                </p>
-              </dd>
+          <div v-for="feature in features" :key="feature.name" :class="['md:flex items-center gap-24', {
+            'md:flex-row-reverse': feature.reverse
+          }]">
+            <div>
+              <component :is="feature.illustration" />
             </div>
-          </dl>
+            <div>
+              <h3 class="text-5xl flex-auto mb-4">{{ feature.title }}</h3>
+              <p class="text-md text-gray-600 flex-auto">{{ feature.description }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </template>
   
   <script setup>
-  import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/vue/20/solid'
+  import OpenSourceIllustration from "~/pages/index/local-components/fragments/OpenSourceIllustration.vue";
   
   const features = [
     {
-      name: 'Push to deploy',
+      title: 'Gardez le contrôle de votre destin.',
       description:
-        'Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu. Phasellus praesent ligula sit faucibus.',
+        'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance tout en gardant le contrôle sur l’hébergement.',
       href: '#',
-      icon: CloudArrowUpIcon,
+      illustration: OpenSourceIllustration,
+      reverse: false
     },
     {
-      name: 'SSL certificates',
+      title: 'Adoptez l’open-source',
       description:
-        'Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh.',
+        'Fini les évolutions de licences de vos logiciels propriétaires en boites noires. Fini les dépenses inutiles monstrueuses à chaque nouveau besoin. Fini le vendor lock-in, bonjour la réversibilité totale, le rêve de chaque DSI et CTO, vous êtes libres de récupérer vos applications et données à tout moment, en un click.',
       href: '#',
-      icon: LockClosedIcon,
+      illustration: OpenSourceIllustration,
+      reverse: true
     },
     {
-      name: 'Simple queues',
+      title: 'Gardez la main sur votre hébergement',
       description:
-        'Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.',
+        'France-Nuage vous offre la flexibilité de gérer la maintenance de vos propres serveurs. Vous ne possédez pas de serveur ? Aucun problème, vous pouvez aussi opter pour un hébergement France-Nuage pour un prix concurrentiel. Vous pourrez migrer vos applications et données rapidement vers vos propres serveurs plus tard.',
       href: '#',
-      icon: ArrowPathIcon,
+      illustration: OpenSourceIllustration,
+      reverse: false
     },
   ]
   </script>

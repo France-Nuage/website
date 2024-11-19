@@ -1,12 +1,20 @@
 <template>
-    <Header />
-    <Comparative />
-    <KPISection />
-    <Pricing />
-    <Footer />
+  <Header />
+  <HeroSection />
+  <Comparative />
+  <MetricsSection />
+  <KPISection />
+  <CTASection />
+  <ApplicationsSection />
+  <Pricing />
+  <Footer />
 </template>
 
 <script lang="ts" setup>
 import KPISection from './local-components/KPISection.vue';
 import Comparative from './local-components/Comparative.vue';
+import HeroSection from "~/pages/index/local-components/HeroSection.vue";
+import MetricsSection from "~/pages/index/local-components/MetricsSection.vue";
+import CTASection from "~/pages/index/local-components/CTASection.vue";
+import ApplicationsSection from "~/pages/index/local-components/ApplicationsSection.vue";
 </script>
