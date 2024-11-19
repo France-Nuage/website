@@ -24,7 +24,7 @@
         </fieldset>
       </div>
       <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        <div v-for="tier in tiers" :key="tier.id" :class="[tier.mostPopular ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
+        <div v-for="tier in tiers.filter((item) => item.own === ownServer)" :key="tier.id" :class="[tier.mostPopular ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
           <div class="flex items-center justify-between gap-x-4">
             <p class="rounded-full bg-[#CEE9FE] px-2.5 py-1 text-xs/5 font-semibold text-[#Startup]">
               {{ tier.name }}</p>
@@ -52,7 +52,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RadioGroup, RadioGroupOption, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
+import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/20/solid'
 
 const tiers = [
@@ -62,8 +62,14 @@ const tiers = [
     href: '#',
     price: 'Gratuit',
     description: 'The essentials to provide your best work for clients.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    features: [
+      '0% SLA',
+      'Vos ressources',
+      'Forum communautaire',
+      'Conformité de base'
+    ],
     mostPopular: false,
+    own: false
   },
   {
     name: 'Startup',
@@ -72,13 +78,13 @@ const tiers = [
     price: '35€',
     description: 'A plan that scales with your rapidly growing business.',
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      '98% SLA',
+      '2 applications et 2 BDDs',
+      'Support 48h par email',
+      'Conformité RGPD',
     ],
     mostPopular: true,
+    own: false
   },
   {
     name: 'Enterprise',
@@ -87,14 +93,43 @@ const tiers = [
     price: '299€',
     description: 'Dedicated support and infrastructure for your company.',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
-      'Custom reporting tools',
+      '99,9% SLA',
+      'Applications et BDDs illimités',
+      'Support dédié 24/7 avec réponse sous 4h',
+      'Conformité RGPD, HDS, et SOC 2',
     ],
     mostPopular: false,
+    own: false
+  },
+  {
+    name: 'Enterprise',
+    id: 'tier-enterprise',
+    href: '#',
+    price: '299€',
+    description: 'Dedicated support and infrastructure for your company.',
+    features: [
+      '98% SLA',
+      '2 applications et 2 BDDs',
+      'Support 48h par email',
+      'Conformité RGPD',
+    ],
+    mostPopular: false,
+    own: true
+  },
+  {
+    name: 'Enterprise',
+    id: 'tier-enterprise',
+    href: '#',
+    price: '299€',
+    description: 'Dedicated support and infrastructure for your company.',
+    features: [
+      '99,9% SLA',
+      'Applications et BDDs illimités',
+      'Support dédié 24/7 avec réponse sous 4h',
+      'Conformité RGPD, HDS, et SOC 2',
+    ],
+    mostPopular: false,
+    own: true
   },
 ]
 

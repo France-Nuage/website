@@ -5,10 +5,12 @@
       <h2 class="text-balance text-4xl font-semibold tracking-tight text-center sm:text-5xl">Vos applications continuellement maintenues, supervisées et sécurisées</h2>
       <p class="mt-8 text-pretty text-lg font-normal text-center text-gray-500 sm:text-xl/8">Garder la main sur votre budget et votre destin en déployant des applications open-source en 1 clic</p>
 
-      <div class="flex flex-wrap">
-        <div v-for="(application, key) in applications" :key="key" class="w-20 shadow-md">
-          <span>{{ application.name }}</span>
-<!--          <span>({{ application.description }})</span>-->
+      <div class="flex flex-wrap gap-4 mt-8">
+        <div v-for="(application, key) in applications" :key="key" class="w-32 shadow-md rounded">
+          <img :src="`/images/logo_${application.image}.${application.type || 'png'}`" class="m-auto h-16 w-16 object-contain" :alt="application.name" />
+          <div class="p-3 text-center">
+            <span class="text-gray-600">{{ application.name }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -20,57 +22,62 @@ const applications = [
   {
     name: 'Identité & Accès',
     description: 'Keycloak',
-    img: ''
+    image: 'keycloak'
   },
   {
     name: 'Suivi de disponibilité',
     description: 'Uptime Kuma',
-    img: ''
+    image: 'uptime_kuma',
+    type: 'svg'
   },
   {
     name: 'Base de données',
     description: 'PostgreSQL',
-    img: ''
+    image: 'postgresql'
   },
   {
     name: 'Monitoring',
     description: 'Grafana',
-    img: ''
+    image: 'grafana'
   },
   {
     name: 'Object-storage',
     description: '',
-    img: ''
+    image: 'minio',
+    type: 'svg'
   },
   {
     name: 'Loki',
     description: 'Grafana',
-    img: ''
+    image: 'loki',
+    type: 'svg'
   },
   {
     name: 'Métrologie',
     description: 'Mimir',
-    img: ''
+    image: 'mimir',
+    type: 'svg'
   },
   {
     name: 'Cloudflare',
     description: '',
-    img: ''
+    image: 'cloudflare'
   },
   {
     name: 'IA génératives',
     description: 'Ollama',
-    img: ''
+    image: 'olloma'
   },
   {
     name: 'Harbor',
     description: '',
-    img: ''
+    image: 'harbor'
   },
   {
     name: 'Design',
     description: 'Penpot, alternative à Figma',
-    img: ''
+    image: 'penpot',
+    type: 'svg'
   },
 ]
 </script>

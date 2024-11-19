@@ -6,7 +6,7 @@
     <KPISection />
     <CTASection />
     <ApplicationsSection />
-    <Pricing />
+    <PricingSection />
   </nuxt-layout>
 </template>
 
@@ -17,4 +17,5 @@ import HeroSection from "~/pages/index/local-components/HeroSection.vue";
 import MetricsSection from "~/pages/index/local-components/MetricsSection.vue";
 import CTASection from "~/pages/index/local-components/CTASection.vue";
 import ApplicationsSection from "~/pages/index/local-components/ApplicationsSection.vue";
+import PricingSection from "~/pages/index/local-components/PricingSection.vue";
 </script>

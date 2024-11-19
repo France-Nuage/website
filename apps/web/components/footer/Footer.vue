@@ -1,6 +1,6 @@
 <template>
-    <footer class="bg-gray-900 py-24 sm:py-32 -mt-20">
-      <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+    <footer class="bg-gray-900 py-4 mt-20">
+      <div class="mx-auto max-w-7xl overflow-hidden px-6 py-8 lg:px-8">
         <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5 flex gap-4 items-center text-white">
             <Logo /><span class="font-semibold">France Nuage</span>
