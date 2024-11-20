@@ -23,7 +23,7 @@
           </SwitchGroup>
         </fieldset>
       </div>
-      <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      <div class="isolate mx-auto mt-10 grid max-w-md gap-8 lg:mx-0 lg:max-w-none" :class="ownServer ? 'grid-cols-3' : 'grid-cols-2 justify-center'">
         <div v-for="tier in tiers.filter((item) => item.own === ownServer)" :key="tier.id" :class="[tier.mostPopular ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
           <div class="flex items-center justify-between gap-x-4">
             <p class="rounded-full bg-[#CEE9FE] px-2.5 py-1 text-xs/5 font-semibold text-[#Startup]">
@@ -32,7 +32,7 @@
           <p class="mt-6 flex items-baseline gap-x-1">
             <span :class="[tier.mostPopular ? 'text-white' : 'text-gray-900','text-4xl font-semibold tracking-tight'] ">{{ tier.price }}</span>
           </p>
-          <Button block :variant="tier.mostPopular ? 'secondary' : 'primary'" class="mt-6">Commancer maintenant</Button>
+          <Button block :variant="tier.mostPopular ? 'secondary' : 'primary'" class="mt-6">Commencer dès maintenant</Button>
           <div class="xl:mt-10">
             <p v-if="tier.mostPopular" class="text-white lowercase">* Le plan autonome plus :</p>
             <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600">
@@ -60,13 +60,14 @@ const tiers = [
     name: 'Autonome',
     id: 'tier-freelancer',
     href: '#',
-    price: 'Gratuit',
+    price: '15€',
     description: 'The essentials to provide your best work for clients.',
     features: [
-      '0% SLA',
-      'Vos ressources',
-      'Forum communautaire',
-      'Conformité de base'
+      'Ecosystèmes Open-Source',
+      'Services interconnectés',
+      'Supervision et alerting',
+      'Chiffrement de bout en bout',
+      'Uniquement vos ressources'
     ],
     mostPopular: false,
     own: true
@@ -75,13 +76,14 @@ const tiers = [
     name: 'Startup',
     id: 'tier-startup',
     href: '#',
-    price: '35€',
+    price: '45€',
     description: 'A plan that scales with your rapidly growing business.',
     features: [
       '98% SLA',
-      '2 applications et 2 BDDs',
-      'Support 48h par email',
+      'Support sous 24h par mail',
       'Conformité RGPD',
+      'Sauvegarde chez France-Nuage',
+      'Failover avec France-Nuage'
     ],
     mostPopular: true,
     own: true
@@ -94,24 +96,27 @@ const tiers = [
     description: 'Dedicated support and infrastructure for your company.',
     features: [
       '99,9% SLA',
-      'Applications et BDDs illimités',
       'Support dédié 24/7 avec réponse sous 4h',
-      'Conformité RGPD, HDS, et SOC 2',
+      'Migrations sans iterruptions',
+      'Conformité RGPD, ISO 27001',
+      'Sauvegarde multi-site',
+      'Répartition de charge'
     ],
     mostPopular: false,
     own: true
   },
   {
-    name: 'Enterprise',
-    id: 'tier-enterprise',
+    name: 'Startup',
+    id: 'tier-startup',
     href: '#',
-    price: '299€',
-    description: 'Dedicated support and infrastructure for your company.',
+    price: '55€',
+    description: 'A plan that scales with your rapidly growing business.',
     features: [
+      '2 vCPU et 4 Go de RAM',
       '98% SLA',
-      '2 applications et 2 BDDs',
-      'Support 48h par email',
+      'Support sous 24h par mail',
       'Conformité RGPD',
+      'Sauvegarde',
     ],
     mostPopular: false,
     own: false
@@ -123,10 +128,12 @@ const tiers = [
     price: '299€',
     description: 'Dedicated support and infrastructure for your company.',
     features: [
+      '8 vCPU et 24 Go de RAM',
       '99,9% SLA',
-      'Applications et BDDs illimités',
       'Support dédié 24/7 avec réponse sous 4h',
-      'Conformité RGPD, HDS, et SOC 2',
+      'Migrations sans iterruptions',
+      'Conformité RGPD, ISO 27001',
+      'Sauvegarde multi-site'
     ],
     mostPopular: false,
     own: false
