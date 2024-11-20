@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-4xl pt-32 sm:pt-32 lg:pt-32">
       <div class="text-center">
         <h1 class="text-balance text-5xl font-semibold tracking-tight text-gray-700 sm:text-7xl">
-          Réappropriez vous le contrôle de vos services <span class="text-primary">en quittant le cloud</span> tout en conservant ses avantages.
+          Réappropriez vous le contrôle de vos services <span class="text-primary">en quittant le cloud</span>, tout en conservant ses avantages.
         </h1>
         <p class="mt-8 text-pretty text-lg font-normal text-gray-500 sm:text-xl/8">
           Avec la possibilité de connecter vos propres serveurs à notre infrastructure, vous restez maitres de vos données tout en profitant de notre expertise pour les sécuriser.

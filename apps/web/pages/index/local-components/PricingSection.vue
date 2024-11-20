@@ -23,7 +23,7 @@
           </SwitchGroup>
         </fieldset>
       </div>
-      <div class="isolate mx-auto mt-10 grid max-w-md gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" :class="ownServer ? 'grid-cols-3' : 'grid-cols-2 justify-center'">
+      <div class="isolate mx-auto mt-10 grid max-w-md gap-8 lg:mx-0 lg:max-w-none justify-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1" :class="ownServer ? 'lg:grid-cols-3 ' : 'lg:grid-cols-2'">
         <div v-for="tier in tiers.filter((item) => item.alreadyHaveServers === ownServer)" :key="tier.id" :class="[tier.isStartup ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
           <div class="flex items-center justify-between gap-x-4">
             <p class="rounded-full bg-[#CEE9FE] px-2.5 py-1 text-xs/5 font-semibold text-[#Startup]">
