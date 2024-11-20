@@ -27,7 +27,7 @@
       {
         title: 'Gardez le contrôle de votre destin.',
         description:
-          'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance tout en gardant le contrôle sur l’hébergement.',
+          'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance de votre infrastructure tout en gardant le contrôle sur son hébergement.',
         href: '#',
         illustration: ControlDestinyIllustration,
         reverse: false
@@ -35,7 +35,7 @@
       {
         title: 'Adoptez l’open-source',
         description:
-          'Fini les évolutions de licences de vos logiciels propriétaires en boites noires. Fini les dépenses inutiles monstrueuses à chaque nouveau besoin. Fini le vendor lock-in, bonjour la réversibilité totale, le rêve de chaque DSI et CTO, vous êtes libres de récupérer vos applications et données à tout moment, en un click.',
+          'Fini les évolutions de licences de vos logiciels propriétaires en boites noires. Fini les dépenses inutiles monstrueuses à chaque nouveau besoin. Fini le vendor lock-in, bonjour la réversibilité totale, le rêve de chaque DSI et CTO, vous êtes libres de récupérer vos applications et données à tout moment, en un clique.',
         href: '#',
         illustration: OpenSourceIllustration,
         reverse: true
