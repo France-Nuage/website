@@ -1,74 +1,57 @@
+version: '3.8'
+
 services:
-    laravel.test:
-        build:
-            context: './vendor/laravel/sail/runtimes/8.3'
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.3/app'
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-            IGNITION_LOCAL_SITES_PATH: '${PWD}'
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
-        depends_on:
-            - pgsql
-            - redis
-    pgsql:
-        image: 'postgres:17'
-        ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
-        environment:
-            PGPASSWORD: '${DB_PASSWORD:-secret}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-        volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - pg_isready
-                - '-q'
-                - '-d'
-                - '${DB_DATABASE}'
-                - '-U'
-                - '${DB_USERNAME}'
-            retries: 3
-            timeout: 5s
-    redis:
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
-        volumes:
-            - 'sail-redis:/data'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
-            retries: 3
-            timeout: 5s
-networks:
-    sail:
-        driver: bridge
+  postgres-api-france-nuage:
+    container_name: postgres-api-france-nuage
+    image: postgres:15
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
+    logging:
+      options:
+        max-size: '10m'
+        max-file: '5'
+      driver: json-file
+    command: [ "postgres", "-c", "log_statement=all", "-c", "log_destination=stderr" ]
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d avis-de-deces -U admin" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis-api-france-nuage:
+    container_name: redis-api-france-nuage
+    image: redis:6-alpine
+    volumes:
+      - redis_volume:/data
+    ports:
+      - 6379:6379
+
+#  api-france-nuage:
+#    container_name: adonis_app
+#    restart: always
+#    depends_on:
+#      - postgres
+#      - redis
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - ${PORT}:${PORT}
+#      - 9229:9229
+#    env_file:
+#      - .env
+#    environment:
+#      - PG_HOST=postgres
+#      - REDIS_HOST=redis
+#    volumes:
+#      - ./:/home/node/app
+#    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+
 volumes:
-    sail-pgsql:
-        driver: local
-    sail-redis:
-        driver: local
+  postgres_volume:
+  redis_volume:
