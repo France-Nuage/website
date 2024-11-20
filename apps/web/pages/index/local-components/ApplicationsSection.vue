@@ -47,7 +47,7 @@ const applications = [
     type: 'svg'
   },
   {
-    name: 'Loki',
+    name: 'Journalisation',
     description: 'Grafana',
     image: 'loki',
     type: 'svg'
@@ -69,7 +69,7 @@ const applications = [
     image: 'olloma'
   },
   {
-    name: 'Harbor',
+    name: 'Dépôt d\'artefacts',
     description: '',
     image: 'harbor'
   },

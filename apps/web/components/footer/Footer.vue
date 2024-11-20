@@ -5,14 +5,13 @@
           <a href="#" class="-m-1.5 p-1.5 flex gap-4 items-center text-white">
             <Logo /><span class="font-semibold">France Nuage</span>
           </a>
-          <nuxt-link to="/legal" class="text-white hover:underline">Mention légal</nuxt-link>
-          <p class="text-center text-sm/6 text-white">&copy; 2024 Your Company, Inc. All rights reserved.</p>
+          <nuxt-link to="/legal" class="text-white hover:underline">Mention légales</nuxt-link>
+          <p class="text-center text-sm/6 text-white">&copy; 2024 France-Nuage, Inc. Tous droits reservé.</p>
         </div>
       </div>
     </footer>
   </template>
   
   <script setup>
-
   import Logo from "~/components/Logo.vue";
   </script>
