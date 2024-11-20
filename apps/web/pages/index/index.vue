@@ -7,6 +7,7 @@
     <CTASection />
     <ApplicationsSection />
     <PricingSection />
+    <TeamSection />
   </nuxt-layout>
 </template>
 
@@ -18,4 +19,5 @@ import MetricsSection from "~/pages/index/local-components/MetricsSection.vue";
 import CTASection from "~/pages/index/local-components/CTASection.vue";
 import ApplicationsSection from "~/pages/index/local-components/ApplicationsSection.vue";
 import PricingSection from "~/pages/index/local-components/PricingSection.vue";
+import TeamSection from "~/pages/index/local-components/TeamSection.vue";
 </script>
