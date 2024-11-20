@@ -24,21 +24,22 @@
         </fieldset>
       </div>
       <div class="isolate mx-auto mt-10 grid max-w-md gap-8 lg:mx-0 lg:max-w-none" :class="ownServer ? 'grid-cols-3' : 'grid-cols-2 justify-center'">
-        <div v-for="tier in tiers.filter((item) => item.own === ownServer)" :key="tier.id" :class="[tier.mostPopular ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
+        <div v-for="tier in tiers.filter((item) => item.alreadyHaveServers === ownServer)" :key="tier.id" :class="[tier.isStartup ? 'ring-2 ring-primary bg-primary' : 'ring-1 ring-gray-200', 'rounded-3xl p-8 xl:p-10']">
           <div class="flex items-center justify-between gap-x-4">
             <p class="rounded-full bg-[#CEE9FE] px-2.5 py-1 text-xs/5 font-semibold text-[#Startup]">
               {{ tier.name }}</p>
           </div>
           <p class="mt-6 flex items-baseline gap-x-1">
-            <span :class="[tier.mostPopular ? 'text-white' : 'text-gray-900','text-4xl font-semibold tracking-tight'] ">{{ tier.price }}</span>
+            <span :class="[tier.isStartup ? 'text-white' : 'text-gray-900','text-4xl font-semibold tracking-tight'] ">{{ tier.price }}</span>
           </p>
-          <Button block :variant="tier.mostPopular ? 'secondary' : 'primary'" class="mt-6">Commencer dès maintenant</Button>
+          <Button block :variant="tier.isStartup ? 'secondary' : 'primary'" class="mt-6">Commencer dès maintenant</Button>
           <div class="xl:mt-10">
-            <p v-if="tier.mostPopular" class="text-white lowercase">* Le plan autonome plus :</p>
+            <p v-if="tier.isStartup && tier.alreadyHaveServers" class="text-white lowercase">* Le plan autonome plus :</p>
+            <p v-if="tier.isEntreprise" class="lowercase">* Le plan startup plus :</p>
             <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600">
               <li v-for="feature in tier.features" :key="feature" class="flex gap-x-3">
-                <CheckIcon :class="[tier.mostPopular ? 'text-[#CEF6F7]' : 'text-primary', 'h-6 w-5 flex-none']" aria-hidden="true" />
-                <span :class="[{'text-[#CEF6F7]': tier.mostPopular}]">
+                <CheckIcon :class="[tier.isStartup ? 'text-[#CEF6F7]' : 'text-primary', 'h-6 w-5 flex-none']" aria-hidden="true" />
+                <span :class="[{'text-[#CEF6F7]': tier.isStartup}]">
                   {{ feature }}
                 </span>
               </li>
@@ -69,8 +70,9 @@ const tiers = [
       'Chiffrement de bout en bout',
       'Uniquement vos ressources'
     ],
-    mostPopular: false,
-    own: true
+    isStartup: false,
+    isEntreprise: false,
+    alreadyHaveServers: true
   },
   {
     name: 'Startup',
@@ -85,8 +87,9 @@ const tiers = [
       'Sauvegarde chez France-Nuage',
       'Failover avec France-Nuage'
     ],
-    mostPopular: true,
-    own: true
+    isStartup: true,
+    isEntreprise: false,
+    alreadyHaveServers: true
   },
   {
     name: 'Enterprise',
@@ -102,8 +105,9 @@ const tiers = [
       'Sauvegarde multi-site',
       'Répartition de charge'
     ],
-    mostPopular: false,
-    own: true
+    isStartup: false,
+    isEntreprise: true,
+    alreadyHaveServers: true
   },
   {
     name: 'Startup',
@@ -118,8 +122,9 @@ const tiers = [
       'Conformité RGPD',
       'Sauvegarde',
     ],
-    mostPopular: false,
-    own: false
+    isStartup: true,
+    isEntreprise: false,
+    alreadyHaveServers: false
   },
   {
     name: 'Enterprise',
@@ -135,8 +140,9 @@ const tiers = [
       'Conformité RGPD, ISO 27001',
       'Sauvegarde multi-site'
     ],
-    mostPopular: false,
-    own: false
+    isStartup: false,
+    isEntreprise: true,
+    alreadyHaveServers: false
   },
 ]
 
