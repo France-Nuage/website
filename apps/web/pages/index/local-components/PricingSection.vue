@@ -34,7 +34,7 @@
           </p>
           <Button block :variant="tier.mostPopular ? 'secondary' : 'primary'" class="mt-6">Commancer maintenant</Button>
           <div class="xl:mt-10">
-            <p v-if="tier.mostPopular" class="text-white uppercase">Le plan autonome plus :</p>
+            <p v-if="tier.mostPopular" class="text-white lowercase">* Le plan autonome plus :</p>
             <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600">
               <li v-for="feature in tier.features" :key="feature" class="flex gap-x-3">
                 <CheckIcon :class="[tier.mostPopular ? 'text-[#CEF6F7]' : 'text-primary', 'h-6 w-5 flex-none']" aria-hidden="true" />
@@ -69,7 +69,7 @@ const tiers = [
       'Conformité de base'
     ],
     mostPopular: false,
-    own: false
+    own: true
   },
   {
     name: 'Startup',
@@ -84,7 +84,7 @@ const tiers = [
       'Conformité RGPD',
     ],
     mostPopular: true,
-    own: false
+    own: true
   },
   {
     name: 'Enterprise',
@@ -99,7 +99,7 @@ const tiers = [
       'Conformité RGPD, HDS, et SOC 2',
     ],
     mostPopular: false,
-    own: false
+    own: true
   },
   {
     name: 'Enterprise',
@@ -114,7 +114,7 @@ const tiers = [
       'Conformité RGPD',
     ],
     mostPopular: false,
-    own: true
+    own: false
   },
   {
     name: 'Enterprise',
@@ -129,9 +129,9 @@ const tiers = [
       'Conformité RGPD, HDS, et SOC 2',
     ],
     mostPopular: false,
-    own: true
+    own: false
   },
 ]
 
-const ownServer = ref(false)
+const ownServer = ref(true)
 </script>

@@ -19,32 +19,34 @@
   </template>
   
   <script setup>
-  import OpenSourceIllustration from "~/pages/index/local-components/fragments/OpenSourceIllustration.vue";
-  
-  const features = [
-    {
-      title: 'Gardez le contrôle de votre destin.',
-      description:
-        'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance tout en gardant le contrôle sur l’hébergement.',
-      href: '#',
-      illustration: OpenSourceIllustration,
-      reverse: false
-    },
-    {
-      title: 'Adoptez l’open-source',
-      description:
-        'Fini les évolutions de licences de vos logiciels propriétaires en boites noires. Fini les dépenses inutiles monstrueuses à chaque nouveau besoin. Fini le vendor lock-in, bonjour la réversibilité totale, le rêve de chaque DSI et CTO, vous êtes libres de récupérer vos applications et données à tout moment, en un click.',
-      href: '#',
-      illustration: OpenSourceIllustration,
-      reverse: true
-    },
-    {
-      title: 'Gardez la main sur votre hébergement',
-      description:
-        'France-Nuage vous offre la flexibilité de gérer la maintenance de vos propres serveurs. Vous ne possédez pas de serveur ? Aucun problème, vous pouvez aussi opter pour un hébergement France-Nuage pour un prix concurrentiel. Vous pourrez migrer vos applications et données rapidement vers vos propres serveurs plus tard.',
-      href: '#',
-      illustration: OpenSourceIllustration,
-      reverse: false
-    },
-  ]
+    import OpenSourceIllustration from "~/pages/index/local-components/fragments/OpenSourceIllustration.vue";
+    import ControlDestinyIllustration from "./fragments/ControlDestinyIllustration.vue";
+    import ControlHostingIllustration from "./fragments/ControlHostingIllustration.vue";
+    
+    const features = [
+      {
+        title: 'Gardez le contrôle de votre destin.',
+        description:
+          'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance tout en gardant le contrôle sur l’hébergement.',
+        href: '#',
+        illustration: ControlDestinyIllustration,
+        reverse: false
+      },
+      {
+        title: 'Adoptez l’open-source',
+        description:
+          'Fini les évolutions de licences de vos logiciels propriétaires en boites noires. Fini les dépenses inutiles monstrueuses à chaque nouveau besoin. Fini le vendor lock-in, bonjour la réversibilité totale, le rêve de chaque DSI et CTO, vous êtes libres de récupérer vos applications et données à tout moment, en un click.',
+        href: '#',
+        illustration: OpenSourceIllustration,
+        reverse: true
+      },
+      {
+        title: 'Gardez la main sur votre hébergement',
+        description:
+          'France-Nuage vous offre la flexibilité de gérer la maintenance de vos propres serveurs. Vous ne possédez pas de serveur ? Aucun problème, vous pouvez aussi opter pour un hébergement France-Nuage pour un prix concurrentiel. Vous pourrez migrer vos applications et données rapidement vers vos propres serveurs plus tard.',
+        href: '#',
+        illustration: ControlHostingIllustration,
+        reverse: false 
+      },
+    ]
   </script>
