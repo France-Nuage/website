@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,8 +11,18 @@ export default {
     "./error.vue",
   ],
   theme: {
+    colors: {
+      ...colors,
+      ...{
+        primary: {
+          DEFAULT: "#1A4CE5"
+        },
+      }
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
 

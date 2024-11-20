@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <nuxt-layout>
     <h1 class="text-3xl font-bold underline">
       Hello world!
+
     </h1>
-  </div>
+  </nuxt-layout>
 </template>
 
 <script lang="ts" setup>

@@ -1,0 +1,42 @@
+<template>
+  <div>
+    <c-label
+      v-if="props.label"
+      :for="props.id || props.name"
+      :label="props.label"
+      class="block text-sm/6 font-medium text-gray-900"
+    />
+    <div class="mt-2">
+      <input
+        :id="props.id || props.name"
+        :name="props.name"
+        :type="props.type"
+        :autocomplete="props.autocomplete"
+        :required="props.required"
+        :placeholder="props.placeholder"
+        class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm/6" />
+    </div>
+    <div v-if="props.description" class="text-gray-500 mt-2 text-sm">{{ props.description }}</div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import CLabel from "~/components/forms/CLabel.vue";
+
+interface Props {
+  required: boolean;
+  autocomplete?: string;
+  name: string;
+  id: string;
+  type: string;
+  placeholder?: string;
+  label?: string;
+  description?: string;
+}
+
+const props = defineProps<Props>()
+</script>
+
+<style scoped>
+
+</style>
