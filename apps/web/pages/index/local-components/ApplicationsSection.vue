@@ -36,12 +36,12 @@ const applications = [
     image: 'postgresql'
   },
   {
-    name: 'Monitoring',
+    name: 'Surveillance',
     description: 'Grafana',
     image: 'grafana'
   },
   {
-    name: 'Object-storage',
+    name: 'Stockage Objet',
     description: '',
     image: 'minio',
     type: 'svg'
@@ -59,7 +59,7 @@ const applications = [
     type: 'svg'
   },
   {
-    name: 'Cloudflare',
+    name: 'Délivrance de contenu',
     description: '',
     image: 'cloudflare'
   },
@@ -79,5 +79,29 @@ const applications = [
     image: 'penpot',
     type: 'svg'
   },
+  {
+    name: 'Gestionnaire de mot de passes',
+    description: 'Vaultwarden, alternative à Bitwarden',
+    image: 'vaultwarden',
+    type: 'svg'
+  },
+  {
+    name: 'Dépôt de code source',
+    description: 'Gitlab',
+    image: 'gitlab',
+    type: 'svg'
+  },
+  {
+    name: 'Livraison continue',
+    description: 'Gitlab runner',
+    image: 'gitlab_runner',
+    type: 'png'
+  },
+  {
+    name: 'CRM',
+    description: 'Odoo',
+    image: 'odoo',
+    type: 'svg'
+  }
 ]
 </script>
