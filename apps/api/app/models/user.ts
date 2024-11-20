@@ -24,10 +24,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare password: string
 
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  declare created_at: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare updated_at: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }
