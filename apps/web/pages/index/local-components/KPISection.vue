@@ -20,6 +20,9 @@
   
   <script setup>
   import OpenSourceIllustration from "~/pages/index/local-components/fragments/OpenSourceIllustration.vue";
+import KeepControlIllustration from "./fragments/ControlDestinyIllustration.vue";
+import ControlDestinyIllustration from "./fragments/ControlDestinyIllustration.vue";
+import ControlHostingIllustration from "./fragments/ControlHostingIllustration.vue";
   
   const features = [
     {
@@ -27,7 +30,7 @@
       description:
         'Reprenez votre autonomie vis-à-vis de votre destin. Avec France-Nuage, simplifiez la maintenance tout en gardant le contrôle sur l’hébergement.',
       href: '#',
-      illustration: OpenSourceIllustration,
+      illustration: ControlDestinyIllustration,
       reverse: false
     },
     {
@@ -43,8 +46,8 @@
       description:
         'France-Nuage vous offre la flexibilité de gérer la maintenance de vos propres serveurs. Vous ne possédez pas de serveur ? Aucun problème, vous pouvez aussi opter pour un hébergement France-Nuage pour un prix concurrentiel. Vous pourrez migrer vos applications et données rapidement vers vos propres serveurs plus tard.',
       href: '#',
-      illustration: OpenSourceIllustration,
-      reverse: false
+      illustration: ControlHostingIllustration,
+      reverse: false 
     },
   ]
   </script>
