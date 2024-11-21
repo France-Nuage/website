@@ -15,7 +15,7 @@ interface ProjectResource {
 
 type PatchProjectData = Partial<ProjectResource> | { resultCode: string };
 
-const ProjectRepository = function (client: AxiosInstance) {
+const ProjectRepository = function (client, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ProjectResource[]>> => {
       try {

@@ -16,7 +16,7 @@ interface UserResource {
 
 type PatchUserData = Partial<UserResource> | { resultCode: string };
 
-const UserRepository = function (client: AxiosInstance) {
+const UserRepository = function (client, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<any>> => {
       try {

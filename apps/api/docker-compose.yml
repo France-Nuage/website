@@ -5,7 +5,7 @@ services:
     container_name: postgres-api-france-nuage
     image: postgres:15
     volumes:
-      - postgres_volume:/var/lib/postgresql/data
+      - postgres_volume_france_nuage:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -27,7 +27,7 @@ services:
     container_name: redis-api-france-nuage
     image: redis:6-alpine
     volumes:
-      - redis_volume:/data
+      - redis_volume_france_nuage:/data
     ports:
       - 6379:6379
 
@@ -53,5 +53,5 @@ services:
 #    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
 
 volumes:
-  postgres_volume:
-  redis_volume:
+  postgres_volume_france_nuage:
+  redis_volume_france_nuage:

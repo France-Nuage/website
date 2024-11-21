@@ -43,21 +43,7 @@ export const SecurityRepository = function (client: AxiosInstance, config: Recor
         firstname: credentials.firstname,
         email: credentials.email,
         password: credentials.password,
-        confirm_password: credentials.confirm_password,
       }),
-    getPermission: async () => client.get('/auth/permission')
-      .then((response) => response)
-      .catch((e) => e.message),
-    navigationCheckingAuthorization: async (data: { slug: string }) => client.post('/auth/navigation-checking', data),
-      // .catch((e) => e.message),
-      // .then((response) => response)
-    getValidateRoutes: async () => {
-      try {
-        return await client.get('/auth/validate-routes')
-      } catch (e) {
-        throw new Error(e.message)
-      }
-    }
   };
 };
 

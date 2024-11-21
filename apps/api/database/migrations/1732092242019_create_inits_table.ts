@@ -21,7 +21,7 @@ export default class extends BaseSchema {
       table.string('fax')
       table.string('phone')
       table.string('establishment_identifier')
-      table.string('environment__id')
+      table.uuid('environment__id')
       table.integer('owner__id')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
@@ -51,27 +51,27 @@ export default class extends BaseSchema {
       table.foreign('organization__id').references('organization__id').inTable('iam.organizations')
     })
 
-    this.schema.createSchema('application')
-    this.schema.withSchema('application').createTable('applications', (table) => {
-      table.uuid('application__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+    this.schema.createSchema('service')
+    this.schema.withSchema('service').createTable('services', (table) => {
+      table.uuid('service__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
 
-    this.schema.withSchema('application').createTable('versions', (table) => {
-      table.uuid('application__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+    this.schema.withSchema('service').createTable('versions', (table) => {
+      table.uuid('version__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.string('description')
       table.timestamp('available_at')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
-      table.uuid('application__id')
+      table.uuid('service__id')
       table
-        .foreign('application__id')
-        .references('application__id')
-        .inTable('application.applications')
+        .foreign('service__id')
+        .references('service__id')
+        .inTable('service.services')
     })
   }
 

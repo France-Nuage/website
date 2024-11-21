@@ -1,8 +1,7 @@
-import { AxiosInstance } from 'axios';
-
+import type { AxiosInstance } from 'axios';
 import { parseUri } from '../parsers/url';
-import { AllowedParams } from './ApiParams';
-import { ApiResponse } from './ApiResponse';
+import type { AllowedParams } from './ApiParams';
+import type { ApiResponse } from './ApiResponse';
 
 interface PostOrganizationData {}
 
@@ -18,7 +17,7 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-const OrganizationRepository = function (client: AxiosInstance) {
+const OrganizationRepository = function (client: AxiosInstance, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
       try {
