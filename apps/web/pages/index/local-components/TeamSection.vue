@@ -20,7 +20,7 @@
                     <img class="size-20 rounded-full" :src="`/images/profil_alex.jpeg`" alt="">
                     <div>
                         <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Alexandre CAILLER</h3>
-                        <p class="text-sm/6 font-semibold" style="color: #284ada;">Co-Founder / Responsable produit et DX</p>
+                        <p class="text-sm/6 font-semibold" style="color: #284ada;">Ex. Ouest-France</p>
                     </div>
                 </div>
             </li>
