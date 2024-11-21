@@ -3,6 +3,7 @@ import { DateTime } from 'luxon'
 import Project from '#models/iam/project'
 import type {BelongsTo, HasMany} from '@adonisjs/lucid/types/relations'
 import Environment from "#models/iam/environment";
+import User from "#models/user";
 
 export default class Organization extends BaseModel {
   public static table = 'iam.organizations'
@@ -19,7 +20,10 @@ export default class Organization extends BaseModel {
   declare name: string
 
   @column({ columnName: 'environment__id' })
-  declare environment_id: string
+  declare environment__id: string
+
+  @column({ columnName: 'owner__id' })
+  declare owner__id: string
 
   @column.dateTime({ autoCreate: true })
   declare created_at: DateTime
@@ -32,4 +36,7 @@ export default class Organization extends BaseModel {
 
   @belongsTo(() => Environment)
   declare environment: BelongsTo<typeof Environment>
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
 }

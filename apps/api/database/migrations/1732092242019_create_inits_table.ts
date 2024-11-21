@@ -22,9 +22,11 @@ export default class extends BaseSchema {
       table.string('phone')
       table.string('establishment_identifier')
       table.string('environment__id')
+      table.integer('owner__id')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
+      table.foreign('owner__id').references('id').inTable('users')
       table.foreign('environment__id').references('environment__id').inTable('iam.environments')
     })
 
