@@ -52,7 +52,7 @@
 <script setup>
 import Logo from "~/components/Logo.vue";
 const navigation = {
-  solutions: [
+  solutions: [ 
     { name: 'Marketing', nameFr: 'Marketing', href: '/marketing' },
     { name: 'Automation', nameFr: 'Automatisation', href: '/automation' },
     { name: 'Insights', nameFr: 'Perspectives', href: '/insights' },
