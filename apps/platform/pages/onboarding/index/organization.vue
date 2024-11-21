@@ -32,11 +32,11 @@
     </c-card-body>
     <c-card-footer>
       <div>
-        <CButton>Annulé</CButton>
+        <CButton variant="filled" size="sm">Annulé</CButton>
       </div>
       <div class="flex items-center gap-4">
-        <small class="text-gray-600">Vous pouvez renommer le nom de l'organisation plus tard</small>
-        <CButton>Créer une organisation</CButton>
+        <small class="text-xs">Vous pouvez renommer le nom <br> de l'organisation plus tard</small>
+        <CButton size="sm">Créer une organisation</CButton>
       </div>
     </c-card-footer>
   </c-card>

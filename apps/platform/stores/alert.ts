@@ -1,5 +1,3 @@
-import { defineStore } from 'pinia';
-
 interface Alert {
   id?: number;
   type?: 'success' | 'danger' | 'warning';

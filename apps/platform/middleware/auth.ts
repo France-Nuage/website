@@ -22,16 +22,17 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     return navigateTo('/auth/login');
   }
 
-  await authStore.loadAuthorizedRoutes()
 
-  try {
-    const data = await authStore.navigationCheckingAuthorization(to.name)
-    if ([403].includes(data.status)) {
-      return navigateTo('/');
-    }
-  } catch (e) {
-    abortNavigation();
-    return navigateTo('/');
-  }
+  // await authStore.loadAuthorizedRoutes()
+
+  // try {
+  //   const data = await authStore.navigationCheckingAuthorization(to.name)
+  //   if ([403].includes(data.status)) {
+  //     return navigateTo('/');
+  //   }
+  // } catch (e) {
+  //   abortNavigation();
+  //   return navigateTo('/');
+  // }
 })
 

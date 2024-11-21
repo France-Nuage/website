@@ -1,7 +1,3 @@
-// store/auth.ts
-
-import { defineStore } from 'pinia';
-
 interface UserPayloadInterface {
   username: string;
   password: string;
