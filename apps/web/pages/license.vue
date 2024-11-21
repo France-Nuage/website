@@ -1,44 +1,94 @@
 <template>
-  <div class="bg-gray-100 min-h-screen p-8">
-    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
-      <h1 class="text-2xl font-semibold text-gray-900 mb-6">Licence Open Source GPL v3</h1>
-      <p class="text-gray-700 leading-relaxed">
-        Ce projet est distribué sous la <strong>GNU General Public License, version 3 (GPL-3.0)</strong>. Vous pouvez utiliser, modifier et distribuer ce logiciel, à condition que toutes les copies et les dérivés soient également partagés sous cette licence.
-      </p>
-      <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-4">Résumé des Conditions</h2>
-      <p class="text-gray-700 leading-relaxed">
-        La <strong>GPL v3</strong> est une licence open source conçue pour garantir aux utilisateurs la liberté d'utiliser et de modifier ce logiciel tout en protégeant la communauté contre les restrictions.
-      </p>
-      <p class="text-gray-700 leading-relaxed mt-4">
-        Vous êtes libre de :
-      </p>
-      <ul class="list-disc list-inside mt-4 text-gray-700 leading-relaxed">
-        <li>Utiliser ce logiciel à des fins personnelles, éducatives, ou commerciales.</li>
-        <li>Modifier le logiciel pour répondre à vos besoins spécifiques.</li>
-        <li>Distribuer des copies du logiciel, modifiées ou non, à d'autres utilisateurs.</li>
-      </ul>
-      <p class="text-gray-700 leading-relaxed mt-4">
-        Toutefois, si vous distribuez une version modifiée de ce logiciel, vous devez également fournir le code source sous la même licence GPL v3 afin de garantir que les utilisateurs disposent des mêmes libertés que vous.
-      </p>
-      <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-4">Clause de Défense des Brevets</h2>
-      <p class="text-gray-700 leading-relaxed">
-        La <strong>GPL v3</strong> inclut une clause de défense contre les brevets. Si vous initiez des actions en justice contre quiconque pour une violation de brevet liée à ce logiciel, vous perdez automatiquement les droits d'utilisation de ce logiciel. Cela permet de protéger la communauté contre les attaques juridiques injustifiées.
-      </p>
-      <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-4">Garanties et Responsabilité</h2>
-      <p class="text-gray-700 leading-relaxed">
-        Ce logiciel est fourni "tel quel", sans garantie d'aucune sorte. L'utilisation de ce logiciel est entièrement à vos risques et périls.
-      </p>
-      <p class="text-gray-700 leading-relaxed mt-4">
-        Pour plus de détails, vous pouvez consulter le texte complet de la licence sur le site officiel de la <a href="https://www.gnu.org/licenses/gpl-3.0.fr.html" class="text-blue-500 hover:underline">GNU General Public License v3</a>.
-      </p>
+  <nuxt-layout>
+    <div class="relative isolate px-6 pt-14 lg:px-8 bg-gray-50">
+      <div class="mx-auto max-w-4xl pt-20 pb-16 sm:pt-28 lg:pt-32">
+        
+        <!-- Titre Principal -->
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Licence GPL v3 de France-Nuage</h1>
+        
+        <!-- Introduction à la Licence GPL v3 -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Introduction</h2>
+          <p class="text-gray-700 mb-4">
+            France-Nuage s'engage en faveur du logiciel libre et open-source. Nos logiciels sont distribués sous la <strong>Licence Publique Générale GNU, version 3 (GPL v3)</strong>, afin de garantir la liberté d'utiliser, d'étudier, de modifier et de redistribuer notre code source.
+          </p>
+          <p class="text-gray-700">
+            Cette page présente un aperçu de la licence GPL v3 et ce qu'elle implique pour nos utilisateurs et développeurs.
+          </p>
+        </section>
+
+        <!-- Qu'est-ce que la Licence GPL v3 ? -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Qu'est-ce que la Licence GPL v3 ?</h2>
+          <p class="text-gray-700">
+            La <strong>GPL v3</strong> est une licence de logiciel libre publiée par la <strong>Free Software Foundation (FSF)</strong>. Elle garantit aux utilisateurs quatre libertés fondamentales :
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-4">
+            <li>La liberté d'utiliser le logiciel pour n'importe quel usage.</li>
+            <li>La liberté d'étudier le fonctionnement du logiciel et de l'adapter à vos besoins.</li>
+            <li>La liberté de redistribuer des copies du logiciel pour aider les autres.</li>
+            <li>La liberté d'améliorer le logiciel et de publier vos améliorations pour en faire bénéficier toute la communauté.</li>
+          </ul>
+        </section>
+
+        <!-- Vos Droits et Obligations -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Vos Droits et Obligations</h2>
+          <p class="text-gray-700 mb-4">
+            En utilisant un logiciel sous licence GPL v3, vous bénéficiez de certaines libertés, mais vous devez également respecter certaines obligations, notamment :
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-4">
+            <li><strong>Code source :</strong> Si vous redistribuez une version du logiciel, vous devez également fournir le code source ou indiquer comment il peut être obtenu.</li>
+            <li><strong>Licences dérivées :</strong> Toute modification que vous apportez au logiciel doit être distribuée sous la même licence GPL v3, garantissant que toutes les versions futures resteront également libres.</li>
+            <li><strong>Liberté pour tous :</strong> Vous ne pouvez pas imposer de restrictions supplémentaires sur les droits accordés par la licence GPL v3. Chaque utilisateur doit bénéficier des mêmes libertés.</li>
+          </ul>
+        </section>
+
+        <!-- Avantages de la Licence GPL v3 -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pourquoi la Licence GPL v3 ?</h2>
+          <p class="text-gray-700 mb-4">
+            La licence GPL v3 est un choix naturel pour France-Nuage, car elle est alignée sur nos valeurs d'**ouverture**, de **transparence**, et de **collaboration**. En utilisant la GPL v3, nous :
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-4">
+            <li>Encourageons une communauté de développeurs à contribuer à l'amélioration de notre logiciel.</li>
+            <li>Garantissons que nos utilisateurs ont un contrôle total sur leur infrastructure et leurs données.</li>
+            <li>Assurons la pérennité et l'accessibilité de notre code source, même en cas d'évolution du projet.</li>
+          </ul>
+        </section>
+
+        <!-- Télécharger la Licence GPL v3 -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Télécharger la Licence</h2>
+          <p class="text-gray-700">
+            Pour plus d'informations, vous pouvez consulter le texte intégral de la <strong>Licence Publique Générale GNU, version 3</strong>, en cliquant sur le lien ci-dessous :
+          </p>
+          <p class="text-gray-700 mt-4">
+            <a href="https://www.gnu.org/licenses/gpl-3.0.fr.html" target="_blank" class="text-blue-600 underline">Lire la Licence GPL v3</a>
+          </p>
+        </section>
+
+        <!-- Contactez-Nous -->
+        <section class="mb-10">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contactez-Nous</h2>
+          <p class="text-gray-700">
+            Si vous avez des questions concernant la licence GPL v3 ou l'utilisation de nos logiciels, n'hésitez pas à nous contacter à l'adresse suivante :
+          </p>
+          <p class="text-gray-700 mt-4">
+            Email : <a href="mailto:contact@france-nuage.fr" class="text-blue-600 underline">contact@france-nuage.fr</a>
+          </p>
+          <p class="text-gray-700">
+            Téléphone : <a href="tel:+33612981673" class="text-blue-600 underline">+33 6 12 98 16 73</a>
+          </p>
+        </section>
+
+      </div>
     </div>
-  </div>
+  </nuxt-layout>
 </template>
 
-<script setup>
-// Aucun script spécifique n'est nécessaire
+<script setup lang="ts">
 </script>
 
 <style scoped>
-/* Ajoutez des styles spécifiques si nécessaire */
 </style>
