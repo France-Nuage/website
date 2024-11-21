@@ -31,9 +31,11 @@
       href: '#',
       title: 'Chez les cloud providers',
       features: [
-        'Dépendance à une solution propriétaire',
+        'Enfermement dans des solutions propriétaires',
         'Hébergé à l’étranger, soumis à des lois non-européennes',
         'Infrastructure imposée sans flexibilité',
+        'Impossible de changer de fournisseur sans gros travaux',
+        'Interface très complexe'
       ],
       featured: false,
     },
@@ -42,11 +44,14 @@
       href: '#',
       title: 'Avec France-Nuage',
       features: [
-        'Profitez d’une maintenance sans interruption',
-        'Gardez la liberté de l’Opensource',
-        'Souveraineté absolue avec vos serveurs',
+        'Quittez-nous à tout moment et simplement',
+        'Mises à jour de sécurité sans interruption',
+        'Ecosystème open-source unifié',
+        'Applications déjà interconnectées',
         'Choisissez entre vos propres serveurs et ceux de France-nuage',
-        'Le tout pour un coût mesuré et maîtrisé'
+        'Controle complet sur vos machines et vos données',
+        'Interface intuitive',
+        'Le tout pour un coût mesuré et maîtrisé',
       ],
       featured: true,
     },
