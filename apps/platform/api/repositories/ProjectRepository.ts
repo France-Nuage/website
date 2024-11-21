@@ -1,8 +1,8 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 
 import { parseUri } from '../parsers/url';
-import { AllowedParams } from './ApiParams';
-import { ApiResponse } from './ApiResponse';
+import type { AllowedParams } from './ApiParams';
+import type { ApiResponse } from './ApiResponse';
 
 interface PostProjectData {}
 
@@ -15,7 +15,7 @@ interface ProjectResource {
 
 type PatchProjectData = Partial<ProjectResource> | { resultCode: string };
 
-const ProjectRepository = function (client, config: Record<any, any>) {
+export const ProjectRepository = function (client: AxiosInstance, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ProjectResource[]>> => {
       try {
@@ -56,5 +56,3 @@ const ProjectRepository = function (client, config: Record<any, any>) {
     }
   };
 };
-
-export default ProjectRepository;

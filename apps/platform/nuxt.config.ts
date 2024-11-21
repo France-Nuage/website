@@ -33,6 +33,7 @@ export default defineNuxtConfig({
       function setMiddleware (pages: any) {
         for (const page of pages) {
           if ('name' in page && typeof page.name === 'string') {
+
             if (![
               'auth-login',
               'auth-forgot-password',
@@ -40,8 +41,25 @@ export default defineNuxtConfig({
               'auth-subscribe'
             ].includes(page.name)) {
               page.meta ||= {}
-              page.meta.middleware = ['auth']
+              page.meta.middleware ||= []
+              page.meta.middleware = page.meta.middleware.concat(['auth'])
             }
+
+            if (![
+              'auth-login',
+              'auth-forgot-password',
+              'auth-reset-password',
+              'auth-subscribe',
+              'onboarding-index-new',
+              'onboarding-index-organizationId',
+              'onboarding-index',
+              'onboarding',
+            ].includes(page.name)) {
+              page.meta ||= {}
+              page.meta.middleware ||= []
+              page.meta.middleware = page.meta.middleware.concat(['organization'])
+            }
+
             if (page.children) {
               setMiddleware(page.children)
             }

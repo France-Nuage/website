@@ -1,3 +1,4 @@
-export { default as OrganizationRepository } from './Organization';
-export { default as ProjectRepository } from './Project';
-export { default as UserRepository } from './User';
+export { OrganizationRepository } from './OrganizationRepository';
+export { ProjectRepository } from './ProjectRepository';
+export { UserRepository } from './UserReposiotry';
+export { ServiceRepository } from "./ServiceRepository";

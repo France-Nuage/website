@@ -1,5 +1,5 @@
 <template>
-  <c-card class="w-4/12 mx-auto mt-24">
+  <c-card class="w-11/12 md:w-8/12 lg:w-4/12 mx-auto mt-24">
     <c-card-header title="Créer une nouvelle organisation" />
     <c-card-body>
 
@@ -11,19 +11,19 @@
       <div class="flex flex-col gap-8">
         <div class="grid grid-cols-12 w-full">
           <c-label label="Nom" for="name" class="col-span-3" />
-          <c-text-field id="name" required name="name" type="text" class="col-span-9" description="Quel serait la meilleur description pour votre organisation ?" />
+          <c-text-field v-model="formData.name" id="name" required name="name" type="text" class="col-span-9" description="Quel serait la meilleur description pour votre organisation ?" />
         </div>
 
         <div class="grid grid-cols-12 w-full">
           <c-label label="Vos serveurs ?" for="name" class="col-span-3" />
-          <c-switch v-model="ownServer" class="col-span-9" description="Connectez vos propres serveurs et machines virtuelles à France Nuage afin de déployer en un seul clic vos applications, base de données, etc." />
+          <c-switch v-model="formData.ownServer" class="col-span-9" description="Connectez vos propres serveurs et machines virtuelles à France Nuage afin de déployer en un seul clic vos applications, base de données, etc." />
         </div>
 
         <div class="grid grid-cols-12 w-full">
           <c-label label="Plans" for="name" class="col-span-3" />
 
           <div class="col-span-9">
-            <c-select :collections="plans" v-model="selectedPlan" placeholder="Choisissez un plan" />
+            <c-select :collections="plans" v-model="formData.selectedPlan" placeholder="Choisissez un plan" />
           </div>
 
         </div>
@@ -32,11 +32,11 @@
     </c-card-body>
     <c-card-footer>
       <div>
-        <CButton variant="filled" size="sm">Annulé</CButton>
+        <CButton variant="filled" size="sm" @click="router.go(-1)">Annulé</CButton>
       </div>
       <div class="flex items-center gap-4">
         <small class="text-xs">Vous pouvez renommer le nom <br> de l'organisation plus tard</small>
-        <CButton size="sm">Créer une organisation</CButton>
+        <CButton size="sm" @click="onSubmit">Créer une organisation</CButton>
       </div>
     </c-card-footer>
   </c-card>
@@ -53,8 +53,6 @@ import CLabel from "~/components/forms/CLabel.vue";
 import CSwitch from "~/components/forms/CSwitch.vue";
 import CSelect from "~/components/forms/CSelect.vue";
 
-const ownServer = ref(false)
-
 const plans = [
   { id: 1, name: 'Durward Reynolds', price: '' },
   { id: 2, name: 'Kenton Towne', price: '' },
@@ -62,7 +60,20 @@ const plans = [
   { id: 4, name: 'Benedict Kessler', price: '' },
   { id: 5, name: 'Katelyn Rohan', price: '' },
 ]
-const selectedPlan = ref(plans[0])
+const formData = ref({
+  name: "",
+  ownServer: false,
+  selectedPlan: plans[0]
+})
+const router = useRouter()
+const { createOrganization } = useOrganizationStore()
+const { organization } = storeToRefs(useOrganizationStore());
+
+const onSubmit = () => {
+  createOrganization(formData.value).then(() => {
+    router.push({ path: `/onboarding/new/${organization.value.id}` })
+  })
+}
 </script>
 
 <style scoped>

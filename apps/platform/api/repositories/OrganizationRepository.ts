@@ -17,7 +17,7 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-const OrganizationRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const OrganizationRepository = function (client: AxiosInstance, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
       try {
@@ -54,5 +54,3 @@ const OrganizationRepository = function (client: AxiosInstance, config: Record<a
     },
   };
 };
-
-export default OrganizationRepository;

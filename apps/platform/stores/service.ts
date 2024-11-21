@@ -1,10 +1,22 @@
-export const useProjectStore = defineStore('project', {
+export const useServiceStore = defineStore('service', {
     state: () => ({
-        projects: [],
-        project: null
+        services: [],
+        service: null
     }),
     actions: {
-        loadProjects: async (): Promise<void> => {},
-        loadProject: async (id: string): Promise<void> => {}
+        loadServices: async (): Promise<void> => {
+            const { $api } = useNuxtApp()
+
+            $api().services.list().then(({ data }) => {
+                this.services = data.data
+            })
+        },
+        loadService: async (id: string): Promise<void> => {
+            const { $api } = useNuxtApp()
+
+            $api().services.get(id).then(({ data }) => {
+                this.service = data
+            })
+        }
     }
 })

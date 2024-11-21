@@ -37,6 +37,6 @@ watch(() => props.modelValue, () => {
 }, { immediate: true })
 
 watch(enabled, () => {
-  emit('update:modelValue', props.modelValue)
+  emit('update:modelValue', enabled.value)
 })
 </script>

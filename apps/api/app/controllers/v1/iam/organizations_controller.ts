@@ -23,9 +23,11 @@ export default class OrganizationsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response }: HttpContext) {
+  async store({ request, response, auth }: HttpContext) {
     const payload = await request.validateUsing(createOrganizationValidator)
-    const organization = await Organization.create({ ...payload })
+    const user = await auth.getUserOrFail()
+
+    const organization = await Organization.create({ ...payload, owner__id: user.id })
 
     return response.created(organization)
   }

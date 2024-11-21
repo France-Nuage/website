@@ -1,7 +1,6 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   // make authenticated state reactive
-  const authStore = useAuthStore()
-  const { authenticated, permission } = storeToRefs(useAuthStore());
+  const { authenticated } = storeToRefs(useAuthStore());
   // get token from cookies
   const token = useCookie('token');
 
@@ -21,7 +20,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     abortNavigation();
     return navigateTo('/auth/login');
   }
-
 
   // await authStore.loadAuthorizedRoutes()
 

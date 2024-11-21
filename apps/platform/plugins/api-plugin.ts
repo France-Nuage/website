@@ -1,7 +1,7 @@
 import axios from 'axios';
 import repositories from '../api';
 import { nanoid } from 'nanoid';
-import {useAlerts} from "~/stores/alert";
+import { useAlerts } from "~/stores/alert";
 
 export default defineNuxtPlugin((app) => {
   const config = useRuntimeConfig();

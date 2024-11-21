@@ -1,1 +1,1 @@
-export { default as SecurityRepository } from './SecurityRepositories';
+export { default as SecurityRepository } from './SecurityRepository';

@@ -3,12 +3,15 @@ import {
   OrganizationRepository,
   ProjectRepository,
   UserRepository,
+  ServiceRepository
 } from './repositories';
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 
 const repositories: any = (client: AxiosInstance, config: Record<any, any>) => ({
+  security: SecurityRepository(client, config),
   organizations: OrganizationRepository(client, config),
   projects: ProjectRepository(client, config),
+  services: ServiceRepository(client, config),
   users: UserRepository(client, config),
 });
 

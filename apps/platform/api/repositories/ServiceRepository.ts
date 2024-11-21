@@ -4,52 +4,52 @@ import { parseUri } from '../parsers/url';
 import type { AllowedParams } from './ApiParams';
 import type { ApiResponse } from './ApiResponse';
 
-interface PostProjectData {}
+interface PostServiceData {}
 
-interface ProjectResource {
+interface ServiceResource {
   id: string;
   name: string;
   updated_at: string;
   created_at: string;
 }
 
-type PatchProjectData = Partial<ProjectResource> | { resultCode: string };
+type PatchServiceData = Partial<ServiceResource> | { resultCode: string };
 
-export const ProjectRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const ServiceRepository = function (client: AxiosInstance, config: Record<any, any>) {
   return {
-    list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ProjectResource[]>> => {
+    list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ServiceResource[]>> => {
       try {
         const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/projects${apiCallParams}`);
+        return await client.get(`/services${apiCallParams}`);
       } catch (e) {
         throw new Error(e.message);
       }
     },
-    get: async (projectId: string, params?: AllowedParams<null, null, null>): Promise<ApiResponse<ProjectResource>> => {
+    get: async (serviceId: string, params?: AllowedParams<null, null, null>): Promise<ApiResponse<ServiceResource>> => {
       try {
         const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/projects/${projectId}${apiCallParams}`);
+        return await client.get(`/services/${serviceId}${apiCallParams}`);
       } catch (e) {
         throw new Error(e.message);
       }
     },
-    post: async (body: PostProjectData): Promise<ApiResponse<ProjectResource>> => {
+    post: async (body: PostServiceData): Promise<ApiResponse<ServiceResource>> => {
       try {
-        return await client.post(`/projects`, body);
+        return await client.post(`/services`, body);
       } catch (e) {
         throw new Error(e.message);
       }
     },
-    patch: async (projectId: string, body: PatchProjectData): Promise<ApiResponse<ProjectResource>> => {
+    patch: async (serviceId: string, body: PatchServiceData): Promise<ApiResponse<ServiceResource>> => {
       try {
-        return await client.patch(`/projects/${projectId}`, body);
+        return await client.patch(`/services/${serviceId}`, body);
       } catch (e) {
         throw new Error(e.message);
       }
     },
     delete: async (body: Array<string>): Promise<ApiResponse<any>> => {
       try {
-        return await client.delete(`/projects`, body);
+        return await client.delete(`/services`, body);
       } catch (e) {
         throw new Error(e.message)
       }

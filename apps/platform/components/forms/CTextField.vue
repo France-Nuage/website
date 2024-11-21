@@ -14,7 +14,11 @@
         :autocomplete="props.autocomplete"
         :required="props.required"
         :placeholder="props.placeholder"
-        class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm/6" />
+        class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm/6"
+        v-bind="$attrs"
+        :value="props.modelValue"
+        @input="onInput"
+      />
     </div>
     <div v-if="props.description" class="text-gray-500 mt-2 text-sm">{{ props.description }}</div>
   </div>
@@ -32,9 +36,15 @@ interface Props {
   placeholder?: string;
   label?: string;
   description?: string;
+  modelValue: string;
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits(['update:modelValue'])
+
+const onInput = (event: InputEvent) => {
+  emit('update:modelValue', (event.target as HTMLInputElement).value);
+}
 </script>
 
 <style scoped>
