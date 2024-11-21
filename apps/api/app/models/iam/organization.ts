@@ -1,9 +1,9 @@
-import {BaseModel, belongsTo, column, computed, hasMany} from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import Project from '#models/iam/project'
-import type {BelongsTo, HasMany} from '@adonisjs/lucid/types/relations'
-import Environment from "#models/iam/environment";
-import User from "#models/user";
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import Environment from '#models/iam/environment'
+import User from '#models/user'
 
 export default class Organization extends BaseModel {
   public static table = 'iam.organizations'

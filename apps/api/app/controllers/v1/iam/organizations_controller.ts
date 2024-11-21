@@ -9,7 +9,7 @@ export default class OrganizationsController {
   async index({ auth, response }: HttpContext) {
     const user = await auth.getUserOrFail()
     const organizations = await Organization.query()
-      .where([['owner__id', user.id]])
+      .where('owner__id', '=', user.id)
       .paginate(1, 10)
 
     return response.ok(organizations)
