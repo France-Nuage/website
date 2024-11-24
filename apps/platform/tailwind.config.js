@@ -15,7 +15,8 @@ export default {
       ...colors,
       ...{
         primary: {
-          DEFAULT: "#1A4CE5"
+          light: "#1A4CE5",
+          DEFAULT: "#1A4CE5",
         },
       }
     },

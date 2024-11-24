@@ -13,8 +13,8 @@ export const useOrganizationStore = defineStore('organization', {
     actions: {
         loadOrganizations: async function() {
             const { $api } = useNuxtApp()
-            return $api().organizations.list().then(({ data }) => {
-                this.organizations = data.data
+            return $api().organizations.list().then(({ data, meta }) => {
+                this.organizations = data
             })
         },
         loadOrganization: async function (id: string) {

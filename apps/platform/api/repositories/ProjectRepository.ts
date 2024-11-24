@@ -15,44 +15,24 @@ interface ProjectResource {
 
 type PatchProjectData = Partial<ProjectResource> | { resultCode: string };
 
-export const ProjectRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const ProjectRepository = function (client, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ProjectResource[]>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/projects${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/projects${apiCallParams}`);
     },
     get: async (projectId: string, params?: AllowedParams<null, null, null>): Promise<ApiResponse<ProjectResource>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/projects/${projectId}${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/projects/${projectId}${apiCallParams}`);
     },
     post: async (body: PostProjectData): Promise<ApiResponse<ProjectResource>> => {
-      try {
-        return await client.post(`/projects`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/projects`, { method: 'POST', body: body });
     },
     patch: async (projectId: string, body: PatchProjectData): Promise<ApiResponse<ProjectResource>> => {
-      try {
-        return await client.patch(`/projects/${projectId}`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/projects/${projectId}`, { method: 'PUT', body });
     },
     delete: async (body: Array<string>): Promise<ApiResponse<any>> => {
-      try {
-        return await client.delete(`/projects`, body);
-      } catch (e) {
-        throw new Error(e.message)
-      }
+      return client(`/projects`, { method: 'DELETE', body });
     }
   };
 };

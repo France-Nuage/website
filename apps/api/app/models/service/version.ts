@@ -1,8 +1,7 @@
-import {BaseModel, belongsTo, column, computed} from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import Organization from "#models/iam/organization";
-import type {BelongsTo} from "@adonisjs/lucid/types/relations";
-import Application from "#models/application/application";
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Service from '#models/service/service'
 
 export default class Version extends BaseModel {
   public static table = 'version.versions'
@@ -24,8 +23,8 @@ export default class Version extends BaseModel {
   @column()
   declare available_at: string
 
-  @column({ columnName: 'application__id' })
-  declare application__id: string
+  @column({ columnName: 'service__id' })
+  declare service__id: string
 
   @column.dateTime({ autoCreate: true })
   declare created_at: DateTime
@@ -33,6 +32,6 @@ export default class Version extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updated_at: DateTime
 
-  @belongsTo(() => Application)
-  declare application: BelongsTo<typeof Application>
+  @belongsTo(() => Service)
+  declare service: BelongsTo<typeof Service>
 }

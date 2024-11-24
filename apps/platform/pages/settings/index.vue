@@ -1,5 +1,7 @@
 <template>
-  <div>settings</div>
+  <nuxt-layout name="settings">
+
+  </nuxt-layout>
 </template>
 
 <script setup lang="ts">

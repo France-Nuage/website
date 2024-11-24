@@ -1,5 +1,3 @@
-import type { AxiosInstance } from 'axios';
-
 import { parseUri } from '../parsers/url';
 import type { AllowedParams } from './ApiParams';
 import type { ApiResponse } from './ApiResponse';
@@ -15,44 +13,24 @@ interface ServiceResource {
 
 type PatchServiceData = Partial<ServiceResource> | { resultCode: string };
 
-export const ServiceRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const ServiceRepository = function (client, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ServiceResource[]>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/services${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/services${apiCallParams}`);
     },
     get: async (serviceId: string, params?: AllowedParams<null, null, null>): Promise<ApiResponse<ServiceResource>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/services/${serviceId}${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/services/${serviceId}${apiCallParams}`);
     },
     post: async (body: PostServiceData): Promise<ApiResponse<ServiceResource>> => {
-      try {
-        return await client.post(`/services`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/services`, { method: 'POST', body: body });
     },
     patch: async (serviceId: string, body: PatchServiceData): Promise<ApiResponse<ServiceResource>> => {
-      try {
-        return await client.patch(`/services/${serviceId}`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/services/${serviceId}`, { method: 'PUT', body });
     },
     delete: async (body: Array<string>): Promise<ApiResponse<any>> => {
-      try {
-        return await client.delete(`/services`, body);
-      } catch (e) {
-        throw new Error(e.message)
-      }
+      return client(`/services`, { method: 'DELETE', body });
     }
   };
 };

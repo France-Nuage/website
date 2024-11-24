@@ -3,15 +3,15 @@ import { DateTime } from 'luxon'
 import Version from '#models/application/version'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
-export default class Application extends BaseModel {
-  public static table = 'application.applications'
+export default class Service extends BaseModel {
+  public static table = 'service.services'
 
   @computed()
   public get object() {
-    return 'application'
+    return 'service'
   }
 
-  @column({ isPrimary: true, columnName: 'application__id' })
+  @column({ isPrimary: true, columnName: 'service__id' })
   declare id: string
 
   @column()

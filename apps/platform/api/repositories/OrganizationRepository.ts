@@ -1,4 +1,4 @@
-import type { AxiosInstance } from 'axios';
+// import type { AxiosInstance } from 'axios';
 import { parseUri } from '../parsers/url';
 import type { AllowedParams } from './ApiParams';
 import type { ApiResponse } from './ApiResponse';
@@ -17,40 +17,24 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-export const OrganizationRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const OrganizationRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/organizations${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/organizations${apiCallParams}`, { method: 'GET' });
     },
     get: async (
       organizationId: string,
       params?: AllowedParams<null, null, null>,
     ): Promise<ApiResponse<OrganizationResource>> => {
-      try {
-        const apiCallParams = params ? parseUri(params) : '';
-        return await client.get(`/organizations/${organizationId}${apiCallParams}`);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      const apiCallParams = params ? parseUri(params) : '';
+      return client(`/organizations/${organizationId}${apiCallParams}`);
     },
     post: async (body: PostOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      try {
-        return await client.post(`/organizations`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/organizations`, {  method: 'POST', body });
     },
     patch: async (organizationId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      try {
-        return await client.put(`/organizations/${organizationId}`, body);
-      } catch (e) {
-        throw new Error(e.message);
-      }
+      return client(`/organizations/${organizationId}`, {  method: 'PUT', body });
     },
   };
 };

@@ -28,7 +28,7 @@
 import CLabel from "~/components/forms/CLabel.vue";
 
 interface Props {
-  required: boolean;
+  required?: boolean;
   autocomplete?: string;
   name: string;
   id: string;

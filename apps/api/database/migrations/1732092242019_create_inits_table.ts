@@ -68,10 +68,65 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
 
       table.uuid('service__id')
-      table
-        .foreign('service__id')
-        .references('service__id')
-        .inTable('service.services')
+      table.foreign('service__id').references('service__id').inTable('service.services')
+    })
+
+    this.schema.createSchema('localisation')
+    this.schema.withSchema('localisation').createTable('countries', (table) => {
+      table.uuid('country__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.string('code')
+      table.float('latitude')
+      table.float('longitude')
+      table.string('postal_code_regex')
+      table.string('phone_indicator')
+      table.string('phone_regex')
+      table.text('flag_svg')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+    })
+
+    this.schema.createSchema('infrastructure')
+    this.schema.withSchema('infrastructure').createTable('regions', (table) => {
+      table.uuid('region__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.uuid('country__id')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+
+      table.foreign('country__id').references('country__id').inTable('localisation.countries')
+    })
+
+    this.schema.withSchema('infrastructure').createTable('zones', (table) => {
+      table.uuid('zone__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.uuid('region__id')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+
+      table.foreign('region__id').references('region__id').inTable('infrastructure.regions')
+    })
+
+    this.schema.withSchema('infrastructure').createTable('clusters', (table) => {
+      table.uuid('cluster__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.uuid('zone__id')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+
+      table.foreign('zone__id').references('zone__id').inTable('infrastructure.zones')
+    })
+
+    this.schema.createSchema('infrastructure')
+    this.schema.withSchema('infrastructure').createTable('instances', (table) => {
+      table.uuid('instance__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.string('node')
+      table.uuid('cluster__id')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+
+      table.foreign('cluster__id').references('cluster__id').inTable('infrastructure.clusters')
     })
   }
 

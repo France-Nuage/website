@@ -60,20 +60,31 @@
       </Dialog>
     </TransitionRoot>
 
-    <c-sidebar />
+    <c-sidebar>
+      <c-sidebar-navigation-group>
+        <c-sidebar-navigation-item title="Home" icon="home-2-bold-duotone" to="/" :active="route.path === '/'" />
+        <c-sidebar-navigation-item title="Instances" icon="home-2-bold-duotone" to="/instances" :active="isActive('instances')" />
+      </c-sidebar-navigation-group>
+      <c-sidebar-navigation-group title="Documentations">
+        <c-sidebar-navigation-item title="Guides" icon="home-2-bold-duotone" to="/" :active="route.path === '/'" />
+        <c-sidebar-navigation-item title="API Reference" icon="home-2-bold-duotone" to="/instances" :active="isActive('instances')" />
+      </c-sidebar-navigation-group>
+    </c-sidebar>
 
-    <div class="lg:pl-72 bg-gray-50 h-screen">
+    <div class="lg:pl-72 bg-gray-50 min-h-screen">
       <c-header />
       <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
-          <slot />
+          <div class="w-4/6 mx-auto">
+            <slot />
+          </div>
         </div>
       </main>
     </div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {
   Dialog,
   DialogPanel,
@@ -85,8 +96,16 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import CLogo from "~/components/CLogo.vue";
-import CHeader from "~/components/CHeader.vue";
+import CHeader from "~/components/header/CHeader.vue";
 import { ref } from "vue";
 import CSidebar from "~/components/sidebar/CSidebar.vue";
+import CSidebarNavigationItem from "~/components/sidebar/CSidebarNavigationItem.vue";
+import CSidebarNavigationGroup from "~/components/sidebar/CSidebarNavigationGroup.vue";
 const sidebarOpen = ref(false)
+
+const route = useRoute()
+
+const isActive = (term: string) => {
+  return route.path.startsWith('/' + term)
+}
 </script>
