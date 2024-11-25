@@ -60,9 +60,6 @@
             <p class="text-gray-700 mt-4">
               Email : <a href="mailto:contact@france-nuage.fr" class="text-blue-600 underline">contact@france-nuage.fr</a>
             </p>
-            <p class="text-gray-700">
-              Téléphone : <a href="tel:+33612981673" class="text-blue-600 underline">+33 6 12 98 16 73</a>
-            </p>
           </section>
   
         </div>
