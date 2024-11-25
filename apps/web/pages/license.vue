@@ -4,81 +4,47 @@
       <div class="mx-auto max-w-4xl pt-20 pb-16 sm:pt-28 lg:pt-32">
         
         <!-- Titre Principal -->
-        <h1 class="text-3xl font-bold text-gray-900 mb-8">Licence GPL v3 de France-Nuage</h1>
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">Licence BSL (Business Source License) de France-Nuage</h1>
         
-        <!-- Introduction à la Licence GPL v3 -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Introduction</h2>
-          <p class="text-gray-700 mb-4">
-            France-Nuage s'engage en faveur du logiciel libre et open-source. Nos logiciels sont distribués sous la <strong>Licence Publique Générale GNU, version 3 (GPL v3)</strong>, afin de garantir la liberté d'utiliser, d'étudier, de modifier et de redistribuer notre code source.
+        <!-- Introduction -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            La licence BSL (Business Source License) est une licence commerciale qui permet une utilisation contrôlée avec certaines restrictions. En utilisant le logiciel France-Nuage, vous acceptez les termes et conditions de la licence BSL décrits ci-dessous.
           </p>
-          <p class="text-gray-700">
-            Cette page présente un aperçu de la licence GPL v3 et ce qu'elle implique pour nos utilisateurs et développeurs.
+          <p class="text-lg text-gray-700 leading-relaxed">
+            La licence BSL permet une utilisation, une modification, et une distribution du logiciel avec certaines limitations initiales, tout en garantissant que les auteurs originaux reçoivent une mention appropriée.
           </p>
         </section>
 
-        <!-- Qu'est-ce que la Licence GPL v3 ? -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Qu'est-ce que la Licence GPL v3 ?</h2>
-          <p class="text-gray-700">
-            La <strong>GPL v3</strong> est une licence de logiciel libre publiée par la <strong>Free Software Foundation (FSF)</strong>. Elle garantit aux utilisateurs quatre libertés fondamentales :
+        <!-- Texte de la Licence BSL -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Licence BSL</h2>
+          <p class="text-base text-gray-600 whitespace-pre-line bg-gray-100 p-4 rounded-md shadow-inner leading-relaxed">
+            <span class="font-semibold text-lg">Copyright (c) 2024 France-Nuage</span>
+            <br /><br />Sous la licence Business Source License (BSL), vous êtes autorisé à utiliser ce logiciel sous certaines conditions commerciales. Le logiciel est initialement soumis à des restrictions commerciales pendant une période spécifiée (généralement 3 ans), après quoi il sera redistribué sous une licence libre.
+            <br /><br />Les utilisateurs peuvent utiliser, copier, modifier, et distribuer le Logiciel sous réserve des restrictions commerciales définies, notamment concernant l'utilisation en tant que service commercial. Après l'expiration de la période BSL, le Logiciel est redistribué sous une licence publique générale.
+            <br /><br />La mention de copyright ci-dessus et la présente autorisation doivent être incluses dans toutes les copies ou portions substantielles du Logiciel.
+            <br /><br /><span class="font-bold text-gray-900">LE LOGICIEL EST FOURNI "EN L'ÉTAT", SANS GARANTIE D'AUCUNE SORTE, EXPRESSE OU IMPLICITE, Y COMPRIS MAIS SANS S'Y LIMITER LES GARANTIES DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE PARTICULIER ET D'ABSENCE DE CONTREFAÇON. EN AUCUN CAS LES AUTEURS OU TITULAIRES DU COPYRIGHT NE POURRONT ÊTRE TENUS POUR RESPONSABLES DE TOUTE RÉCLAMATION, DE DOMMAGES OU AUTRE RESPONSABILITÉ, QUE CE SOIT DANS UNE ACTION DE CONTRAT, DÉLIT OU AUTREMENT, DÉCOULANT DE, OU EN LIEN AVEC LE LOGICIEL OU L'UTILISATION OU D'AUTRES INTERACTIONS AVEC LE LOGICIEL.</span>
           </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-4">
-            <li>La liberté d'utiliser le logiciel pour n'importe quel usage.</li>
-            <li>La liberté d'étudier le fonctionnement du logiciel et de l'adapter à vos besoins.</li>
-            <li>La liberté de redistribuer des copies du logiciel pour aider les autres.</li>
-            <li>La liberté d'améliorer le logiciel et de publier vos améliorations pour en faire bénéficier toute la communauté.</li>
-          </ul>
         </section>
 
-        <!-- Vos Droits et Obligations -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Vos Droits et Obligations</h2>
-          <p class="text-gray-700 mb-4">
-            En utilisant un logiciel sous licence GPL v3, vous bénéficiez de certaines libertés, mais vous devez également respecter certaines obligations, notamment :
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-4">
-            <li><strong>Code source :</strong> Si vous redistribuez une version du logiciel, vous devez également fournir le code source ou indiquer comment il peut être obtenu.</li>
-            <li><strong>Licences dérivées :</strong> Toute modification que vous apportez au logiciel doit être distribuée sous la même licence GPL v3, garantissant que toutes les versions futures resteront également libres.</li>
-            <li><strong>Liberté pour tous :</strong> Vous ne pouvez pas imposer de restrictions supplémentaires sur les droits accordés par la licence GPL v3. Chaque utilisateur doit bénéficier des mêmes libertés.</li>
-          </ul>
-        </section>
-
-        <!-- Avantages de la Licence GPL v3 -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pourquoi la Licence GPL v3 ?</h2>
-          <p class="text-gray-700 mb-4">
-            La licence GPL v3 est un choix naturel pour France-Nuage, car elle est alignée sur nos valeurs d'**ouverture**, de **transparence**, et de **collaboration**. En utilisant la GPL v3, nous :
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-4">
-            <li>Encourageons une communauté de développeurs à contribuer à l'amélioration de notre logiciel.</li>
-            <li>Garantissons que nos utilisateurs ont un contrôle total sur leur infrastructure et leurs données.</li>
-            <li>Assurons la pérennité et l'accessibilité de notre code source, même en cas d'évolution du projet.</li>
-          </ul>
-        </section>
-
-        <!-- Télécharger la Licence GPL v3 -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Télécharger la Licence</h2>
-          <p class="text-gray-700">
-            Pour plus d'informations, vous pouvez consulter le texte intégral de la <strong>Licence Publique Générale GNU, version 3</strong>, en cliquant sur le lien ci-dessous :
-          </p>
-          <p class="text-gray-700 mt-4">
-            <a href="https://www.gnu.org/licenses/gpl-3.0.fr.html" target="_blank" class="text-blue-600 underline">Lire la Licence GPL v3</a>
+        <!-- Utilisation de la Licence BSL -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Utilisation de la Licence BSL</h2>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            La licence BSL vous permet d'utiliser ce logiciel avec certaines restrictions commerciales pendant une période définie. Vous pouvez modifier le code source et redistribuer le logiciel, avec ou sans modifications, tant que la mention de copyright et la permission originale sont incluses dans chaque copie. À l'expiration de la période de limitation, le logiciel devient disponible sous une licence open-source.
           </p>
         </section>
 
         <!-- Contactez-Nous -->
-        <section class="mb-10">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contactez-Nous</h2>
-          <p class="text-gray-700">
-            Si vous avez des questions concernant la licence GPL v3 ou l'utilisation de nos logiciels, n'hésitez pas à nous contacter à l'adresse suivante :
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Contactez-Nous</h2>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Pour toute question concernant la licence ou l'utilisation du logiciel France-Nuage, veuillez nous contacter à :
           </p>
           <p class="text-gray-700 mt-4">
             Email : <a href="mailto:contact@france-nuage.fr" class="text-blue-600 underline">contact@france-nuage.fr</a>
-          </p>
-          <p class="text-gray-700">
-            Téléphone : <a href="tel:+33612981673" class="text-blue-600 underline">+33 6 12 98 16 73</a>
           </p>
         </section>
 
