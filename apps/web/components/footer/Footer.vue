@@ -69,7 +69,7 @@ const navigation = {
     { name: 'Notice', nameFr: 'Mentions légales', href: '/legalNotice' },
     { name: 'Terms of Service', nameFr: 'Conditions d\'utilisation', href: '/termsOfService' },
     { name: 'Privacy Policy', nameFr: 'Politique de confidentialité', href: '/privacyPolicy' },
-    { name: 'License', nameFr: 'Licence', href: '/license' },
+    { name: 'License', nameFr: 'Licence', href: 'https://gitlab.com/getnobullshit/france-nuage/website/-/raw/master/LICENCE?ref_type=heads' },
   ],
 }
 </script>
