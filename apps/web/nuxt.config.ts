@@ -10,4 +10,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-})
+  runtimeConfig: {
+    // Private keys are only available on the server
+    brevoApiKey: process.env.BREVO_API_KEY,
+
+    // Public keys are exposed to the client
+    public: {
+      brevoApiKey: process.env.BREVO_API_KEY,
+    },
+  },
+});
