@@ -9,7 +9,7 @@
           Avec la possibilité de connecter vos propres serveurs à notre infrastructure, vous restez maitres de vos données tout en profitant de notre expertise pour les sécuriser.
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <Button>Commencer maintenant</Button>
+          <Button to="/contact">Commencer maintenant</Button>
         </div>
       </div>
     </div>

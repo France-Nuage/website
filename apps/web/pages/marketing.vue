@@ -67,7 +67,7 @@
                   <li>✔ Chiffrement de bout en bout</li>
                   <li>✔ Uniquement vos ressources</li>
                 </ul>
-                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg">Commencer dès maintenant</button>
+                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
               </div>
               <!-- Plan Startup -->
               <div class="bg-blue-600 p-6 rounded-lg text-white">
@@ -81,7 +81,7 @@
                   <li>✔ Sauvegarde chez France-Nuage</li>
                   <li>✔ Failover avec France-Nuage</li>
                 </ul>
-                <button class="mt-6 w-full bg-white text-blue-600 py-2 rounded-lg">Commencer dès maintenant</button>
+                <button class="mt-6 w-full bg-white text-blue-600 py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
               </div>
               <!-- Plan Entreprise -->
               <div class="bg-white p-6 rounded-lg shadow-md">
@@ -96,7 +96,7 @@
                   <li>✔ Sauvegarde multi-site</li>
                   <li>✔ Répartition de charge</li>
                 </ul>
-                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg">Commencer dès maintenant</button>
+                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
               </div>
             </div>
           </section>
