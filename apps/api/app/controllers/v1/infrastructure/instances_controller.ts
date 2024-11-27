@@ -1,20 +1,16 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createOrganizationValidator } from '#validators/v1/iam/organization'
-import Organization from '#models/iam/organization'
 import axios from 'axios'
 
 export default class InstancesController {
   /**
    * Display a list of resource
    */
-  async index({ auth, response }: HttpContext) {
-
+  async index({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
   }
-
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
 
   /**
    * Handle form submission for the create action
@@ -48,20 +44,30 @@ export default class InstancesController {
   /**
    * Show individual record
    */
-  async show({ params, response }: HttpContext) {}
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
+  async show({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 }

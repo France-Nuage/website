@@ -4,35 +4,50 @@ export default class ServicesController {
   /**
    * Display a list of resource
    */
-  async index({ auth, response }: HttpContext) {}
-
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
+  async index({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ response }: HttpContext) {}
+  async store({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Show individual record
    */
-  async show({ params, response }: HttpContext) {}
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
+  async show({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ response, params, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 }

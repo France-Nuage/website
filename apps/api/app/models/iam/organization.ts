@@ -23,7 +23,7 @@ export default class Organization extends BaseModel {
   declare environment__id: string
 
   @column({ columnName: 'owner__id' })
-  declare owner__id: string
+  declare owner__id: number
 
   @column.dateTime({ autoCreate: true })
   declare created_at: DateTime
