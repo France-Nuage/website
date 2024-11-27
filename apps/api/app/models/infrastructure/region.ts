@@ -20,5 +20,5 @@ export class Region extends BaseModel {
   declare zones: BelongsTo<typeof Zone>
 
   @hasOne(() => Country)
-  declare country: HasOne<Country>
+  declare country: HasOne<typeof Country>
 }

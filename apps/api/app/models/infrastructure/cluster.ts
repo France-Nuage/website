@@ -20,5 +20,5 @@ export class Cluster extends BaseModel {
   declare instances: BelongsTo<typeof Instance>
 
   @hasOne(() => Zone)
-  declare zone: HasOne<Zone>
+  declare zone: HasOne<typeof Zone>
 }

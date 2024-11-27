@@ -70,14 +70,14 @@
       </c-sidebar-navigation-group>
       <c-sidebar-navigation-group title="Organisations">
         <c-sidebar-navigation-item
-          v-for="organization in organizations"
+          v-for="organization in organizations.slice(0, 5)"
           :key="organization.id"
           :title="organization.name"
           icon="home-2-bold-duotone"
           :to="`/settings/organizations/${organization.id}`"
           :active="route.path === `/settings/organizations/${organization.id}`"
         />
-        <template #footer>
+        <template v-if="organizations.length > 5" #footer>
           <nuxt-link class="text-xs ml-2 text-gray-700 dark:text-gray-400 cursor-pointer" to="/settings/organizations">Toutes les organisations...</nuxt-link>
         </template>
       </c-sidebar-navigation-group>

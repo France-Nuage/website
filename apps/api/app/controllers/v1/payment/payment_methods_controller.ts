@@ -5,14 +5,14 @@ export default class PaymentsController {
   private stripe
 
   constructor() {
-    this.stripe = new Stripe(env.get('STRIPE_SECRET_KEY', null), null)
+    this.stripe = new Stripe(env.get('STRIPE_SECRET_KEY'))
   }
 
-  public async index({ customer_id: string }): Promise<any> {
+  public async index({ customer_id }: { customer_id: string }): Promise<any> {
     return this.stripe.paymentMethods.list({
       customer: customer_id,
       type: 'card',
-    });
+    })
   }
 
   /**
@@ -31,6 +31,6 @@ export default class PaymentsController {
    * @param id
    */
   public async show(id: string): Promise<Stripe.PaymentMethod> {
-    return await this.stripe.paymentMethods.retrieve(id);
+    return await this.stripe.paymentMethods.retrieve(id)
   }
 }

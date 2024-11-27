@@ -29,9 +29,9 @@ const props = withDefaults(defineProps<Props>(), { variant: 'information' })
 
 const variantClasses = {
   information: {
-    background: 'bg-blue-50',
-    title: 'text-blue-800',
-    description: 'text-blue-600',
+    background: 'bg-blue-50 dark:bg-blue-950',
+    title: 'text-blue-800 dark:text-white',
+    description: 'text-blue-600 dark:text-gray-400',
     icon: 'text-blue-400'
   },
   danger: {

@@ -16,11 +16,6 @@ export default class OrganizationsController {
   }
 
   /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
-
-  /**
    * Handle form submission for the create action
    */
   async store({ request, response, auth }: HttpContext) {
@@ -46,17 +41,22 @@ export default class OrganizationsController {
   }
 
   /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request, response }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, response, request }: HttpContext) {
+    return response.notImplemented({
+      params: params,
+      request: request,
+    })
+  }
 }
