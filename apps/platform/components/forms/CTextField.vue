@@ -4,7 +4,7 @@
       v-if="props.label"
       :for="props.id || props.name"
       :label="props.label"
-      class="block text-sm/6 font-medium text-gray-900"
+      class="block text-sm/6 font-medium"
     />
     <div class="mt-2">
       <input
@@ -14,7 +14,7 @@
         :autocomplete="props.autocomplete"
         :required="props.required"
         :placeholder="props.placeholder"
-        class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm/6"
+        class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm/6 dark:bg-gray-700 dark:ring-gray-500 dark:text-gray-200"
         v-bind="$attrs"
         :value="props.modelValue"
         @input="onInput"
