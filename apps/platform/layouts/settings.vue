@@ -65,14 +65,20 @@
         <c-sidebar-navigation-item title="Home" icon="home-2-bold-duotone" to="/profile" :active="route.path === '/profile'" />
         <c-sidebar-navigation-item title="Instances" icon="home-2-bold-duotone" to="/instances" :active="isActive('instances')" />
         <template #footer>
-          <nuxt-link class="text-xs ml-2 text-gray-700 cursor-pointer">Tous les projet...</nuxt-link>
+          <nuxt-link class="text-xs ml-2 text-gray-700 dark:text-gray-400 cursor-pointer">Tous les projets...</nuxt-link>
         </template>
       </c-sidebar-navigation-group>
       <c-sidebar-navigation-group title="Organisations">
-        <c-sidebar-navigation-item title="Home" icon="home-2-bold-duotone" to="/" :active="route.path === '/'" />
-        <c-sidebar-navigation-item title="Instances" icon="home-2-bold-duotone" to="/instances" :active="isActive('instances')" />
+        <c-sidebar-navigation-item
+          v-for="organization in organizations"
+          :key="organization.id"
+          :title="organization.name"
+          icon="home-2-bold-duotone"
+          :to="`/settings/organizations/${organization.id}`"
+          :active="route.path === `/settings/organizations/${organization.id}`"
+        />
         <template #footer>
-          <nuxt-link class="text-xs ml-2 text-gray-700 cursor-pointer">Toutes les organisations...</nuxt-link>
+          <nuxt-link class="text-xs ml-2 text-gray-700 dark:text-gray-400 cursor-pointer" to="/settings/organizations">Toutes les organisations...</nuxt-link>
         </template>
       </c-sidebar-navigation-group>
       <c-sidebar-navigation-group title="Profile">
@@ -86,7 +92,7 @@
       </c-sidebar-navigation-group>
     </c-sidebar>
 
-    <div class="lg:pl-72 bg-gray-50 min-h-screen">
+    <div class="lg:pl-72 bg-gray-50 dark:bg-gray-900 min-h-screen">
       <c-header />
       <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
@@ -117,6 +123,7 @@ import CSidebarNavigationGroup from "~/components/sidebar/CSidebarNavigationGrou
 const sidebarOpen = ref(false)
 
 const route = useRoute()
+const { organizations } = storeToRefs(useOrganizationStore());
 
 const isActive = (term: string) => {
   return route.path.startsWith('/' + term)

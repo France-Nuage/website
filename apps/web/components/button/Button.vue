@@ -1,7 +1,11 @@
 <template>
-  <button :class="[`inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition ${variantClasses[props.variant]}`, {
-    'w-full': props.block
-  }]">
+  <button
+    :class="[
+      `inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition ${variantClasses[props.variant]}`,
+      { 'w-full': props.block }
+    ]"
+    @click="handleClick"
+>
     <slot />
   </button>
 </template>
@@ -29,6 +33,15 @@ const variantClasses = {
       'rounded-lg py-3 px-5 text-zinc-700 ring-1 ring-inset ring-zinc-900/10 hover:bg-primary-900/2.5 hover:text-zinc-900',
   text: 'text-emerald-500 hover:text-emerald-600',
 }
+
+
+// Gestion du clic
+const handleClick = () => {
+  if (props.to) {
+    // Redirection via window.location
+    window.location.href = props.to;
+  }
+};
 </script>
 
 <style scoped>

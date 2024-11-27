@@ -1,5 +1,5 @@
 <template>
-  <div class="top-0 z-10   flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 sm:gap-x-6 sm:px-6 lg:px-8">
+  <div class="top-0 z-10   flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 px-4 sm:gap-x-6 sm:px-6 lg:px-8">
     <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="sidebarOpen = true">
       <span class="sr-only">Open sidebar</span>
       <Bars3Icon class="size-6" aria-hidden="true" />

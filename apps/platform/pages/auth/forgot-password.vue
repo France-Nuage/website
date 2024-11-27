@@ -4,14 +4,20 @@
 
     <div class="mt-10">
       <div>
-        <form   class="space-y-6">
+        <form class="space-y-6">
 
-          <c-text-field id="email" required autocomplete="email" name="email" type="email" label="Email" />
+          <c-text-field
+            id="email"
+            required
+            autocomplete="email"
+            name="email"
+            type="email"
+            label="Email"
+            v-model="formData.email"
+          />
 
           <div>
-            <c-button type="submit" block>
-              Je valide
-            </c-button>
+            <c-button type="submit" block>Je valide</c-button>
           </div>
         </form>
       </div>
@@ -21,9 +27,11 @@
 
 <script setup lang="ts">
 import CTextField from "~/components/forms/CTextField.vue";
-import CSeparator from "~/components/CSeparator.vue";
 import CButton from "~/components/forms/CButton.vue";
-import CSocialButton from "~/components/autentification/CSocialButton.vue";
+
+const formData = ref({
+  email: "",
+})
 </script>
 
 <style scoped>
