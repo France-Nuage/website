@@ -16,7 +16,7 @@
             <strong>Directeur de la publication :</strong> Alexandre CAILLER
           </p>
           <p class="text-gray-700">
-            <strong>Hébergeur :</strong> Webflow, Inc., 398 11th Street, 2nd Floor, San Francisco, CA 94103
+            <strong>Hébergeur :</strong> France-Nuage
           </p>
         </section>
 

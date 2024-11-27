@@ -57,46 +57,60 @@
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <!-- Plan Autonome -->
-              <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Autonome</h3>
-                <p class="text-3xl font-bold text-gray-900 mb-4">15€</p>
-                <ul class="list-none text-gray-700 space-y-3">
-                  <li>✔ Écosystèmes Open-Source</li>
-                  <li>✔ Services interconnectés</li>
-                  <li>✔ Supervision et alerting</li>
-                  <li>✔ Chiffrement de bout en bout</li>
-                  <li>✔ Uniquement vos ressources</li>
-                </ul>
-                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
+              <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-4">Autonome</h3>
+                  <p class="text-3xl font-bold text-gray-900 mb-4">15€</p>
+                  <ul class="list-none text-gray-700 space-y-3 mb-6">
+                    <li>✔ Écosystèmes Open-Source</li>
+                    <li>✔ Services interconnectés</li>
+                    <li>✔ Supervision et alerting</li>
+                    <li>✔ Chiffrement de bout en bout</li>
+                    <li>✔ Uniquement vos ressources</li>
+                  </ul>
+                </div>
+                <a href="/contact" class="mt-auto w-full bg-blue-600 text-white py-2 rounded-lg text-center hover:bg-blue-700 transition">
+                  Commencer dès maintenant
+                </a>
               </div>
+
               <!-- Plan Startup -->
-              <div class="bg-blue-600 p-6 rounded-lg text-white">
-                <h3 class="text-xl font-semibold mb-4">Startup</h3>
-                <p class="text-3xl font-bold mb-4">45€</p>
-                <p class="mb-4">* le plan autonome plus :</p>
-                <ul class="list-none space-y-3">
-                  <li>✔ 98% SLA</li>
-                  <li>✔ Support sous 24h par mail</li>
-                  <li>✔ Conformité RGPD</li>
-                  <li>✔ Sauvegarde chez France-Nuage</li>
-                  <li>✔ Failover avec France-Nuage</li>
-                </ul>
-                <button class="mt-6 w-full bg-white text-blue-600 py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
+              <div class="bg-blue-600 p-6 rounded-lg text-white flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold mb-4">Startup</h3>
+                  <p class="text-3xl font-bold mb-4">45€</p>
+                  <p class="mb-4">* le plan autonome plus :</p>
+                  <ul class="list-none space-y-3 mb-6">
+                    <li>✔ 98% SLA</li>
+                    <li>✔ Support sous 24h par mail</li>
+                    <li>✔ Conformité RGPD</li>
+                    <li>✔ Sauvegarde chez France-Nuage</li>
+                    <li>✔ Failover avec France-Nuage</li>
+                  </ul>
+                </div>
+                <a href="/contact" class="mt-auto w-full bg-white text-blue-600 py-2 rounded-lg text-center hover:bg-gray-200 transition">
+                  Commencer dès maintenant
+                </a>
               </div>
+
               <!-- Plan Entreprise -->
-              <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Entreprise</h3>
-                <p class="text-3xl font-bold text-gray-900 mb-4">299€</p>
-                <p class="mb-4">* le plan startup plus :</p>
-                <ul class="list-none text-gray-700 space-y-3">
-                  <li>✔ 99,9% SLA</li>
-                  <li>✔ Support dédié 24/7 avec réponse sous 4h</li>
-                  <li>✔ Migrations sans interruptions</li>
-                  <li>✔ Conformité RGPD, ISO 27001</li>
-                  <li>✔ Sauvegarde multi-site</li>
-                  <li>✔ Répartition de charge</li>
-                </ul>
-                <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg" to="/contact">Commencer dès maintenant</button>
+              <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-4">Entreprise</h3>
+                  <p class="text-3xl font-bold text-gray-900 mb-4">299€</p>
+                  <p class="mb-4">* le plan startup plus :</p>
+                  <ul class="list-none text-gray-700 space-y-3 mb-6">
+                    <li>✔ 99,9% SLA</li>
+                    <li>✔ Support dédié 24/7 avec réponse sous 4h</li>
+                    <li>✔ Migrations sans interruptions</li>
+                    <li>✔ Conformité RGPD, ISO 27001</li>
+                    <li>✔ Sauvegarde multi-site</li>
+                    <li>✔ Répartition de charge</li>
+                  </ul>
+                </div>
+                <a href="/contact" class="mt-auto w-full bg-blue-600 text-white py-2 rounded-lg text-center hover:bg-blue-700 transition">
+                  Commencer dès maintenant
+                </a>
               </div>
             </div>
           </section>
@@ -109,9 +123,6 @@
             </p>
             <p class="text-gray-700 mt-4">
               Email : <a href="mailto:contact@france-nuage.fr" class="text-blue-600 underline">contact@france-nuage.fr</a>
-            </p>
-            <p class="text-gray-700">
-              Téléphone : <a href="tel:+33987654321" class="text-blue-600 underline">+33 6 12 98 16 73</a>
             </p>
           </section>
   
