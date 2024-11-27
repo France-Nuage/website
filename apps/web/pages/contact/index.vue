@@ -50,6 +50,21 @@
                 </div>
               </div>
             </div>
+
+            <div v-if="successSubmit" class="rounded-md bg-green-50 p-4">
+              <div class="flex">
+                <div class="shrink-0">
+                  <CheckCircleIcon class="size-5 text-green-400" aria-hidden="true" />
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-sm font-medium text-green-800">Message envoyé</h3>
+                  <div class="mt-2 text-sm text-green-700">
+                    <p>Votre message a bien été envoyé, nous revenons vers vous au plus vite.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="mt-10">
               <Button block @click="onSubmit">
                 Venez on parle !
@@ -87,9 +102,11 @@
 
 <script setup lang="ts">
 import Logo from "~/components/Logo.vue";
+import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 import { ref } from "vue";
 
 const config = useRuntimeConfig();
+const successSubmit = ref(false);
 
 const formData = ref({
   email: "",
@@ -134,8 +151,8 @@ const onSubmit = async (event: Event) => {
     const payload = {
       email: formData.value.email,
       attributes: {
-        FIRSTNAME: formData.value.firstname,
-        LASTNAME: formData.value.lastname,
+        PRENOM: formData.value.firstname,
+        NOM: formData.value.lastname,
         COMPANY: formData.value.company,
         MESSAGE: formData.value.message,
       },
@@ -169,6 +186,7 @@ const onSubmit = async (event: Event) => {
       return; // Exit the function
     } else {
       console.log("Contact saved successfully");
+      successSubmit.value = true;
 
       // Clear the form after successful submission
       formData.value = {

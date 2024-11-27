@@ -1,7 +1,7 @@
 <template>
-  <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col border-r border-gray-200 bg-white">
+  <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col border-r border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800">
 
-    <div class="h-16 border-b border-gray-200 flex items-center">
+    <div class="h-16 border-b border-gray-200 dark:border-gray-800   flex items-center">
 
       <Listbox v-model="selectedPerson">
         <div class="relative w-full">
@@ -21,7 +21,7 @@
           </ListboxButton>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
             <ListboxOptions
-              class="absolute min-w-40 right-0 z-10 left-4 w-full origin-top-left rounded-lg bg-white p-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+              class="absolute min-w-40 right-0 z-10 left-4 w-full origin-top-left rounded-lg bg-white dark:bg-gray-900 p-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
             >
               <ListboxOption
                 v-for="person in people"
