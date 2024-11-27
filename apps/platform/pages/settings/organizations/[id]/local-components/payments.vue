@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-
 import CAlert from "~/components/alert/CAlert.vue";
 import CButton from "~/components/forms/CButton.vue";
 import CTable from "~/components/table/CTable.vue";

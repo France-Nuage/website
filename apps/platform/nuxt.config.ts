@@ -13,11 +13,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/icon',
-    '@pinia/nuxt',
-    '@vueuse/nuxt'
-  ],
+  modules: ['@nuxt/icon', '@pinia/nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
 
   imports: {
     dirs: ['./stores'],
@@ -26,6 +22,12 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
     autoImports: ['defineStore', 'acceptHMRUpdate'],
+  },
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'light',
+    fallback: 'light'
   },
 
   hooks: {

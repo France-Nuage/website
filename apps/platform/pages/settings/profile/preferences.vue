@@ -10,7 +10,7 @@
               <c-label label="Nom" for="lastname" />
             </div>
             <div class="col-span-9">
-              <c-text-field id="lastname" required name="firsname" type="text" v-model="formData.lastname" />
+              <c-text-field id="lastname" required name="lastname" type="text" v-model="formData.lastname" />
             </div>
 
             <div class="col-span-3">
@@ -38,11 +38,11 @@
               <c-label label="Nom" for="lastname" />
             </div>
             <div class="col-span-9">
-              <p class="text-sm">France Nuage will use your selected theme</p>
+              <p class="text-sm dark:text-gray-400">France Nuage will use your selected theme</p>
             </div>
 
             <div class="col-span-3">
-              <c-label label="Choose how Supabase looks to you. Select a single theme, or sync with your system." for="lastname" />
+              <c-label light label="Choose how Supabase looks to you. Select a single theme, or sync with your system." for="lastname" />
             </div>
             <div class="col-span-9">
               <c-theme-selector />
