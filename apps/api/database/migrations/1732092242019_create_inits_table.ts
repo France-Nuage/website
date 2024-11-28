@@ -1,8 +1,6 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'inits'
-
   async up() {
     this.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp" schema pg_catalog version "1.1";')
 
@@ -15,7 +13,7 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
     })
 
-    this.schema.createSchema('resources')
+    this.schema.createSchema('resource')
     this.schema.withSchema('resource').createTable('organizations', (table) => {
       table.uuid('organization__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
@@ -28,8 +26,8 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
-      table.foreign('owner__id').references('id').inTable('users')
-      table.foreign('account__id').references('account__id').inTable('resource.accounts')
+      table.foreign('owner__id').references('id').inTable('iam.users')
+      table.foreign('account__id').references('account__id').inTable('billing.accounts')
     })
 
     this.schema.withSchema('resource').createTable('projects', (table) => {
@@ -40,11 +38,14 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
 
       table.uuid('organization__id')
-      table.foreign('organization__id').references('organization__id').inTable('resource.organizations')
+      table
+        .foreign('organization__id')
+        .references('organization__id')
+        .inTable('resource.organizations')
     })
 
     this.schema.withSchema('iam').createTable('permissions', (table) => {
-      table.uuid('role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.uuid('permission__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
@@ -122,7 +123,6 @@ export default class extends BaseSchema {
       table.foreign('zone__id').references('zone__id').inTable('infrastructure.zones')
     })
 
-    this.schema.createSchema('infrastructure')
     this.schema.withSchema('infrastructure').createTable('instances', (table) => {
       table.uuid('instance__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
