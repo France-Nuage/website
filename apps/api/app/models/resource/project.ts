@@ -4,7 +4,7 @@ import Organization from '#models/iam/organization'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class Project extends BaseModel {
-  public static table = 'iam.projects'
+  public static table = 'resource.projects'
 
   @computed()
   public get object() {
