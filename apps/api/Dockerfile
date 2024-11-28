@@ -1,38 +1,42 @@
-# Use a lightweight Node.js image
+# Build Stage
 FROM node:20-alpine AS build
 
-# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy package files
-COPY package*.json ./
+# Copy monorepo root files (package.json, package-lock.json, turbo.json)
+COPY ./package.json ./package-lock.json ./turbo.json ./
 
-# Install all dependencies (including devDependencies for building)
+# Copy workspace files (apps and packages)
+COPY ./apps ./apps
+COPY ./packages ./packages
+
+# Install all dependencies (including dev dependencies) in the build stage
 RUN npm install
 
-# Copy the application source code
-COPY . .
+# Build the app (specific to the "api" app in the monorepo)
+RUN npx turbo run build --filter=api
 
-# Build the application
-RUN npm run build
-
-# Use a smaller base image for the production stage
+# Production Stage
 FROM node:20-alpine
 
-# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy built files
-COPY --from=build /usr/src/app/build ./build
-COPY package*.json ./
+# Copy the root package.json and package-lock.json to the production image
+COPY ./package.json ./package-lock.json ./
 
-# Install production dependencies only
-RUN npm install --omit=dev
+# Copy the app-specific package.json files (if needed for production dependencies)
+COPY ./apps/api/package*.json ./apps/api/
 
-# Expose the desired port
+# Copy the built files from the build stage
+COPY --from=build /usr/src/app/apps/api/build ./build
+
+# Install only production dependencies (omit dev dependencies)
+RUN npm install --omit=dev --production
+
+# Expose the API's port
 EXPOSE 3000
 
-# Run as a non-root user
+# Use non-root user for better security
 USER node
 
 # Start the application
