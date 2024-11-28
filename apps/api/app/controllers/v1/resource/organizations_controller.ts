@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { createOrganizationValidator } from '#validators/v1/iam/organization'
-import Organization from '#models/iam/organization'
+import Organization from '#models/resource/organization'
 
 export default class OrganizationsController {
   /**

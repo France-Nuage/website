@@ -1,0 +1,24 @@
+stages:
+  - build
+
+variables:
+  DOCKER_IMAGE: registry.gitlab.com/getnobullshit/france-nuage/website/apps/api:$CI_COMMIT_SHORT_SHA
+  
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    # Build the Docker image from the root, specify the Dockerfile in apps/api
+    - docker build -f apps/api/Dockerfile -t $DOCKER_IMAGE .
+    # Push the Docker image to the GitLab Container Registry
+    - docker push $DOCKER_IMAGE
+  only:
+    - master
+    - staging  # Run on master and staging branches
+    - test-ci  # Run on test-ci for debugging
