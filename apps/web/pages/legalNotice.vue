@@ -12,7 +12,7 @@
           <p class="text-gray-700 mb-4">
             <strong>SIREN :</strong> RCS La Roche sur yon 850824350 <br />
             <strong>SIRET :</strong>  85082435000019 <br />
-            <strong>Siège social :</strong> 7 Rue Pierre Abélard, Cs 43124, 35031 Rennes Cedex <br />
+            <strong>Siège social :</strong> 3 RUE DE L'AUBEPINE 85110 CHANTONNAY <br />
             <strong>Numéro de TVA :</strong> FR 27850824350 <br />
             <strong>Directeur de la publication :</strong> Alexandre CAILLER
           </p>
