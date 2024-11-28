@@ -2,11 +2,11 @@ import { BaseModel, belongsTo, column, computed, hasMany } from '@adonisjs/lucid
 import { DateTime } from 'luxon'
 import Project from '#models/iam/project'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Environment from '#models/iam/environment'
 import User from '#models/user'
+import Account from '#models/billing/Account'
 
 export default class Organization extends BaseModel {
-  public static table = 'iam.organizations'
+  public static table = 'resource.organizations'
 
   @computed()
   public get object() {
@@ -25,6 +25,9 @@ export default class Organization extends BaseModel {
   @column({ columnName: 'owner__id' })
   declare owner__id: number
 
+  @column({ columnName: 'account__id' })
+  declare account__id: string
+
   @column.dateTime({ autoCreate: true })
   declare created_at: DateTime
 
@@ -34,8 +37,8 @@ export default class Organization extends BaseModel {
   @hasMany(() => Project)
   declare projects: HasMany<typeof Project>
 
-  @belongsTo(() => Environment)
-  declare environment: BelongsTo<typeof Environment>
+  @belongsTo(() => Account)
+  declare account: BelongsTo<typeof Account>
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
