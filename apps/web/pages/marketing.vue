@@ -56,6 +56,7 @@
               France-Nuage propose des offres adaptées à chaque besoin, que vous soyez une startup ou une grande entreprise. Choisissez le plan qui correspond à vos besoins et bénéficiez de tarifs compétitifs, sans mauvaises surprises.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
               <!-- Plan Autonome -->
               <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
                 <div>
