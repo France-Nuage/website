@@ -4,11 +4,11 @@ stages:
 variables:
   DOCKER_IMAGE: registry.gitlab.com/getnobullshit/france-nuage/website/api:$CI_COMMIT_SHORT_SHA
   # Define required environment variables
-  NODE_ENV: production
-  PORT: 3000
+  NODE_ENV: $NODE_ENV
+  PORT: $PORT
   APP_KEY: $APP_KEY
-  HOST: 0.0.0.0
-  LOG_LEVEL: info
+  HOST: $HOST
+  LOG_LEVEL: $LOG_LEVEL
   DB_HOST: $DB_HOST
   DB_PORT: $DB_PORT
   DB_USER: $DB_USER
