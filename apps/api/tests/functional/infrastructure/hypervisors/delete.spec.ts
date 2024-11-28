@@ -1,8 +1,12 @@
 import { test } from '@japa/runner'
+import testUtils from "@adonisjs/core/services/test_utils";
 
-test.group('Users list', () => {
-  test('get a user', async ({ client }) => {
-    const response = await client.get('/users')
+test.group('Hypervisors delete', (group) => {
+  group.each.setup(() => testUtils.db().withGlobalTransaction())
+  group.each.setup(() => testUtils.db().truncate())
+
+  test('delete a hypervisor', async ({ client }) => {
+    const response = await client.delete('/hypervisors')
 
     response.assertStatus(200)
     response.assertBody({

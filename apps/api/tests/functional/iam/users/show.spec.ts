@@ -1,6 +1,11 @@
 import { test } from '@japa/runner'
+import testUtils from "@adonisjs/core/services/test_utils";
+import group = test.group;
 
-test.group('Users list', () => {
+test.group('User show', (group) => {
+  group.each.setup(() => testUtils.db().withGlobalTransaction())
+  group.each.setup(() => testUtils.db().truncate())
+
   test('get a user', async ({ client }) => {
     const response = await client.get('/users')
 

@@ -1,14 +1,12 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
 
-test.group('User', (group) => {
+test.group('Users update', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
   group.each.setup(() => testUtils.db().truncate())
-})
 
-test.group('Users list', () => {
-  test('get a user', async ({ client }) => {
-    const response = await client.get('/users')
+  test('update a user', async ({ client }) => {
+    const response = await client.put('/users')
 
     response.assertStatus(200)
     response.assertBody({
