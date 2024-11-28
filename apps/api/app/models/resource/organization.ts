@@ -1,6 +1,6 @@
 import { BaseModel, belongsTo, column, computed, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import Project from '#models/iam/project'
+import Project from '#models/resource/project'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
 import Account from '#models/billing/Account'
