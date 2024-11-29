@@ -1,5 +1,5 @@
-import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { CountryFactory } from '#database/factories/localisation/CountryFactory'
+import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import { CountryFactory } from '#database/factories/localisation/country_factory'
 
 export default class extends BaseSeeder {
   public static async run() {

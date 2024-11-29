@@ -21,16 +21,16 @@ export default class Version extends BaseModel {
   declare description: string
 
   @column()
-  declare available_at: string
+  declare availableAt: string
 
   @column({ columnName: 'service__id' })
-  declare service__id: string
+  declare serviceId: string
 
   @column.dateTime({ autoCreate: true })
-  declare created_at: DateTime
+  declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updated_at: DateTime
+  declare updatedAt: DateTime
 
   @belongsTo(() => Service)
   declare service: BelongsTo<typeof Service>

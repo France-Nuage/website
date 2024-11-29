@@ -1,7 +1,7 @@
 import factory from '@adonisjs/lucid/factories'
-import Account from '#models/billing/account'
+import Account from '#models/resource/account'
 
-export const Account_factory = factory
+export const AccountFactory = factory
   .define(Account, ({ faker }) => {
     return {
       account__id: faker.string.uuid(),

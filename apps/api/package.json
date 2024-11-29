@@ -71,12 +71,7 @@
     "stripe": "^17.4.0",
     "ts-node-maintained": "^10.9.4"
   },
-  "hotHook": {
-    "boundaries": [
-      "./app/controllers/**/*.ts",
-      "./app/middleware/*.ts"
-    ]
-  },
+  "hotHook": {},
   "overrides": {
     "strtok3": "8.0.1"
   },

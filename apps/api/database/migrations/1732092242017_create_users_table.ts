@@ -19,5 +19,6 @@ export default class extends BaseSchema {
 
   async down() {
     this.schema.withSchema('iam').dropTable(this.tableName)
+    this.schema.dropSchema('iam')
   }
 }

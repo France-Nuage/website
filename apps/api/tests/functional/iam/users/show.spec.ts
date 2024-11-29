@@ -1,6 +1,5 @@
 import { test } from '@japa/runner'
 import testUtils from "@adonisjs/core/services/test_utils";
-import group = test.group;
 
 test.group('User show', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())

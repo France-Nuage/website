@@ -1,12 +1,12 @@
-import { BaseSeeder } from '@ioc:Adonis/Lucid/Seeder'
-import { ZoneFactory } from '#database/factories/infrastructure/ZoneFactory'
+import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import { ZoneFactory } from '#database/factories/infrastructure/zone_factory'
 import { Region } from '#models/infrastructure/region'
 
 export default class ZoneSeeder extends BaseSeeder {
   public static async run() {
     const regions = await Region.all()
     for (const region of regions) {
-      await ZoneFactory.merge({ region__id: region.region__id }).createMany(2) // 2 zones par région
+      await ZoneFactory.merge({ region__id: region.id }).createMany(2) // 2 zones par région
     }
   }
 }
