@@ -20,14 +20,6 @@
   - [ ] Avons-nous établi des **contacts avec les mainteneurs** pour demander du support payant si nécessaire ?
   - [ ] Les mainteneurs sont-ils prêts à **être recommandés** pour du consulting/développement spécifique, avec une commission d'apporteur d'affaires ?
 
-### Suivi du processus
-- [ ] **Évaluation initiale** : Quelqu'un a pris en charge l'évaluation de cette application.
-- [ ] **Validation** : Validé par **3 membres** de l'équipe France Nuage.
-- [ ] **Intégration** : L'application est intégrée dans le **catalogue de la marketplace**.
-- [ ] **Mise en production** : L'application est en **production**.
-- [ ] **Communication** : Communication réalisée auprès des **clients, prospects et partenaires**.
-- [ ] **Clôture** : Ticket clôturé.
-
 ### Notes additionnelles
 - **Commentaires** :
 - **Autres informations** :
