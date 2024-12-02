@@ -15,5 +15,5 @@ export class Instance extends BaseModel {
   declare updated_at: DateTime
 
   @hasOne(() => Instance)
-  declare cluster: HasOne<Instance>
+  declare cluster: HasOne<typeof Instance>
 }

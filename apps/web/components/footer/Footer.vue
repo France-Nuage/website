@@ -3,10 +3,16 @@
     <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
       <!-- Mise en page en grille pour gérer différentes tailles d'écran -->
       <div class="grid gap-8 xl:grid-cols-3 xl:gap-8">
-        <!-- Logo et France Nuage en haut pour petits écrans, à gauche pour grands écrans (1/3) -->
-        <div class="flex items-center space-x-4 col-span-3 xl:col-span-1">
-          <Logo />
-          <span class="font-semibold text-white">France Nuage</span>
+        <!-- Logo, France Nuage et informations de contact -->
+        <div class="flex flex-col space-y-4 col-span-3 xl:col-span-1">
+          <div class="flex items-center space-x-4">
+            <Logo />
+            <span class="font-semibold text-white">France Nuage</span>
+          </div>
+          <div class="text-sm text-gray-400">
+            <p>Email : <a href="mailto:bonjour@france-nuage.com" class="hover:text-white">bonjour@france-nuage.com</a></p>
+            <p>Téléphone : <a href="tel:+33781479170" class="hover:text-white">+33 7 81 47 91 70</a></p>
+          </div>
         </div>
 
         <!-- Colonnes de navigation à droite pour les grands écrans, sous le logo pour les petits écrans (2/3) -->

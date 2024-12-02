@@ -6,14 +6,14 @@
           <!-- Titre Principal -->
           <h1 class="text-3xl font-bold text-gray-900 mb-8">Automatisez Vos Déploiements avec France-Nuage</h1>
           
-          <!-- Pourquoi l'Automation est Cruciale -->
+          <!-- Pourquoi l'Automatisation est nécessaire -->
           <section class="mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pourquoi l'Automation est Cruciale ?</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pourquoi l'Automatisation est nécessaire ?</h2>
             <p class="text-gray-700 mb-4">
-              Avec la croissance rapide des infrastructures numériques, l'automatisation est devenue un élément essentiel pour gagner en efficacité et en fiabilité. Chez <strong>France-Nuage</strong>, nous simplifions la gestion de vos déploiements, en vous permettant de se concentrer sur l'innovation plutôt que sur la maintenance quotidienne de votre cloud.
+              Avec la croissance rapide des infrastructures numériques, l'automatisation est devenue un élément essentiel pour gagner en efficacité et en fiabilité. Chez <strong>France-Nuage</strong>, nous simplifions la gestion de vos déploiements, en vous permettant de se concentrer sur ce qui compte vraiment plutôt que sur la maintenance quotidienne de votre cloud.
             </p>
             <p class="text-gray-700">
-              L'automation vous aide à réduire les erreurs humaines, à assurer la cohérence des configurations, et à gagner un temps précieux dans la gestion de votre infrastructure IT.
+              L'automatisation vous aide à réduire les erreurs humaines, à assurer la cohérence des configurations, et à gagner du temps dans la gestion de votre infrastructure IT.
             </p>
           </section>
   
@@ -28,9 +28,9 @@
             </ul>
           </section>
   
-          <!-- Les Avantages de l'Automation chez France-Nuage -->
+          <!-- Les Avantages de l'Automatisation chez France-Nuage -->
           <section class="mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Les Avantages de l'Automation chez France-Nuage</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Les Avantages de l'Automatisation chez France-Nuage</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Gain de Temps</h3>
@@ -41,7 +41,7 @@
               <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Réduction des Risques</h3>
                 <p class="text-gray-700">
-                  L'automation réduit les erreurs humaines et améliore la fiabilité de vos services. Vos applications sont toujours à jour, sécurisées et fonctionnelles, sans intervention manuelle.
+                  L'automatisation réduit les erreurs humaines et améliore la fiabilité de vos services. Vos applications sont toujours à jour, sécurisées et fonctionnelles, sans intervention manuelle.
                 </p>
               </div>
               <div class="bg-white p-6 rounded-lg shadow-md">
@@ -59,11 +59,11 @@
             </div>
           </section>
   
-          <!-- Comment Commencer avec l'Automation France-Nuage -->
+          <!-- Comment Commencer avec l'Automatisation France-Nuage -->
           <section class="mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comment Commencer avec l'Automation France-Nuage ?</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comment Commencer avec l'Automatisation France-Nuage ?</h2>
             <p class="text-gray-700 mb-4">
-              Démarrer avec l'automation de France-Nuage est simple et rapide. Voici les étapes à suivre :
+              Démarrer avec l'automatisation de France-Nuage est simple et rapide. Voici les étapes à suivre :
             </p>
             <ol class="list-decimal list-inside text-gray-700 space-y-3">
               <li><strong>Inscrivez-vous</strong> sur notre plateforme et accédez à votre espace client sécurisé.</li>

@@ -4,19 +4,20 @@
       <div class="mx-auto max-w-4xl pt-20 pb-16 sm:pt-28 lg:pt-32">
         
         <!-- Titre Principal -->
-        <h1 class="text-3xl font-bold text-gray-900 mb-8">ACAILLER Société à Responsabilité Limitée</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">France Nuage (FGRibreau Société à Responsabilité Limitée)</h1>
         
         <!-- Informations légales -->
         <section class="mb-10">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Informations Légales</h2>
           <p class="text-gray-700 mb-4">
-            <strong>SIREN :</strong> 952 347 359 RCS Nantes <br />
-            <strong>Siège social :</strong> 7 Rue Pierre Abélard, Cs 43124, 35031 Rennes Cedex <br />
-            <strong>Numéro de TVA :</strong> FR 15952347359 <br />
+            <strong>SIREN :</strong> RCS La Roche sur yon 850824350 <br />
+            <strong>SIRET :</strong>  85082435000019 <br />
+            <strong>Siège social :</strong> 3 RUE DE L'AUBEPINE 85110 CHANTONNAY <br />
+            <strong>Numéro de TVA :</strong> FR 27850824350 <br />
             <strong>Directeur de la publication :</strong> Alexandre CAILLER
           </p>
           <p class="text-gray-700">
-            <strong>Hébergeur :</strong> Webflow, Inc., 398 11th Street, 2nd Floor, San Francisco, CA 94103
+            <strong>Hébergeur :</strong> France-Nuage
           </p>
         </section>
 
@@ -24,8 +25,8 @@
         <section class="mb-10">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Adresse</h2>
           <address class="text-gray-700">
-            12 rue chantermerle<br />
-            44190, Clisson, France
+            3 rue de l'aubépine<br />
+            85110 CHANTONNAY
           </address>
         </section>
 
@@ -33,7 +34,7 @@
         <section class="mb-10">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contact</h2>
           <p class="text-gray-700 mb-2">
-            Email : <a href="mailto:alex02.cailler@gmail.com" class="text-blue-600 underline">alex02.cailler@gmail.com</a>
+            Email : <a href="mailto:contact@france-nuage.fr" class="text-blue-600 underline">contact@france-nuage.fr</a>
           </p>
           <p class="text-gray-700">
             Téléphone : <a href="tel:+33781479170" class="text-blue-600 underline">+33 7 81 47 91 70</a>
@@ -45,7 +46,7 @@
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Signaler un abus</h2>
           <p class="text-gray-700">
             Pour signaler un contenu litigieux ou si vous êtes victime d'une utilisation frauduleuse d'un service France-Nuage, contactez-nous à l'adresse 
-            <a href="mailto:support@cloud-iam.com" class="text-blue-600 underline">support@cloud-iam.com</a>.
+            <a href="mailto:support@cloud-iam.com" class="text-blue-600 underline">support@france-nuage.fr</a>.
           </p>
         </section>
 

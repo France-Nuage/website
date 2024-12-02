@@ -1,7 +1,7 @@
 <template>
   <nuxt-layout name="settings">
 
-    <h1 class="text-3xl font-semibold mb-8">France Nuage</h1>
+    <h1 class="text-3xl font-semibold mb-8 dark:text-gray-300">France Nuage</h1>
 
     <TabGroup>
       <c-tab-list>
