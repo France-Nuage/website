@@ -14,35 +14,34 @@ export interface AllowedRegisterCredentials {
   confirm_password: string;
 }
 
-export const SecurityRepository = function (client: AxiosInstance, config: Record<any, any>) {
+export const SecurityRepository = function (client, config: Record<any, any>) {
   return {
     login: async (credentials: AllowedLoginCredentials) =>
-      client
-        .post(`/auth/token`, {
+      client(`/auth/token`, {
           // client_id: config.PASSPORT_CLIENT_ID,
           // client_secret: config.PASSPORT_CLIENT_SECRET,
           // grant_type: 'password',
-          ...credentials,
+          method: 'POST',
+          body: { ...credentials },
         })
-        .then(({ data }) => {
+        .then((response) => {
           const token = useCookie('token'); // useCookie new hook in nuxt 3
-          token.value = data?.token?.token;
-          return data;
+          token.value = response.token?.token;
+          return response;
         })
         .catch((e) => e.message),
     me: async () => {
-      try {
-        return await client.get('/auth/me');
-      } catch (e) {
-        throw new Error(e.message);
-      }
+        return client('/auth/me');
     },
     register: async (credentials: AllowedRegisterCredentials) =>
-      client.post('/auth/register', {
-        lastname: credentials.firstname,
-        firstname: credentials.firstname,
-        email: credentials.email,
-        password: credentials.password,
+       client('/auth/register', {
+          method: 'POST',
+          body: {
+              lastname: credentials.firstname,
+              firstname: credentials.firstname,
+              email: credentials.email,
+              password: credentials.password,
+          }
       }),
   };
 };

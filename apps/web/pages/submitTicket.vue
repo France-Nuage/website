@@ -10,10 +10,10 @@
           <section class="mb-10">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Nous n'aimons pas que vous ayez besoin de nous contacter</h2>
             <p class="text-gray-700 mb-4">
-              Chez France-Nuage, nous croyons que notre service doit fonctionner sans que vous ayez à vous soucier des détails. Notre objectif est de créer une expérience fluide et sans faille, où tout est déjà pris en charge pour vous.
+              Chez France-Nuage, nous croyons que notre service doit fonctionner sans que vous ayez à vous soucier des détails. Si vous avez besoin de créer un ticket, c'est que nous n'avons pas fait notre travail en tant qu'infogéreur de nouvelle génération. Notre objectif est de créer une expérience fluide et sans faille, où tout est déjà pris en charge pour vous, et où VOUS avez le contrôle.
             </p>
             <p class="text-gray-700 mb-4">
-              Alors, quand vous devez soumettre un ticket, nous le prenons personnellement. C'est un signe que nous n'avons pas bien fait notre travail. Chaque ticket est pour nous une opportunité de comprendre ce qui n'a pas fonctionné et de nous améliorer.
+              Alors, quand vous devez soumettre un ticket, nous le prenons personnellement. C'est un signe que nous n'avons pas bien fait notre travail. Chaque ticket est pour nous une opportunité de comprendre ce qui n'a pas fonctionné et de productiviser votre problème au sein de notre produit, afin de vous rendre votre autonomie et votre pouvoir d'action.
             </p>
             <p class="text-gray-700">
               Nous sommes désolés de ne pas avoir répondu à vos attentes cette fois-ci, mais nous sommes déterminés à faire mieux. Merci de prendre le temps de nous informer du problème.

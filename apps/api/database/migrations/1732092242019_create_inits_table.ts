@@ -6,31 +6,33 @@ export default class extends BaseSchema {
   async up() {
     this.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp" schema pg_catalog version "1.1";')
 
-    this.schema.createSchema('iam')
-    this.schema.withSchema('iam').createTable('environments', (table) => {
-      table.uuid('environment__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
-      table.string('name')
+    this.schema.createSchema('stripe')
+    this.schema.createSchema('billing')
+    this.schema.withSchema('billing').createTable('accounts', (table) => {
+      table.uuid('account__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('stripe_customer__id')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
 
-    this.schema.withSchema('iam').createTable('organizations', (table) => {
+    this.schema.createSchema('resources')
+    this.schema.withSchema('resource').createTable('organizations', (table) => {
       table.uuid('organization__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.string('email')
       table.string('fax')
       table.string('phone')
       table.string('establishment_identifier')
-      table.uuid('environment__id')
+      table.uuid('account__id')
       table.integer('owner__id')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
       table.foreign('owner__id').references('id').inTable('users')
-      table.foreign('environment__id').references('environment__id').inTable('iam.environments')
+      table.foreign('account__id').references('account__id').inTable('resource.accounts')
     })
 
-    this.schema.withSchema('iam').createTable('projects', (table) => {
+    this.schema.withSchema('resource').createTable('projects', (table) => {
       table.uuid('project__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.string('description')
@@ -38,17 +40,20 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
 
       table.uuid('organization__id')
-      table.foreign('organization__id').references('organization__id').inTable('iam.organizations')
+      table.foreign('organization__id').references('organization__id').inTable('resource.organizations')
     })
 
+    this.schema.withSchema('iam').createTable('permissions', (table) => {
+      table.uuid('role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+    })
     this.schema.withSchema('iam').createTable('roles', (table) => {
       table.uuid('role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
-
-      table.uuid('organization__id')
-      table.foreign('organization__id').references('organization__id').inTable('iam.organizations')
     })
 
     this.schema.createSchema('service')
@@ -131,10 +136,10 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    this.schema.withSchema('iam').dropTable('projects')
-    this.schema.withSchema('iam').dropTable('organizations')
-    this.schema.withSchema('iam').dropTable('environments')
-    this.schema.dropSchema('iam')
+    this.schema.withSchema('resources').dropTable('projects')
+    this.schema.withSchema('resources').dropTable('organizations')
+    this.schema.withSchema('resources').dropTable('environments')
+    this.schema.dropSchema('resources')
 
     this.schema.withSchema('application').dropTable('applications')
     this.schema.withSchema('application').dropTable('versions')

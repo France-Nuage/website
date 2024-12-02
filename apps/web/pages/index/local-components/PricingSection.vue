@@ -32,7 +32,15 @@
           <p class="mt-6 flex items-baseline gap-x-1">
             <span :class="[tier.isStartup ? 'text-white' : 'text-gray-900','text-4xl font-semibold tracking-tight'] ">{{ tier.price }}</span>
           </p>
-          <Button block :variant="tier.isStartup ? 'secondary' : 'primary'" class="mt-6" to="/contact">Commencer dès maintenant</Button>
+          <a
+            href="/contact"
+            :class="[
+              tier.isStartup ? 'bg-white text-primary' : 'bg-primary text-white',
+              'block w-full text-center mt-6 px-6 py-3 rounded-lg font-semibold shadow-sm hover:opacity-90 transition',
+            ]"
+          >
+            Commencer dès maintenant
+          </a>
           <div class="xl:mt-10">
             <p v-if="tier.isStartup && tier.alreadyHaveServers" class="text-white lowercase">* Le plan autonome plus :</p>
             <p v-if="tier.isEntreprise" class="lowercase">* Le plan startup plus :</p>
