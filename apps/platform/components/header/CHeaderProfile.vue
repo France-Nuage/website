@@ -18,15 +18,15 @@
 
       <c-dropdown-item>
         <template #default v-slot="{ active }">
-          <nuxt-link class="h-full w-full block" to="/profile">Your profile</nuxt-link>
+          <nuxt-link class="h-full w-full block" to="/profile/preferences">Your profile</nuxt-link>
         </template>
       </c-dropdown-item>
 
-      <c-dropdown-item>
-        <template #default v-slot="{ active }">
-          <nuxt-link to="/profile/setings" class="h-full w-full block">Account settings</nuxt-link>
-        </template>
-      </c-dropdown-item>
+<!--      <c-dropdown-item>-->
+<!--        <template #default v-slot="{ active }">-->
+<!--          <nuxt-link to="/settings/setings" class="h-full w-full block">Account settings</nuxt-link>-->
+<!--        </template>-->
+<!--      </c-dropdown-item>-->
 
       <c-divider class="-mx-2 my-2" />
 

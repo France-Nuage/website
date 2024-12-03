@@ -67,8 +67,8 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
     })
 
-    this.schema.withSchema('iam').createTable('role_groups', (table) => {
-      table.uuid('role_group__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+    this.schema.withSchema('iam').createTable('group_roles', (table) => {
+      table.uuid('group_role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('description')
       table.string('name')
       table.string('title')
@@ -81,10 +81,19 @@ export default class extends BaseSchema {
       table.string('description')
       table.string('name')
       table.string('title')
+      table.boolean('custom').defaultTo(false)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
       table.uuid('group_role__id')
       table.foreign('group_role__id').references('group_role__id').inTable('iam.group_roles')
+    })
+
+    this.schema.withSchema('iam').createTable('roles__permissions', (table) => {
+      table.uuid('permission__id')
+      table.uuid('role__id')
+
+      table.foreign('role__id').references('role__id').inTable('iam.roles')
+      table.foreign('permission__id').references('permission__id').inTable('iam.permissions')
     })
 
     this.schema.createSchema('service')
@@ -181,7 +190,7 @@ export default class extends BaseSchema {
         table
           .foreign('instance_type__id')
           .references('instance_type__id')
-          .inTable('infrastructure.instances')
+          .inTable('infrastructure.instance_types')
       })
 
     this.schema.withSchema('infrastructure').createTable('instance_template', (table) => {
@@ -239,12 +248,11 @@ export default class extends BaseSchema {
       table.string('version').notNullable()
       table.date('release_date')
       table.timestamps(true)
-      table.uuid('boot_disk__id')
+      table.uuid('boot_disk__id').notNullable()
       table
         .foreign('boot_disk__id')
         .references('boot_disk__id')
         .inTable('infrastructure.boot_disks')
-        .notNullable()
     })
 
     this.schema.withSchema('infrastructure').createTable('instances', (table) => {
@@ -253,6 +261,7 @@ export default class extends BaseSchema {
       table.string('node')
       table.uuid('cluster__id')
       table.uuid('instance_type__id')
+      table.uuid('boot_disk__id').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
@@ -261,12 +270,10 @@ export default class extends BaseSchema {
         .foreign('instance_type__id')
         .references('instance_type__id')
         .inTable('infrastructure.instance_types')
-      table.uuid('boot_disk__id')
       table
         .foreign('boot_disk__id')
         .references('boot_disk__id')
         .inTable('infrastructure.boot_disks')
-        .notNullable()
     })
   }
 

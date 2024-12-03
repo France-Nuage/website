@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 h-screen">
+  <div class="bg-gray-50 h-screen dark:bg-gray-900">
     <c-breadcrumb logo :pages="pages" />
     <nuxt-page />
   </div>
@@ -18,7 +18,7 @@ const pages = computed(() => {
 
   return [
     { name: organizationLabel, href: '#', current: true },
-    { name: 'Créer un projet', href: '#', current: true },
+    { name: 'Créer un compte', href: '#', current: true },
   ]
 });
 

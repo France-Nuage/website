@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
 
-test.group('Organizations list', (group) => {
+test.group('organization_delete', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
   group.each.setup(() => testUtils.db().truncate())
 

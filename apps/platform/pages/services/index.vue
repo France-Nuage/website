@@ -1,5 +1,7 @@
 <template>
-  <div>services</div>
+  <nuxt-layout>
+    <div>services</div>
+  </nuxt-layout>
 </template>
 
 <script setup lang="ts">

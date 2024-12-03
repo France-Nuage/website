@@ -1,7 +1,6 @@
-// import type { AxiosInstance } from 'axios';
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostOrganizationData {}
 

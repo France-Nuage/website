@@ -32,8 +32,11 @@ export default class OrganizationsController {
   /**
    * Show individual record
    */
-  async show({ params, response }: HttpContext) {
-    const organization = await Organization.find(params.id)
+  async show({ params, response, request }: HttpContext) {
+    const organization = await new RequestQueryBuilder(Organization.query())
+      .withIncludes(request.qs().includes)
+      .applyWhere([['id', '=', params.id]])
+      .firstOrFail()
 
     if (!organization) {
       response.notFound(`Organization ${params.id} not found`)

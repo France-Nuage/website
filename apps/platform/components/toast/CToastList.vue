@@ -1,45 +1,37 @@
 <template>
-  <div class="m-alert">
-    <TransitionGroup name="list" tag="ul">
-      <li v-for="(item, key) in alerts.list" :key="key">
-        <m-alert-item :title="item.title" :description="item.description" :type="item.type" />
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed right-5 bottom-5 flex items-end px-4 py-6 sm:items-start sm:p-6"
+    style="width: 600px"
+  >
+    <TransitionGroup
+      name="list"
+      tag="ul"
+      class="flex w-full flex-col items-center space-y-4 sm:items-end"
+      enter-active-class="transform ease-out duration-300 transition"
+      enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+      enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+      leave-active-class="transition ease-in duration-100"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <li
+        v-for="(item, key) in alerts.list"
+        :key="key"
+        class="w-full"
+      >
+        <c-toast-item
+          :title="item.title"
+          :description="item.description"
+          :type="item.type"
+        />
       </li>
     </TransitionGroup>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAlerts } from "stores/alert";
-import MAlertItem from "components/alerts/MAlertItem.vue";
+import CToastItem from "~/components/toast/CToastItem.vue";
 
 const alerts = useAlerts()
 </script>
-
-<style scoped lang="scss">
-.m-alert {
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
-  &__list, ul {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    margin: 0;
-    flex-direction: column;
-    li {
-      list-style: none;
-    }
-  }
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-</style>

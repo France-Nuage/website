@@ -1,6 +1,6 @@
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostServiceData {}
 
@@ -13,7 +13,7 @@ interface ServiceResource {
 
 type PatchServiceData = Partial<ServiceResource> | { resultCode: string };
 
-export const ServiceRepository = function (client, config: Record<any, any>) {
+export const ServiceRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ServiceResource[]>> => {
       const apiCallParams = params ? parseUri(params) : '';

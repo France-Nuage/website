@@ -61,35 +61,25 @@
     </TransitionRoot>
 
     <c-sidebar>
-      <c-sidebar-navigation-group title="Projects">
-        <c-sidebar-navigation-item title="Home" icon="home-2-bold-duotone" to="/profile" :active="route.path === '/profile'" />
-        <c-sidebar-navigation-item title="Instances" icon="home-2-bold-duotone" to="/instances" :active="isActive('instances')" />
-        <template #footer>
-          <nuxt-link class="text-xs ml-2 text-gray-700 dark:text-gray-400 cursor-pointer">Tous les projets...</nuxt-link>
-        </template>
+
+      <c-sidebar-navigation-group>
+        <button class="text-white text-sm text-start flex items-center gap-2" @click="$router.go(-1)">
+          <Icon :name="`solar:backspace-bold-duotone`" size="1.3rem" style="color: #c1c1c1" />
+          <span>Retour</span>
+        </button>
       </c-sidebar-navigation-group>
-      <c-sidebar-navigation-group title="Organisations">
-        <c-sidebar-navigation-item
-          v-for="organization in organizations.slice(0, 5)"
-          :key="organization.id"
-          :title="organization.name"
-          icon="home-2-bold-duotone"
-          :to="`/settings/organizations/${organization.id}`"
-          :active="route.path === `/settings/organizations/${organization.id}`"
-        />
-        <template v-if="organizations.length > 5" #footer>
-          <nuxt-link class="text-xs ml-2 text-gray-700 dark:text-gray-400 cursor-pointer" to="/settings/organizations">Toutes les organisations...</nuxt-link>
-        </template>
-      </c-sidebar-navigation-group>
+
       <c-sidebar-navigation-group title="Profile">
-        <c-sidebar-navigation-item title="Préférences" icon="home-2-bold-duotone" to="/settings/profile/preferences" :active="route.path === '/settings/profile/preferences'" />
-        <c-sidebar-navigation-item title="Access Token" icon="home-2-bold-duotone" to="/settings/profile/access-token" :active="route.path === '/settings/profile/access-token'" />
-        <c-sidebar-navigation-item title="Sécurité" icon="home-2-bold-duotone" to="/settings/profile/security" :active="route.path === '/settings/profile/security'" />
+        <c-sidebar-navigation-item title="Préférences" icon="user-circle-bold-duotone" to="/settings/profile/preferences" :active="route.path === '/settings/profile/preferences'" />
+        <c-sidebar-navigation-item title="Token personnel" icon="key-bold-duotone" to="/settings/profile/access-token" :active="route.path === '/settings/profile/access-token'" />
+        <c-sidebar-navigation-item title="Sécurité" icon="lock-keyhole-bold-duotone" to="/settings/profile/security" :active="route.path === '/settings/profile/security'" />
       </c-sidebar-navigation-group>
+
       <c-sidebar-navigation-group title="Documentations">
-        <c-sidebar-navigation-item title="Guides" icon="home-2-bold-duotone" to="/" :active="route.path === '/'" />
-        <c-sidebar-navigation-item title="API Reference" icon="home-2-bold-duotone" to="/" :active="isActive('instances')" />
+        <c-sidebar-navigation-item title="Guides" icon="square-bottom-up-line-duotone" to="/instances" :active="isActive('/documentation/guides')" />
+        <c-sidebar-navigation-item title="Api référence" icon="square-bottom-up-line-duotone" to="/services" :active="isActive('/documentation/api')" />
       </c-sidebar-navigation-group>
+
     </c-sidebar>
 
     <div class="lg:pl-72 bg-gray-50 dark:bg-gray-900 min-h-screen">
@@ -100,6 +90,7 @@
         </div>
       </main>
     </div>
+    <c-toast-list />
   </div>
 </template>
 
@@ -120,6 +111,7 @@ import { ref } from "vue";
 import CSidebar from "~/components/sidebar/CSidebar.vue";
 import CSidebarNavigationItem from "~/components/sidebar/CSidebarNavigationItem.vue";
 import CSidebarNavigationGroup from "~/components/sidebar/CSidebarNavigationGroup.vue";
+import CToastList from "~/components/toast/CToastList.vue";
 const sidebarOpen = ref(false)
 
 const route = useRoute()

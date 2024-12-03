@@ -1,7 +1,8 @@
-import { BaseModel, belongsTo, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, manyToMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import RoleGroup from '#models/iam/role_group'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
+import GroupRole from '#models/iam/group_role'
+import Permission from '#models/iam/permission'
 
 export default class Role extends BaseModel {
   public static table = 'iam.roles'
@@ -29,6 +30,9 @@ export default class Role extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updated_at: DateTime
 
-  @belongsTo(() => RoleGroup)
-  declare group: BelongsTo<typeof RoleGroup>
+  @belongsTo(() => GroupRole)
+  declare group: BelongsTo<typeof GroupRole>
+
+  @manyToMany(() => Permission)
+  declare permissions: ManyToMany<typeof Permission>
 }

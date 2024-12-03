@@ -1,12 +1,13 @@
 <template>
   <Dialog
-      class="fixed inset-0 z-50"
+      class="fixed inset-0"
+      style="z-index: 51"
       :open="props.modelValue"
       @close="$emit('update:modelValue', $event)"
   >
     <DialogBackdrop
         transition
-        class="fixed inset-0 bg-zinc-400/25 backdrop-blur-sm data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in dark:bg-black/40"
+        class="fixed inset-0 z-50 bg-zinc-400/25 backdrop-blur-sm data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in dark:bg-black/40"
     />
     <div class="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
       <DialogPanel

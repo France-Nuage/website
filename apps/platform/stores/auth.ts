@@ -28,14 +28,16 @@ export const useAuthStore = defineStore('auth', {
     },
     authenticate: async function ({ email, password }: UserPayloadInterface) {
       const { $api } = useNuxtApp()
-      return $api().security.login({ email, password }).then(({ data }) => {
-        if (data.token) {
+      return $api().security.login({ email, password }).then((response) => {
+        if (response.data.token) {
           const token = useCookie('token');
 
-          token.value = data?.token?.token;
-          this.user = { id: data?.id, email: data?.email }
+          token.value = response.data?.token?.token;
+          this.user = { id: response.data?.id, email: response.data?.email }
           this.authenticated = true;
         }
+
+        return response;
       })
     },
     logUserOut: function () {

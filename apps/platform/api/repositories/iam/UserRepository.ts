@@ -1,8 +1,6 @@
-import type { AxiosInstance } from 'axios';
-
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostUserData {}
 
@@ -16,7 +14,7 @@ interface UserResource {
 
 type PatchUserData = Partial<UserResource> | { resultCode: string };
 
-export const UserRepository = function (client, config: Record<any, any>) {
+export const UserRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<any>> => {
       const apiCallParams = params ? parseUri(params) : '';

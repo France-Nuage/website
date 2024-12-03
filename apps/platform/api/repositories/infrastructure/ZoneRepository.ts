@@ -1,7 +1,6 @@
-// import type { AxiosInstance } from 'axios';
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostOrganizationData {}
 
@@ -17,24 +16,24 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-export const RegionRepository = function (client: any, config: Record<any, any>) {
+export const ZoneRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/regions${apiCallParams}`, { method: 'GET' });
+      return client(`/zones${apiCallParams}`, { method: 'GET' });
     },
     get: async (
-      regionId: string,
+      zoneId: string,
       params?: AllowedParams<null, null, null>,
     ): Promise<ApiResponse<OrganizationResource>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/regions/${regionId}${apiCallParams}`);
+      return client(`/zones/${zoneId}${apiCallParams}`);
     },
     post: async (body: PostOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/regions`, {  method: 'POST', body });
+      return client(`/zones`, {  method: 'POST', body });
     },
-    patch: async (regionId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/regions/${regionId}`, {  method: 'PUT', body });
+    patch: async (zoneId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
+      return client(`/zones/${zoneId}`, {  method: 'PUT', body });
     },
   };
 };

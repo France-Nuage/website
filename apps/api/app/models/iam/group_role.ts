@@ -3,15 +3,15 @@ import { DateTime } from 'luxon'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Role from '#models/iam/role'
 
-export default class RoleGroup extends BaseModel {
-  public static table = 'iam.role_groups'
+export default class GroupRole extends BaseModel {
+  public static table = 'iam.group_roles'
 
   @computed()
   public get object() {
     return 'group'
   }
 
-  @column({ isPrimary: true, columnName: 'role_group__id' })
+  @column({ isPrimary: true, columnName: 'group_role__id' })
   declare id: string
 
   @column()

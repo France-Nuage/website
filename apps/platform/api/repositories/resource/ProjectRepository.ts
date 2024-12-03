@@ -1,8 +1,6 @@
-import type { AxiosInstance } from 'axios';
-
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostProjectData {}
 
@@ -15,7 +13,7 @@ interface ProjectResource {
 
 type PatchProjectData = Partial<ProjectResource> | { resultCode: string };
 
-export const ProjectRepository = function (client, config: Record<any, any>) {
+export const ProjectRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<ProjectResource[]>> => {
       const apiCallParams = params ? parseUri(params) : '';

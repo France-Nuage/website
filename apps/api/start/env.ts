@@ -67,5 +67,9 @@ export default await Env.create(new URL('../', import.meta.url), {
   |----------------------------------------------------------
   */
   GOOGLE_CLIENT_ID: Env.schema.string(),
-  GOOGLE_CLIENT_SECRET: Env.schema.string()
+  GOOGLE_CLIENT_SECRET: Env.schema.string(),
+
+  REDIS_HOST: Env.schema.string({ format: 'host' }),
+  REDIS_PORT: Env.schema.number(),
+  REDIS_PASSWORD: Env.schema.string.optional()
 })

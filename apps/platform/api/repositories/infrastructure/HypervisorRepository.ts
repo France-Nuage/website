@@ -1,7 +1,6 @@
-// import type { AxiosInstance } from 'axios';
-import { parseUri } from '../parsers/url';
-import type { AllowedParams } from './ApiParams';
-import type { ApiResponse } from './ApiResponse';
+import { parseUri } from '../../parsers/url';
+import type { AllowedParams } from './../ApiParams';
+import type { ApiResponse } from './../ApiResponse';
 
 interface PostOrganizationData {}
 
@@ -17,24 +16,24 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-export const InstanceRepository = function (client: any, config: Record<any, any>) {
+export const HypervisorRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/instances${apiCallParams}`, { method: 'GET' });
+      return client(`/hypervisor${apiCallParams}`, { method: 'GET' });
     },
     get: async (
       instanceId: string,
       params?: AllowedParams<null, null, null>,
     ): Promise<ApiResponse<OrganizationResource>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/instances/${instanceId}${apiCallParams}`);
+      return client(`/hypervisor/${instanceId}${apiCallParams}`);
     },
     post: async (body: PostOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/instances`, {  method: 'POST', body });
+      return client(`/hypervisor`, { method: 'POST', body });
     },
     patch: async (instanceId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/instances/${instanceId}`, {  method: 'PUT', body });
+      return client(`/hypervisor/${instanceId}`, {  method: 'PUT', body });
     },
   };
 };

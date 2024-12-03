@@ -59,7 +59,7 @@ export default defineNuxtConfig({
             ].includes(page.name)) {
               page.meta ||= {}
               page.meta.middleware ||= []
-              page.meta.middleware = page.meta.middleware.concat(['organization'])
+              page.meta.middleware = page.meta.middleware.concat(['organization', 'router'])
             }
 
             if (page.children) {

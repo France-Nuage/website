@@ -1,7 +1,8 @@
 export const useProjectStore = defineStore('project', {
     state: () => ({
         projects: [],
-        project: null
+        project: null,
+        currentProject: null,
     }),
     actions: {
         loadProjects: async (): Promise<void> => {

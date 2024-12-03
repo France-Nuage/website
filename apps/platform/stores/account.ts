@@ -1,28 +1,28 @@
-export const useProjectStore = defineStore('project', {
+export const useAccountStore = defineStore('account', {
     state: () => ({
-        projects: [],
-        project: null
+        accounts: [],
+        account: null
     }),
     actions: {
-        loadProjects: async (): Promise<void> => {
+        loadAccounts: async (): Promise<void> => {
             const { $api } = useNuxtApp()
 
-            $api().projects.list().then(({ data }) => {
-                this.projects = data.data
+            $api().accounts.list().then(({ data }) => {
+                this.accounts = data.data
             })
         },
-        loadProject: async (id: string): Promise<void> => {
+        loadAccount: async (id: string): Promise<void> => {
             const { $api } = useNuxtApp()
 
-            $api().projects.get(id).then(({ data }) => {
-                this.project = data
+            $api().accounts.get(id).then(({ data }) => {
+                this.account = data
             })
         },
-        createProject: async function (data) {
+        createAccount: async function (data) {
             const { $api } = useNuxtApp()
 
-            $api().projects.post(data).then(({ data }) => {
-                this.project = data
+            return $api().accounts.post(data).then(({ data }) => {
+                this.account = data
             })
         }
     }
