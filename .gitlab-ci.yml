@@ -49,7 +49,7 @@ set-issue-labels:
         curl --request PUT \
           --header "PRIVATE-TOKEN: $SA_API_TOKEN" \
           --header "Content-Type: application/json" \
-          --data '{"labels": "group::marketing-communication, Milestone::France-Nuage issue mail à classifier"}' \
+          --data '{"labels": "group::marketing-communication, milestone::France-Nuage issue mail à classifier"}' \
           "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/issues/$ISSUE_ID"
         echo "Labels applied successfully."
       else
