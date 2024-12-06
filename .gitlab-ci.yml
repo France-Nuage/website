@@ -1,5 +1,6 @@
 stages:
   - build
+  - auto-set-labels-new-issue
 
 variables:
   DOCKER_IMAGE: registry.gitlab.com/getnobullshit/france-nuage/website/apps/api:$CI_COMMIT_SHORT_SHA
@@ -29,3 +30,27 @@ build:
     - master
     - staging  # Run on master and staging branches
     - test-ci  # Run on test-ci for debugging
+
+set-issue-labels:
+  stage: auto-set-labels-new-issue
+  script:
+    - echo "Checking for existing labels on the issue..."
+    - |
+      # Get the current labels
+      CURRENT_LABELS=$(curl --silent --header "PRIVATE-TOKEN: $SA_API_TOKEN" \
+        "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/issues/$ISSUE_ID" | jq -r '.labels | join(",")')
+      
+      # If no labels, apply group and milestone labels
+      if [ -z "$CURRENT_LABELS" ]; then
+        echo "No labels found. Setting default labels..."
+        curl --request PUT \
+          --header "PRIVATE-TOKEN: $SA_API_TOKEN" \
+          --header "Content-Type: application/json" \
+          --data '{"labels": "group::marketing-communication, Milestone::France-Nuage issue mail à classifier"}' \
+          "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/issues/$ISSUE_ID"
+        echo "Labels applied successfully."
+      else
+        echo "Labels already exist: $CURRENT_LABELS. Skipping."
+      fi
+  only:
+    - api  # Trigger manually or dynamically
