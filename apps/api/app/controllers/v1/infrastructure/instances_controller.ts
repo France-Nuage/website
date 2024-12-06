@@ -71,3 +71,94 @@ export default class InstancesController {
     })
   }
 }
+
+
+
+
+
+
+
+
+// import { createMachine } from "xstate";
+//
+// export const machine = createMachine({
+//   context: {},
+//   id: "status",
+//   initial: "Init",
+//   states: {
+//     Init: {
+//       on: {
+//         created: {
+//           target: "Created",
+//         },
+//       },
+//       description:
+//         "The initial state where the status is not yet created. The only transition from this state is to the Created state.",
+//     },
+//     Created: {
+//       on: {
+//         running: {
+//           target: "Running",
+//         },
+//         stop: {
+//           target: "Stop",
+//         },
+//         restart: {
+//           target: "Restart",
+//         },
+//         delete: {
+//           target: "Delete",
+//         },
+//       },
+//       description:
+//         "The created state where the status is set up. It can transition to Running, Stop, or Restart.",
+//     },
+//     Running: {
+//       on: {
+//         stop: {
+//           target: "Stop",
+//         },
+//         restart: {
+//           target: "Restart",
+//         },
+//         delete: {
+//           target: "Delete",
+//         },
+//       },
+//       description:
+//         "The running state where the status is actively executing. It can transition to Stop, Restart, or remain in Running.",
+//     },
+//     Stop: {
+//       on: {
+//         delete: {
+//           target: "Delete",
+//         },
+//         restart: {
+//           target: "Restart",
+//         },
+//       },
+//       description:
+//         "The stop state where the status is halted. It cannot transition to any other state.",
+//     },
+//     Restart: {
+//       on: {
+//         running: {
+//           target: "Running",
+//         },
+//         stop: {
+//           target: "Stop",
+//         },
+//         delete: {
+//           target: "Delete",
+//         },
+//       },
+//       description:
+//         "The restart state where the status is reset and can transition to Running or Stop.",
+//     },
+//     Delete: {
+//       type: "final",
+//       description:
+//         "The restart state where the status is reset and can transition to Running or Stop.",
+//     },
+//   },
+// }).withConfig({});

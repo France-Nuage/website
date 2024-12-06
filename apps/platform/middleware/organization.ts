@@ -1,10 +1,12 @@
+import { useNavigationStore } from "~/stores/navigation";
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
-    const { loadOrganizations } = useOrganizationStore()
-    const { organizations } = storeToRefs(useOrganizationStore());
-    await loadOrganizations()
+    const { loadOrganizations } = useNavigationStore()
+    const { organizations } = storeToRefs(useNavigationStore());
+    await loadOrganizations({ includes: 'accounts.projects' })
 
-    if (organizations.value.length === 0) {
+    if (!organizations.value === undefined || organizations.value.length === 0) {
         abortNavigation()
         return navigateTo('/onboarding/new');
     }

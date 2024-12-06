@@ -2,7 +2,7 @@ interface Alert {
   id?: number;
   type?: 'success' | 'danger' | 'warning';
   title: string;
-  description?: 'string';
+  description?: string;
 }
 
 export const useAlerts = defineStore('alerts', {

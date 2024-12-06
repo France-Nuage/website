@@ -1,6 +1,6 @@
 <template>
   <MenuItem v-slot="{ active }">
-    <div :class="[active ? 'bg-gray-100 rounded-lg relative outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']">
+    <div :class="[active ? 'bg-gray-100 rounded-lg relative outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 cursor-pointer']">
       <slot :active="active" />
     </div>
   </MenuItem>

@@ -11,25 +11,25 @@ export const useOrganizationStore = defineStore('organization', {
         organization: null
     }),
     actions: {
-        loadOrganizations: async function() {
+        loadOrganizations: async function(queryParams: any = null) {
             const { $api } = useNuxtApp()
-            return $api().organizations.list().then(({ data, meta }) => {
+            return $api().organizations.list(queryParams).then(({ data, meta }) => {
                 this.organizations = data
             })
         },
         loadOrganization: async function (id: string) {
             const { $api } = useNuxtApp()
 
-            $api().organizations.get(id).then(({ data }) => {
-                this.organization = data
+            $api().organizations.get(id).then((response) => {
+                this.organization = response
             })
         },
         createOrganization: function (formData) {
             const { $api } = useNuxtApp()
 
-            return $api().organizations.post(formData).then(({ data }) => {
-                this.organization = data
-                return data
+            return $api().organizations.post(formData).then((response) => {
+                this.organization = response
+                return response
             })
         }
     }

@@ -1,18 +1,20 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createOrganizationValidator } from '#validators/v1/iam/organization'
+import { createOrganizationValidator } from '#validators/v1/resource/organization'
 import Organization from '#models/resource/organization'
+import RequestQueryBuilder from '../../../utils/RequestQueryBuilder.js'
 
 export default class OrganizationsController {
   /**
    * Display a list of resource
    */
-  async index({ auth, response }: HttpContext) {
+  async index({ auth, request }: HttpContext) {
     const user = await auth.getUserOrFail()
-    const organizations = await Organization.query()
-      .where('owner__id', '=', user.id)
-      .paginate(1, 10)
 
-    return response.ok(organizations)
+    return new RequestQueryBuilder(Organization.query())
+      .withIncludes(request.qs().includes)
+      .applyWhere([['owner__id', '=', user.id]])
+      .withPagination(1, 10)
+      .apply()
   }
 
   /**
@@ -30,8 +32,11 @@ export default class OrganizationsController {
   /**
    * Show individual record
    */
-  async show({ params, response }: HttpContext) {
-    const organization = await Organization.find(params.id)
+  async show({ params, response, request }: HttpContext) {
+    const organization = await new RequestQueryBuilder(Organization.query())
+      .withIncludes(request.qs().includes)
+      .applyWhere([['id', '=', params.id]])
+      .firstOrFail()
 
     if (!organization) {
       response.notFound(`Organization ${params.id} not found`)

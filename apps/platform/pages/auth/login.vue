@@ -25,7 +25,7 @@
           </div>
 
           <div>
-            <c-button type="submit" block>
+            <c-button type="submit" block :loading="loading">
               Se connecter
             </c-button>
           </div>
@@ -49,12 +49,15 @@ const formData = ref({
 })
 
 const router = useRouter()
+const loading = ref(false)
 
 const onSubmit = () => {
+  loading.value = true
   authenticate(formData.value).finally(() => {
     if (authenticated) {
       router.push('/')
     }
+    loading.value = false
   });
 }
 </script>

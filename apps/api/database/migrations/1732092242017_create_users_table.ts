@@ -4,7 +4,8 @@ export default class extends BaseSchema {
   protected tableName = 'users'
 
   async up() {
-    this.schema.createTable(this.tableName, (table) => {
+    this.schema.createSchema('iam')
+    this.schema.withSchema('iam').createTable(this.tableName, (table) => {
       table.increments('id').notNullable()
       table.string('lastname')
       table.string('firstname')
@@ -17,6 +18,7 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    this.schema.dropTable(this.tableName)
+    this.schema.withSchema('iam').dropTable(this.tableName)
+    this.schema.dropSchema('iam')
   }
 }

@@ -49,4 +49,13 @@ export default class AuthController {
       return response.unauthorized({ error: 'User not found' })
     }
   }
+
+  async preload({ request, response, auth }: HttpContext) {
+    try {
+      const user = auth.getUserOrFail()
+      return response.notImplemented({ user })
+    } catch (error) {
+      return response.unauthorized({ error: 'User not found' })
+    }
+  }
 }

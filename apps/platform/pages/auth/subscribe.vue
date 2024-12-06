@@ -21,7 +21,7 @@
           <c-text-field v-model.trim="formData.password" id="password" required autocomplete="password" name="password" type="password" label="Mot de passe" />
 
           <div>
-            <c-button type="submit" block>
+            <c-button type="submit" block :loading="loading">
               S'inscrire
             </c-button>
           </div>
@@ -47,12 +47,15 @@ const formData = ref({
 const { subscribe } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
 const router = useRouter()
+const loading = ref(false)
 
 const onSubmit = () => {
+  loading.value = true
   subscribe(formData.value).finally(() => {
     if (authenticated.value) {
       router.push('/')
     }
+    loading.value = false
   });
 }
 </script>

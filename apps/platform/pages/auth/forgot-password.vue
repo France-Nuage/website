@@ -4,7 +4,7 @@
 
     <div class="mt-10">
       <div>
-        <form class="space-y-6">
+        <form class="space-y-6" @submit="onSubmit()">
 
           <c-text-field
             id="email"
@@ -17,7 +17,7 @@
           />
 
           <div>
-            <c-button type="submit" block>Je valide</c-button>
+            <c-button type="submit" block :loading="loading">Je valide</c-button>
           </div>
         </form>
       </div>
@@ -32,6 +32,11 @@ import CButton from "~/components/forms/CButton.vue";
 const formData = ref({
   email: "",
 })
+const loading = ref(false);
+
+const onSubmit = () => {
+  loading.value = true;
+}
 </script>
 
 <style scoped>
