@@ -60,40 +60,130 @@ export default class extends BaseSchema {
         .inTable('resource.organizations')
     })
 
-    this.schema.withSchema('iam').createTable('permissions', (table) => {
-      table.uuid('permission__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
-      table.string('name')
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+    this.schema.withSchema('iam').createTable('services', (table) => {
+      table.string('service__id', 63).unique().primary()
+      table.string('description')
     })
 
-    this.schema.withSchema('iam').createTable('group_roles', (table) => {
-      table.uuid('group_role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+    this.schema.withSchema('iam').createTable('types', (table) => {
+      table.string('type__id', 63)
+      table
+        .string('service__id', 63)
+        .references('service__id')
+        .inTable('iam.services')
+        .onDelete('cascade')
+        .onUpdate('cascade')
       table.string('description')
-      table.string('name')
-      table.string('title')
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+    })
+
+    this.schema.withSchema('iam').createTable('verbs', (table) => {
+      table.string('verb__id', 63).primary()
+    })
+
+    this.schema.withSchema('iam').createTable('permissions', (table) => {
+      table
+        .string('type__id', 63)
+        .references('type__id')
+        .inTable('iam.types')
+        .onDelete('restrict')
+        .onUpdate('cascade')
+      table.string('service__id', 63)
+      table
+        .string('verb__id', 63)
+        .references('verb__id')
+        .inTable('iam.verbs')
+        .onDelete('restrict')
+        .onDelete('cascade')
+
+      table.primary(['service__id', 'type__id', 'verb__id'])
+      table
+        .foreign(['service__id', 'type__id'])
+        .references(['service__id', 'type__id'])
+        .inTable('iam.type')
+        .onDelete('restrict')
+        .onUpdate('cascade')
     })
 
     this.schema.withSchema('iam').createTable('roles', (table) => {
-      table.uuid('role__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('role__id', 63)
+      table
+        .string('service__id')
+        .references('service__id')
+        .inTable('iam.services')
+        .onDelete('restrict')
+        .onUpdate('cascade')
       table.string('description')
       table.string('name')
       table.string('title')
-      table.boolean('custom').defaultTo(false)
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
-      table.uuid('group_role__id')
-      table.foreign('group_role__id').references('group_role__id').inTable('iam.group_roles')
     })
 
-    this.schema.withSchema('iam').createTable('roles__permissions', (table) => {
-      table.uuid('permission__id')
-      table.uuid('role__id')
+    this.schema.withSchema('iam').createTable('role__permission', (table) => {
+      table.string('permission_service__id')
+      table.string('permission_type__id')
+      table.string('permission_verb__id')
+      table.string('role__id')
+      table.string('service__id')
 
-      table.foreign('role__id').references('role__id').inTable('iam.roles')
-      table.foreign('permission__id').references('permission__id').inTable('iam.permissions')
+      table
+        .foreign(['permission_service__id', 'permission_type__id', 'permission_verb__id'])
+        .references(['service__id', 'type__id', 'verb__id'])
+        .inTable('iam.permissions')
+        .onDelete('restrict')
+        .onUpdate('cascade')
+      table
+        .foreign(['service__id', 'role__id'])
+        .references(['service__id', 'role__id'])
+        .inTable('iam.roles')
+        .onDelete('restrict')
+        .onUpdate('cascade')
+    })
+
+    this.schema.withSchema('iam').createTable('resource_policy', (table) => {
+      table.uuid('policy__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table
+        .uuid('organization__id')
+        .references('organization__id')
+        .inTable('resource.organizations')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+      table
+        .uuid('account__id')
+        .references('account__id')
+        .inTable('resource.accounts')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+      table
+        .uuid('project__id')
+        .references('project__id')
+        .inTable('resource.projects')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+    })
+
+    this.schema.withSchema('iam').createTable('user_resource_policy_binding', (table) => {
+      table
+        .uuid('policy__id')
+        .references('policy__id')
+        .inTable('iam.resource_policy')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+      table
+        .string('member__id')
+        .references('user__id')
+        .references('iam.user_id')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+      table.string('role__id')
+      table.string('service__id')
+
+      table
+        .foreign(['service__id', 'role__id'])
+        .references(['service__id', 'role__id'])
+        .inTable('iam.roles')
+        .onDelete('cascade')
+        .onUpdate('cascade')
+
+      table.unique(['policy__id', 'member__id', 'service__id'])
     })
 
     this.schema.createSchema('service')

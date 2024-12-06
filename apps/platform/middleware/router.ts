@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     let nextOrganizationId = toQuery.organization || storeOrganizationId;
     let nextAccountId = toQuery.account || storeAccountId;
-    let nextProjectId = toQuery.project || storeProjectId;
+        let nextProjectId = toQuery.project || storeProjectId;
 
     const queryParams = {};
 
