@@ -27,9 +27,12 @@ build:
     - docker push $LATEST_IMAGE
     
   only:
-    - master
-    - staging  # Run on master and staging branches
-    - test-ci  # Run on test-ci for debugging
+    refs:
+      - master
+      - staging  # Run only on master and staging branches
+      - test-ci  # Run on test-ci for debugging
+    changes:
+      - apps/api/**  # Trigger only when files in the API directory are modified
 
 set-issue-labels:
   stage: auto-set-labels-new-issue
