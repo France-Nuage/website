@@ -55,3 +55,4 @@ set-issue-labels:
       fi
   rules:
     - if: $CI_PIPELINE_SOURCE == "api"  # Run only for API-triggered pipelines
+      when: always  # Ensure this job runs for API-triggered pipelines
