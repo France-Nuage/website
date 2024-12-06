@@ -26,13 +26,11 @@ build:
     - docker push $DOCKER_IMAGE
     - docker push $LATEST_IMAGE
     
-  only:
-    refs:
-      - master
-      - staging  # Run only on master and staging branches
-      - test-ci  # Run on test-ci for debugging
-    changes:
-      - apps/api/**  # Trigger only when files in the API directory are modified
+  rules:
+    - if: ($CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "test-ci") && $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - apps/api/**  # Trigger only when files in the API directory are modified
+    - when: never  # Do not run for other sources like API or webhooks
 
 set-issue-labels:
   stage: auto-set-labels-new-issue
@@ -55,5 +53,5 @@ set-issue-labels:
       else
         echo "Labels already exist: $CURRENT_LABELS. Skipping."
       fi
-  only:
-    - api  # Trigger manually or dynamically
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "api"  # Run only for API-triggered pipelines
