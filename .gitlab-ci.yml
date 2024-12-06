@@ -27,7 +27,7 @@ build:
     - docker push $LATEST_IMAGE
     
   rules:
-    - if: ($CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "test-ci") && $CI_PIPELINE_SOURCE == "push"
+    - if: ($CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "test-ci") && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event")
       changes:
         - apps/api/**  # Trigger only when files in the API directory are modified
     - when: never  # Do not run for other sources like API or webhooks
@@ -35,6 +35,8 @@ build:
 set-issue-labels:
   stage: auto-set-labels-new-issue
   script:
+    - echo "Installing jq..."
+    - apt-get update && apt-get install -y jq
     - echo "Checking for existing labels on the issue..."
     - |
       # Get the current labels
