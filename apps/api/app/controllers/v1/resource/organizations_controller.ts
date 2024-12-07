@@ -1,30 +1,26 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { createOrganizationValidator } from '#validators/v1/resource/organization'
-import Organization from '#models/resource/organization'
-import RequestQueryBuilder from '../../../utils/RequestQueryBuilder.js'
+import OrganizationService from '#services/v1/resource/OrganizationService'
+import organizationService from '#services/v1/resource/OrganizationService'
+import OrganizationPolicy from '#policies/resource/organization_policy'
 
 export default class OrganizationsController {
   /**
    * Display a list of resource
    */
-  async index({ auth, request }: HttpContext) {
+  async index({ auth, request, bouncer }: HttpContext) {
+    await bouncer.with(OrganizationPolicy).authorize('index')
     const user = await auth.getUserOrFail()
-
-    return new RequestQueryBuilder(Organization.query())
-      .withIncludes(request.qs().includes)
-      .applyWhere([['owner__id', '=', user.id]])
-      .withPagination(1, 10)
-      .apply()
+    return await OrganizationService.list(request.qs().includes, user)
   }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response, auth }: HttpContext) {
+  async store({ request, response, bouncer }: HttpContext) {
+    await bouncer.with(OrganizationPolicy).authorize('store')
     const payload = await request.validateUsing(createOrganizationValidator)
-    const user = await auth.getUserOrFail()
-
-    const organization = await Organization.create({ ...payload, owner__id: user.id })
+    const organization = await organizationService.create({ ...payload })
 
     return response.created(organization)
   }
@@ -32,14 +28,12 @@ export default class OrganizationsController {
   /**
    * Show individual record
    */
-  async show({ params, response, request }: HttpContext) {
-    const organization = await new RequestQueryBuilder(Organization.query())
-      .withIncludes(request.qs().includes)
-      .applyWhere([['id', '=', params.id]])
-      .firstOrFail()
+  async show({ params, response, bouncer }: HttpContext) {
+    await bouncer.with(OrganizationPolicy).authorize('show')
+    const organization = await OrganizationService.get(params.id)
 
     if (!organization) {
-      response.notFound(`Organization ${params.id} not found`)
+      return response.notFound(`Organization ${params.id} not found`)
     }
 
     return response.ok(organization)
@@ -48,7 +42,8 @@ export default class OrganizationsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request, response }: HttpContext) {
+  async update({ params, request, response, bouncer }: HttpContext) {
+    await bouncer.with(OrganizationPolicy).authorize('update')
     return response.notImplemented({
       params: params,
       request: request,
@@ -58,7 +53,8 @@ export default class OrganizationsController {
   /**
    * Delete record
    */
-  async destroy({ params, response, request }: HttpContext) {
+  async destroy({ params, response, request, bouncer }: HttpContext) {
+    await bouncer.with(OrganizationPolicy).authorize('destroy')
     return response.notImplemented({
       params: params,
       request: request,

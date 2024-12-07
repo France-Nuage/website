@@ -1,13 +1,13 @@
 import vine from '@vinejs/vine'
 
-export const createAccountValidator = vine.compile(
+export const createFolderValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(6),
     organization__id: vine.string().trim(),
   })
 )
 
-export const updateAccountValidator = vine.compile(
+export const updateFolderValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(6),
     organization__id: vine.string().trim().optional(),
