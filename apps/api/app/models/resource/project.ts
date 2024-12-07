@@ -1,7 +1,8 @@
-import { BaseModel, belongsTo, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, hasOne } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Account from '#models/resource/Account'
+import Folder from '#models/resource/folder'
 
 export default class Project extends BaseModel {
   public static table = 'resource.projects'
@@ -28,4 +29,7 @@ export default class Project extends BaseModel {
 
   @belongsTo(() => Account, { localKey: 'id', foreignKey: 'accountId' })
   declare account: BelongsTo<typeof Account>
+
+  @belongsTo(() => Folder)
+  declare folder: BelongsTo<typeof Folder>
 }

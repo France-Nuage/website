@@ -4,6 +4,7 @@ export default class extends BaseSchema {
   protected tableName = 'auth_access_tokens'
 
   async up() {
+    this.schema.createSchema('iam')
     this.schema.withSchema('iam').createTable(this.tableName, (table) => {
       table.increments('id')
       table
@@ -11,7 +12,7 @@ export default class extends BaseSchema {
         .notNullable()
         .unsigned()
         .references('id')
-        .inTable('iam.users')
+        .inTable('member.users')
         .onDelete('CASCADE')
 
       table.string('type').notNullable()

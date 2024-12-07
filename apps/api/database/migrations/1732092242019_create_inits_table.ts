@@ -18,15 +18,30 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
-      table.foreign('owner__id').references('id').inTable('iam.users')
+      table.foreign('owner__id').references('id').inTable('member.users')
     })
 
-    this.schema.withSchema('resource').createTable('accounts', (table) => {
-      table.uuid('account__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+    this.schema.withSchema('resource').createTable('folders', (table) => {
+      table.uuid('folder__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.uuid('organization__id')
-      table.string('name'), table.timestamp('created_at', { useTz: true })
+      table.string('name')
+      table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
+      table
+        .foreign('organization__id')
+        .references('organization__id')
+        .inTable('resource.organizations')
+    })
+
+    this.schema.createSchema('billing')
+    this.schema.withSchema('billing').createTable('accounts', (table) => {
+      table.uuid('account__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('stripe_customer__id')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+
+      table.uuid('organization__id')
       table
         .foreign('organization__id')
         .references('organization__id')
@@ -41,23 +56,10 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
 
       table.uuid('account__id')
-      table.foreign('account__id').references('account__id').inTable('resource.accounts')
-    })
+      table.uuid('folder__id')
 
-    this.schema.createSchema('billing')
-    this.schema.withSchema('billing').createTable('billing_accounts', (table) => {
-      table
-        .uuid('billing_account__id', { primaryKey: true })
-        .defaultTo(this.raw('uuid_generate_v4()'))
-      table.string('stripe_customer__id')
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
-
-      table.uuid('organization__id')
-      table
-        .foreign('organization__id')
-        .references('organization__id')
-        .inTable('resource.organizations')
+      table.foreign('account__id').references('account__id').inTable('billing.accounts')
+      table.foreign('folder__id').references('folder__id').inTable('resource.folders')
     })
 
     this.schema.withSchema('iam').createTable('services', (table) => {
@@ -74,6 +76,8 @@ export default class extends BaseSchema {
         .onDelete('cascade')
         .onUpdate('cascade')
       table.string('description')
+
+      table.primary(['type__id', 'service__id'])
     })
 
     this.schema.withSchema('iam').createTable('verbs', (table) => {
@@ -81,25 +85,24 @@ export default class extends BaseSchema {
     })
 
     this.schema.withSchema('iam').createTable('permissions', (table) => {
+      table.string('type__id', 63)
       table
-        .string('type__id', 63)
-        .references('type__id')
-        .inTable('iam.types')
+        .string('service__id', 63)
+        .references('service__id')
+        .inTable('iam.services')
         .onDelete('restrict')
         .onUpdate('cascade')
-      table.string('service__id', 63)
       table
         .string('verb__id', 63)
         .references('verb__id')
         .inTable('iam.verbs')
         .onDelete('restrict')
         .onDelete('cascade')
-
       table.primary(['service__id', 'type__id', 'verb__id'])
       table
         .foreign(['service__id', 'type__id'])
         .references(['service__id', 'type__id'])
-        .inTable('iam.type')
+        .inTable('iam.types')
         .onDelete('restrict')
         .onUpdate('cascade')
     })
@@ -113,16 +116,18 @@ export default class extends BaseSchema {
         .onDelete('restrict')
         .onUpdate('cascade')
       table.string('description')
-      table.string('name')
       table.string('title')
+
+      table.primary(['service__id', 'role__id'])
     })
 
     this.schema.withSchema('iam').createTable('role__permission', (table) => {
       table.string('permission_service__id')
       table.string('permission_type__id')
       table.string('permission_verb__id')
-      table.string('role__id')
+
       table.string('service__id')
+      table.string('role__id')
 
       table
         .foreign(['permission_service__id', 'permission_type__id', 'permission_verb__id'])
@@ -130,6 +135,7 @@ export default class extends BaseSchema {
         .inTable('iam.permissions')
         .onDelete('restrict')
         .onUpdate('cascade')
+
       table
         .foreign(['service__id', 'role__id'])
         .references(['service__id', 'role__id'])
@@ -147,9 +153,9 @@ export default class extends BaseSchema {
         .onDelete('cascade')
         .onUpdate('cascade')
       table
-        .uuid('account__id')
-        .references('account__id')
-        .inTable('resource.accounts')
+        .uuid('folder__id')
+        .references('folder__id')
+        .inTable('resource.folders')
         .onDelete('cascade')
         .onUpdate('cascade')
       table
@@ -168,9 +174,9 @@ export default class extends BaseSchema {
         .onDelete('cascade')
         .onUpdate('cascade')
       table
-        .string('member__id')
-        .references('user__id')
-        .references('iam.user_id')
+        .integer('member__id')
+        .references('id')
+        .inTable('member.users')
         .onDelete('cascade')
         .onUpdate('cascade')
       table.string('role__id')
@@ -370,10 +376,13 @@ export default class extends BaseSchema {
   async down() {
     this.schema.withSchema('iam').dropTable('roles')
     this.schema.withSchema('iam').dropTable('permissions')
+    this.schema.withSchema('iam').dropTable('verbs')
+    this.schema.withSchema('iam').dropTable('types')
+    this.schema.withSchema('iam').dropTable('services')
 
     this.schema.withSchema('resources').dropTable('projects')
     this.schema.withSchema('resources').dropTable('organizations')
-    this.schema.withSchema('resources').dropTable('environments')
+    this.schema.withSchema('resources').dropTable('folders')
     this.schema.dropSchema('resources')
 
     this.schema.withSchema('service').dropTable('services')
@@ -389,7 +398,7 @@ export default class extends BaseSchema {
     this.schema.withSchema('infrastructure').dropTable('regions')
     this.schema.dropSchema('infrastructure')
 
-    this.schema.withSchema('billing').dropTable('billing_accounts')
+    this.schema.withSchema('billing').dropTable('accounts')
     this.schema.dropSchema('stripe')
   }
 }

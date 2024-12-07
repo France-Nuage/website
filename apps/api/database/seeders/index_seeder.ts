@@ -19,11 +19,20 @@ export default class IndexSeeder extends BaseSeeder {
   }
 
   public async run() {
-    await this.seed(await import('#database/seeders/service_seeder'))
-    await this.seed(await import('#database/seeders/country_seeder'))
-    await this.seed(await import('#database/seeders/region_seeder'))
-    await this.seed(await import('#database/seeders/zone_seeder'))
-    await this.seed(await import('#database/seeders/cluster_seeder'))
-    await this.seed(await import('#database/seeders/instance_seeder'))
+    // IAM
+    await this.seed(await import('#database/seeders/iam/permission_seeder'))
+    await this.seed(await import('#database/seeders/iam/role_seeder'))
+
+    // SERVICE
+    await this.seed(await import('#database/seeders/service/service_seeder'))
+
+    // INFRASTRUCTURE
+    await this.seed(await import('#database/seeders/infrastructure/country_seeder'))
+    await this.seed(await import('#database/seeders/infrastructure/region_seeder'))
+    await this.seed(await import('#database/seeders/infrastructure/zone_seeder'))
+    await this.seed(await import('#database/seeders/infrastructure/cluster_seeder'))
+    await this.seed(await import('#database/seeders/infrastructure/instance_seeder'))
+
+    // QUOTA
   }
 }

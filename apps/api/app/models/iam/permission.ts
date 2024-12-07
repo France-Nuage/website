@@ -12,14 +12,14 @@ export default class Permission extends BaseModel {
   @column()
   declare name: string
 
-  @column()
-  declare title: string
+  @column({ isPrimary: true, columnName: 'service__id' })
+  declare serviceId: string
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  @column({ isPrimary: true, columnName: 'type__id' })
+  declare typeId: string
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  @column({ isPrimary: true, columnName: 'verb__id' })
+  declare verbId: string
 
   @manyToMany(() => Role)
   declare roles: ManyToMany<typeof Role>

@@ -1,11 +1,11 @@
-import { BaseModel, belongsTo, column, computed, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, computed, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import Organization from '#models/resource/organization'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Project from '#models/resource/project'
 
 export default class Account extends BaseModel {
-  public static table = 'resource.accounts'
+  public static table = 'billing.accounts'
 
   @computed()
   public get object() {
@@ -31,5 +31,5 @@ export default class Account extends BaseModel {
   declare organization: BelongsTo<typeof Organization>
 
   @hasMany(() => Project)
-  declare projects: HasMany<typeof Project>
+  declare project: HasMany<typeof Project>
 }
