@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { createFolderValidator } from '#validators/v1/resource/folder'
-import FolderService from '#services/v1/resource/FolderService'
-import folderService from '#services/v1/resource/FolderService'
+import FolderService from '#services/v1/resource/folder_service'
 import FolderPolicy from '#policies/resource/folder_policy'
 
 export default class FoldersController {
@@ -20,7 +19,7 @@ export default class FoldersController {
    */
   async show({ params, response, bouncer, request }: HttpContext) {
     await bouncer.with(FolderPolicy).authorize('show')
-    const folder = await folderService.get(params.id, request.qs.includes)
+    const folder = await FolderService.get(params.id, request.qs().includes)
 
     if (!folder) {
       response.notFound(`Folder ${params.id} not found`)

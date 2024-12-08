@@ -27,9 +27,6 @@ export default class Folder extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @hasMany(() => Project, { localKey: 'id', foreignKey: 'projectId' })
-  declare projects: HasMany<typeof Project>
-
-  @belongsTo(() => Organization)
-  declare organization: BelongsTo<typeof Organization>
+  @belongsTo(() => Project, { localKey: 'id', foreignKey: 'projectId' })
+  declare project: BelongsTo<typeof Project>
 }

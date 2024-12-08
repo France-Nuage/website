@@ -1,6 +1,6 @@
-import { BaseModel, column, computed, manyToMany } from '@adonisjs/lucid/orm'
-import type { ManyToMany } from '@adonisjs/lucid/types/relations'
-import Permission from '#models/iam/permission'
+import { BaseModel, column, computed, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import RolePermission from '#models/iam/role_permission'
 
 export default class Role extends BaseModel {
   public static table = 'iam.roles'
@@ -13,12 +13,12 @@ export default class Role extends BaseModel {
   @column({ isPrimary: true, columnName: 'role__id' })
   declare id: string
 
-  @column({ isPrimary: true, columnName: 'service__id' })
-  declare serviceId: string
+  // @column({ isPrimary: true, columnName: 'service__id' })
+  // declare serviceId: string
 
   @column()
   declare description: string
 
-  @manyToMany(() => Permission)
-  declare permissions: ManyToMany<typeof Permission>
+  @hasMany(() => RolePermission, { foreignKey: 'roleId' })
+  declare permissions: HasMany<typeof RolePermission>
 }

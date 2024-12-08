@@ -6,12 +6,12 @@ export const createUserValidator = vine.compile(
       .string()
       .email()
       .unique(async (db, value) => {
-        const user = await db.from('iam.users').where('email', value).first()
+        const user = await db.from('member.users').where('email', value).first()
         return !user
       }),
     lastname: vine.string().trim().nullable(),
     firstname: vine.string().trim().nullable(),
-    password: vine.string().minLength(12).maxLength(512),
+    password: vine.string().minLength(8).maxLength(512),
   })
 )
 

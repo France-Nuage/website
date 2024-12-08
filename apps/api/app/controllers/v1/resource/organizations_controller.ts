@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { createOrganizationValidator } from '#validators/v1/resource/organization'
-import OrganizationService from '#services/v1/resource/OrganizationService'
-import organizationService from '#services/v1/resource/OrganizationService'
+import OrganizationService from '#services/v1/resource/organization_service'
 import OrganizationPolicy from '#policies/resource/organization_policy'
 
 export default class OrganizationsController {
@@ -20,7 +19,7 @@ export default class OrganizationsController {
   async store({ request, response, bouncer }: HttpContext) {
     await bouncer.with(OrganizationPolicy).authorize('store')
     const payload = await request.validateUsing(createOrganizationValidator)
-    const organization = await organizationService.create({ ...payload })
+    const organization = await OrganizationService.create({ ...payload })
 
     return response.created(organization)
   }
