@@ -40,5 +40,8 @@ router
     router.post('/auth/register', [AuthController, 'register'])
     router.post('/auth/login', [AuthController, 'login'])
     router.post('/auth/token', [AuthController, 'generateToken'])
+    router.post('/auth/request-reset', [AuthController, 'requestReset'])
+    router.get('/auth/reset-password-token', [AuthController, 'resetPasswordToken'])
+    router.post('/auth/reset', [AuthController, 'reset'])
   })
   .prefix('api/v1')

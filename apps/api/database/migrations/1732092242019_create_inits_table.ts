@@ -67,6 +67,15 @@ export default class extends BaseSchema {
       table.string('description')
     })
 
+    this.schema.withSchema('iam').createTable(this.tableName, (table) => {
+      table.increments('id')
+      table.string('email').notNullable().index()
+      table.string('token').notNullable().unique()
+      table.timestamp('expires_at').notNullable()
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+    })
+
     this.schema.withSchema('iam').createTable('types', (table) => {
       table.string('type__id', 63)
       table
