@@ -1,9 +1,8 @@
-// app/Models/PasswordReset.ts
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class PasswordReset extends BaseModel {
-  public static table = 'iam.password_reset'
+export default class Token extends BaseModel {
+  public static table = 'iam.tokens'
 
   @column({ isPrimary: true })
   public id: number

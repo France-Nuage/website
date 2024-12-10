@@ -1,11 +1,16 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createUserValidator, loginUserValidator } from '#validators/v1/iam/user'
+import {
+  createUserValidator,
+  loginUserValidator,
+  resetPasswordRequestValidator,
+  resetPasswordValidator,
+} from '#validators/v1/iam/user'
 import User from '#models/user'
 import { randomBytes } from 'node:crypto'
 import { DateTime } from 'luxon'
-import PasswordReset from '#models/iam/password_reset'
+import Token from '#models/iam/token'
 import Env from '#start/env'
-import Mail from '#config/mail'
+import mail from '@adonisjs/mail/services/main'
 
 export default class AuthController {
   async register({ request, response }: HttpContext) {
@@ -54,44 +59,42 @@ export default class AuthController {
       return response.unauthorized({ error: 'User not found' })
     }
   }
-  async requestReset({ request, response }: HttpContextContract) {
-    const email = request.input('email')
+  async resetPasswordRequest({ request, response }: HttpContextContract) {
+    const { email } = await request.validateUsing(resetPasswordRequestValidator)
 
     const user = await User.findBy('email', email)
     if (!user) {
-      return response.badRequest({ message: 'Aucun utilisateur trouvé avec cet e-mail' })
+      return response.ok()
     }
 
     const token = randomBytes(32).toString('hex')
     const expiresAt = DateTime.now().plus({ minutes: 15 })
 
-    await PasswordReset.create({
+    await Token.create({
       email: user.email,
       token: token,
       expiresAt: expiresAt,
     })
 
-    const resetUrl = `${Env.get('APP_URL')}/password/reset/${token}`
+    const resetUrl = `${Env.get('PLATFORM_URL')}/auth/reset-password?token=${token}`
 
-    await Mail.send((message) => {
+    await mail.send((message) => {
       message
         .to(user.email)
-        .from('support@monappli.com', 'Support')
         .subject('Réinitialisation de votre mot de passe')
-        .htmlView('emails/reset_password', { url: resetUrl })
+        .htmlView('emails/reset_password', { url: resetUrl, email: email })
     })
 
-    return { message: 'Un lien de réinitialisation vous a été envoyé par e-mail.' }
+    return response.ok({ message: 'Un lien de réinitialisation vous a été envoyé par e-mail.' })
   }
   async resetPasswordToken({ params, response }) {
-    const token = params.token
-    const passwordReset = await PasswordReset.findBy('token', token)
+    const token = await Token.findBy('token', params.token)
 
-    if (!passwordReset) {
+    if (!token) {
       return response.badRequest('Lien invalide')
     }
 
-    if (DateTime.now() > passwordReset.expiresAt) {
+    if (DateTime.now() > token.expiresAt) {
       return response.badRequest('Le lien a expiré')
     }
 
@@ -99,25 +102,25 @@ export default class AuthController {
       token,
     })
   }
-  async reset({ request, response }: HttpContextContract) {
-    const token = request.input('token')
-    const newPassword = request.input('password')
+  async resetPassword({ request, response }: HttpContext) {
+    const { token, password } = await request.validateUsing(resetPasswordValidator)
 
-    const passwordReset = await PasswordReset.findBy('token', token)
-    if (!passwordReset) {
-      return response.badRequest('Invalid link')
+    const tokenFromDb = await Token.findBy('token', token)
+    if (!tokenFromDb) {
+      return response.badRequest({ message: 'Invalid link' })
     }
 
-    if (DateTime.now() > passwordReset.expiresAt) {
-      return response.badRequest('The link is expired')
+    if (DateTime.now() > tokenFromDb.expiresAt) {
+      await tokenFromDb.delete()
+      return response.badRequest({ message: 'The link is expired' })
     }
 
-    const user = await User.findByOrFail('email', passwordReset.email)
+    const user = await User.findByOrFail('email', tokenFromDb.email)
 
-    user.password = newPassword
+    user.password = password
     await user.save()
 
-    await passwordReset.delete()
+    await tokenFromDb.delete()
 
     return { message: 'Password reset successfully!' }
   }
