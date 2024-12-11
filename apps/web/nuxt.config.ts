@@ -19,4 +19,9 @@ export default defineNuxtConfig({
       brevoApiKey: process.env.BREVO_API_KEY,
     },
   },
+  app: {
+    head: {
+      title: `france-nuage`, // Titre par défaut pour toutes les pages
+    },
+  },
 });

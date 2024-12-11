@@ -37,7 +37,7 @@
               Pour commencer avec France-Nuage, vous devrez installer notre agent sur vos serveurs. L'agent est disponible pour plusieurs distributions Linux et peut être installé en suivant les étapes ci-dessous :
             </p>
             <ol class="list-decimal list-inside text-gray-700 space-y-3">
-              <li>Téléchargez l'agent France-Nuage depuis notre <a href="/download" class="text-blue-600 underline">page de téléchargement</a>.</li>
+              <li>Téléchargez l'agent France-Nuage depuis notre <a href="#" class="text-blue-600 underline">page de téléchargement</a>.</li>
               <li>Exécutez le script d'installation avec les privilèges root.</li>
               <li>Suivez les instructions à l'écran pour configurer la connexion avec votre compte France-Nuage.</li>
             </ol>
