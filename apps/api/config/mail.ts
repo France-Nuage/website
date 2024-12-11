@@ -4,17 +4,16 @@ import { defineConfig, transports } from '@adonisjs/mail'
 const mailConfig = defineConfig({
   default: 'brevo',
 
-   /**
-    * The mailers object can be used to configure multiple mailers
-    * each using a different transport or same transport with different
-    * options.
+  /**
+   * The mailers object can be used to configure multiple mailers
+   * each using a different transport or same transport with different
+   * options.
    */
-  mailers: {     
+  mailers: {
     brevo: transports.brevo({
       key: env.get('BREVO_API_KEY'),
       baseUrl: 'https://api.brevo.com/v3',
     }),
-     
   },
 })
 

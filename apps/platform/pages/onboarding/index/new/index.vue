@@ -3,7 +3,7 @@
     <c-card-header title="Créer une nouvelle organisation" />
     <c-card-body>
 
-      <p class="text-xs mb-8">
+      <p class="text-xs mb-8 dark:text-gray-400">
         <span class="font-semibold">This is your organization within France-Nuage.</span>
         For example, you can use the name of your company or department.
       </p>
@@ -13,20 +13,6 @@
           <c-label label="Nom" for="name" class="col-span-3" />
           <c-text-field v-model="formData.name" id="name" required name="name" type="text" class="col-span-9" description="Quel serait la meilleur description pour votre organisation ?" />
         </div>
-
-        <div class="grid grid-cols-12 w-full">
-          <c-label label="Vos serveurs ?" for="name" class="col-span-3" />
-          <c-switch v-model="formData.ownServer" class="col-span-9" description="Connectez vos propres serveurs et machines virtuelles à France Nuage afin de déployer en un seul clic vos applications, base de données, etc." />
-        </div>
-
-        <div class="grid grid-cols-12 w-full">
-          <c-label label="Plans" for="name" class="col-span-3" />
-
-          <div class="col-span-9">
-            <c-select :collections="plans" v-model="formData.selectedPlan" placeholder="Choisissez un plan" />
-          </div>
-
-        </div>
       </div>
 
     </c-card-body>
@@ -35,8 +21,8 @@
         <CButton variant="filled" size="sm" @click="router.go(-1)">Annulé</CButton>
       </div>
       <div class="flex items-center gap-4">
-        <small class="text-xs">Vous pouvez renommer le nom <br> de l'organisation plus tard</small>
-        <CButton size="sm" @click="onSubmit">Créer une organisation</CButton>
+        <small class="text-xs dark:text-gray-400">Vous pouvez renommer le nom <br> de l'organisation plus tard</small>
+        <CButton size="sm" @click="onSubmit" :loading="loading">Créer une organisation</CButton>
       </div>
     </c-card-footer>
   </c-card>
@@ -68,14 +54,15 @@ const formData = ref({
 const router = useRouter()
 const { createOrganization } = useOrganizationStore()
 const { organization } = storeToRefs(useOrganizationStore());
+const loading = ref(false)
 
 const onSubmit = () => {
+  loading.value = true
   createOrganization(formData.value).then(() => {
     router.push({ path: `/onboarding/new/${organization.value.id}` })
   })
+    .finally(() => {
+      loading.value = false
+    })
 }
 </script>
-
-<style scoped>
-
-</style>

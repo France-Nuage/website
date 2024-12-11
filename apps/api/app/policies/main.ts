@@ -12,4 +12,8 @@
 |
 */
 
-export const policies = {}
+export const policies = {
+  FolderPolicy: () => import('#policies/resource/folder_policy'),
+  ProjectPolicy: () => import('#policies/resource/project_policy'),
+  OrganizationPolicy: () => import('#policies/resource/organization_policy'),
+}

@@ -32,13 +32,13 @@ import CHeading from "~/components/CHeading.vue";
 import CServiceSquare from "~/components/services/CServiceSquare.vue";
 
 const { servers } = storeToRefs(useServerStore());
-const { loadServers } = useServerStore();
+// const { loadServers } = useServerStore();
 
 onMounted(() => {
-  loadServers();
-  setInterval(() => {
-    loadServers();
-  }, 1000);
+  // loadServers();
+  // setInterval(() => {
+  //   loadServers();
+  // }, 1000);
 })
 </script>
 

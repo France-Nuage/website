@@ -1,7 +1,7 @@
 import { BaseModel, belongsTo, column, computed } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import Organization from '#models/resource/organization'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Folder from '#models/resource/folder'
 
 export default class Project extends BaseModel {
   public static table = 'resource.projects'
@@ -17,15 +17,18 @@ export default class Project extends BaseModel {
   @column()
   declare name: string
 
-  @column({ columnName: 'organization__id' })
-  declare organization__id: string
+  @column({ columnName: 'account__id' })
+  declare accountId: string
 
   @column.dateTime({ autoCreate: true })
-  declare created_at: DateTime
+  declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updated_at: DateTime
+  declare updatedAt: DateTime
 
-  @belongsTo(() => Organization)
-  declare organization: BelongsTo<typeof Organization>
+  @belongsTo(() => Account, { localKey: 'id', foreignKey: 'accountId' })
+  declare account: BelongsTo<typeof Account>
+
+  @belongsTo(() => Folder)
+  declare folder: BelongsTo<typeof Folder>
 }

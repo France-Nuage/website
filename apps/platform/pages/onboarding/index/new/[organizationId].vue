@@ -1,23 +1,31 @@
 <template>
   <c-card class="w-11/12 md:w-8/12 lg:w-4/12 mx-auto mt-24">
-    <c-card-header title="Créer un projet" />
+    <c-card-header title="Créer un compte" />
     <c-card-body>
       <div class="flex flex-col gap-8">
 
         <div class="grid grid-cols-12 w-full">
           <c-label label="Nom" for="name" class="col-span-3" />
-          <c-text-field v-model="formData.name" id="name" required name="name" type="text" class="col-span-9" description="Quel serait la meilleur description pour votre organisation ?" />
+          <c-text-field
+            v-model="formData.name"
+            id="name"
+            required
+            name="name"
+            type="text"
+            class="col-span-9"
+            description="Le nom d'un compte est semblable à un nom d'une entreprise."
+          />
         </div>
 
       </div>
     </c-card-body>
     <c-card-footer>
       <div>
-        <CButton size="sm" variant="filled" @click="router.go(-1)">Annulé</CButton>
+        <c-button size="sm" variant="filled" @click="router.go(-1)">Annulé</c-button>
       </div>
       <div class="flex items-center gap-4">
-        <small class="text-gray-600">Vous pouvez renommer le nom du projet plus tard</small>
-        <CButton size="sm" @click="onSubmit">Créer un projet</CButton>
+        <small class="text-gray-600 dark:text-gray-400">Vous pouvez renommer le nom du compte plus tard</small>
+        <c-button size="sm" @click="onSubmit" :loading="loading">Créer un compte</c-button>
       </div>
     </c-card-footer>
   </c-card>
@@ -32,7 +40,7 @@ import CCard from "~/components/card/CCard.vue";
 import CTextField from "~/components/forms/CTextField.vue";
 import CLabel from "~/components/forms/CLabel.vue";
 
-const { createProject } = useProjectStore()
+const { createAccount } = useAccountStore()
 const { loadOrganization } = useOrganizationStore()
 const { organization } = storeToRefs(useOrganizationStore());
 const route = useRoute()
@@ -46,14 +54,16 @@ onMounted(() => {
   loadOrganization(route.params.organizationId)
 })
 
+const loading = ref(false);
 
 const onSubmit = () => {
-  createProject({ ...formData.value, organization__id: organization.value.id }).then((response) => {
-    router.push('/')
-  })
+  loading.value = true;
+  createAccount({ ...formData.value, organization__id: organization.value.id })
+    .then((response) => {
+      router.push('/')
+    })
+    .finally(() => {
+      loading.value = false;
+    })
 }
 </script>
-
-<style scoped>
-
-</style>

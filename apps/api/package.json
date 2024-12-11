@@ -36,10 +36,11 @@
     "@adonisjs/eslint-config": "^2.0.0-beta.6",
     "@adonisjs/prettier-config": "^1.4.0",
     "@adonisjs/tsconfig": "^1.4.0",
-    "@japa/api-client": "^2.0.3",
+    "@japa/api-client": "^2.0.4",
     "@japa/assert": "^3.0.0",
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
+    "@japa/snapshot": "^2.0.6",
     "@swc/core": "1.7.26",
     "@types/luxon": "^3.4.2",
     "@types/node": "^22.7.5",
@@ -50,6 +51,7 @@
     "typescript": "~5.6"
   },
   "dependencies": {
+    "@adonisjs/ally": "^5.0.2",
     "@adonisjs/auth": "^9.2.3",
     "@adonisjs/bouncer": "^3.1.4",
     "@adonisjs/core": "^6.14.1",
@@ -59,6 +61,7 @@
     "@adonisjs/limiter": "^2.3.2",
     "@adonisjs/lucid": "^21.3.0",
     "@adonisjs/mail": "^9.2.2",
+    "@adonisjs/redis": "^9.1.0",
     "@adonisjs/transmit": "^2.0.2",
     "@aws-sdk/client-s3": "^3.696.0",
     "@aws-sdk/s3-request-presigner": "^3.696.0",
@@ -70,12 +73,7 @@
     "stripe": "^17.4.0",
     "ts-node-maintained": "^10.9.4"
   },
-  "hotHook": {
-    "boundaries": [
-      "./app/controllers/**/*.ts",
-      "./app/middleware/*.ts"
-    ]
-  },
+  "hotHook": {},
   "overrides": {
     "strtok3": "8.0.1"
   },
@@ -89,3 +87,4 @@
   },
   "prettier": "@adonisjs/prettier-config"
 }
+

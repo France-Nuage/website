@@ -10,10 +10,10 @@ export class Country extends BaseModel {
   declare id: string
 
   @column.dateTime({ autoCreate: true })
-  declare created_at: DateTime
+  declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updated_at: DateTime
+  declare updatedAt: DateTime
 
   @belongsTo(() => Region)
   declare regions: BelongsTo<typeof Region>

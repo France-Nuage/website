@@ -4,14 +4,15 @@ export default class extends BaseSchema {
   protected tableName = 'auth_access_tokens'
 
   async up() {
-    this.schema.createTable(this.tableName, (table) => {
+    this.schema.createSchema('iam')
+    this.schema.withSchema('iam').createTable(this.tableName, (table) => {
       table.increments('id')
       table
         .integer('tokenable_id')
         .notNullable()
         .unsigned()
         .references('id')
-        .inTable('users')
+        .inTable('member.users')
         .onDelete('CASCADE')
 
       table.string('type').notNullable()
@@ -26,6 +27,6 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    this.schema.dropTable(this.tableName)
+    this.schema.withSchema('iam').dropTable(this.tableName)
   }
 }

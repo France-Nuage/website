@@ -1,5 +1,15 @@
-export { OrganizationRepository } from './OrganizationRepository';
-export { ProjectRepository } from './ProjectRepository';
-export { UserRepository } from './UserRepository';
-export { ServiceRepository } from "./ServiceRepository";
-export { ServerRepository } from "./ServerRepository";
+// resource
+export { OrganizationRepository } from './resource/OrganizationRepository';
+export { ProjectRepository } from './resource/ProjectRepository';
+export { AccountRepository } from "./resource/AccountRepository";
+
+// iam
+export { UserRepository } from './iam/UserRepository';
+export { RoleRepository } from "./iam/RoleRepository";
+export { PermissionRepository } from "./iam/PermissionRepository";
+
+// service
+export { ServiceRepository } from "./service/ServiceRepository";
+
+// account billing
+export { AccountBillingRepository } from "./billing/AccountBillingRepository";
