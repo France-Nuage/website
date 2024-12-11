@@ -1,6 +1,6 @@
 <template>
   <c-header-selector
-    :items="accounts.filter((_) => _.organizationId === organization.id).map((_) => ({ value: _.id, name: _.name }))"
+    :items="folders.filter((_) => _.organizationId === organization.id).map((_) => ({ value: _.id, name: _.name }))"
     :selected="selected"
     type="account"
     @select="onAccountSelected"
@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import CHeaderSelector from "~/components/header/CHeaderSelector.vue";
-const { account, accounts, organization } = storeToRefs(useNavigationStore())
+const { account, folders, organization } = storeToRefs(useNavigationStore())
 
 const router = useRouter()
 const route = useRoute()
