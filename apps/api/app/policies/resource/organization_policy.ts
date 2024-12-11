@@ -11,34 +11,37 @@ export default class OrganizationPolicy extends BasePolicy {
    * Every logged-in user can list an organization
    */
   index(user: User) {
-    return authorization.check(['resourcemanager.organizations.get'], user, this.resource)
+    return authorization.check(['resourcemanager.organizations.get'], user)
   }
 
   /**
    * Every logged-in user can show an organization
    */
-  show(user: User, organization: Organization): AuthorizerResponse {
-    return authorization.check(['resourcemanager.organizations.get'], user, this.resource)
+  show(user: User): AuthorizerResponse {
+    return authorization.check(['resourcemanager.organizations.get'], user, {
+      type: 'organization',
+      id: this.ctx.params.id,
+    })
   }
 
   /**
    * Every logged-in user can store an organization
    */
   store(user: User): AuthorizerResponse {
-    return true
+    return false
   }
 
   /**
    * Only the organization creator can update the organization
    */
   update(user: User, organization: Organization): AuthorizerResponse {
-    return true
+    return false
   }
 
   /**
    * Only the organization creator can destroy the organization
    */
   destroy(user: User, organization: Organization): AuthorizerResponse {
-    return true
+    return false
   }
 }

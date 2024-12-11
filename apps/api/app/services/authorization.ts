@@ -13,22 +13,27 @@ export default {
   check: async function (
     permissions: Array<String>,
     user: User,
-    resource: { type: 'organization' | 'folder' | 'project'; id?: string }
+    resource: { type: 'organization' | 'folder' | 'project'; id?: string } | undefined
   ) {
-    const bindings = await Binding.query()
+    const bindingQuery = Binding.query()
       .where('memberId', user.id)
-      .preload('policy', (policyQuery) => {
-        policyQuery.where(filterPolicyKey[resource.type], resource.id)
-      })
       .preload('role', (roleQuery) => {
         roleQuery.preload('permissions')
       })
+
+    if (resource) {
+      bindingQuery.preload('policy', (policyQuery) => {
+        policyQuery.where(filterPolicyKey[resource.type], resource.id)
+      })
+    }
+
+    const bindings = await bindingQuery
 
     const permissionsBinding = bindings
       .map((_) => _.role.permissions)
       .flat()
       .map((_) => {
-        return `${_.permissionServiceId}.${_.permissionTypeId}.${_.permissionVerbId}`
+        return `${_.serviceId}.${_.typeId}.${_.verbId}`
       })
 
     return permissionsBinding.some((r) => permissions.includes(r))

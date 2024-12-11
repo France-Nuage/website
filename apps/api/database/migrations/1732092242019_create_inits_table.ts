@@ -63,7 +63,7 @@ export default class extends BaseSchema {
     })
 
     this.schema.withSchema('iam').createTable('services', (table) => {
-      table.string('service__id', 63).unique().primary()
+      table.string('service__id', 63).primary()
       table.string('description')
     })
 
@@ -94,6 +94,7 @@ export default class extends BaseSchema {
     })
 
     this.schema.withSchema('iam').createTable('permissions', (table) => {
+      table.uuid('permission__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('type__id', 63)
       table
         .string('service__id', 63)
@@ -107,13 +108,14 @@ export default class extends BaseSchema {
         .inTable('iam.verbs')
         .onDelete('restrict')
         .onDelete('cascade')
-      table.primary(['service__id', 'type__id', 'verb__id'])
       table
         .foreign(['service__id', 'type__id'])
         .references(['service__id', 'type__id'])
         .inTable('iam.types')
         .onDelete('restrict')
         .onUpdate('cascade')
+
+      table.unique(['service__id', 'type__id', 'verb__id'])
     })
 
     this.schema.withSchema('iam').createTable('roles', (table) => {
@@ -127,30 +129,29 @@ export default class extends BaseSchema {
       table.string('description')
       table.string('title')
 
-      table.primary(['service__id', 'role__id'])
+      table.primary(['role__id'])
+      table.unique(['service__id', 'role__id'])
     })
 
     this.schema.withSchema('iam').createTable('role__permission', (table) => {
-      table.string('permission_service__id')
-      table.string('permission_type__id')
-      table.string('permission_verb__id')
-
-      table.string('service__id')
       table.string('role__id')
+      table.uuid('permission__id')
 
       table
-        .foreign(['permission_service__id', 'permission_type__id', 'permission_verb__id'])
-        .references(['service__id', 'type__id', 'verb__id'])
+        .foreign('permission__id')
+        .references('permission__id')
         .inTable('iam.permissions')
         .onDelete('restrict')
         .onUpdate('cascade')
 
       table
-        .foreign(['service__id', 'role__id'])
-        .references(['service__id', 'role__id'])
+        .foreign('role__id')
+        .references('role__id')
         .inTable('iam.roles')
         .onDelete('restrict')
         .onUpdate('cascade')
+
+      table.unique(['role__id', 'permission__id'])
     })
 
     this.schema.withSchema('iam').createTable('resource_policy', (table) => {
@@ -173,9 +174,12 @@ export default class extends BaseSchema {
         .inTable('resource.projects')
         .onDelete('cascade')
         .onUpdate('cascade')
+
+      table.unique(['organization__id', 'folder__id', 'project__id'])
     })
 
     this.schema.withSchema('iam').createTable('user_resource_policy_binding', (table) => {
+      table.uuid('binding__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table
         .uuid('policy__id')
         .references('policy__id')

@@ -510,7 +510,7 @@ export default class extends BaseSeeder {
       })
     ).createMany(permissions.length)
 
-    await RoleFactory.merge([
+    const roles = [
       { id: 'roles/compute.admin', serviceId: 'compute' },
       { id: 'roles/iam.admin', serviceId: 'iam' },
       { id: 'roles/resourcemanager.organizationAdmin', serviceId: 'resourcemanager' },
@@ -522,6 +522,8 @@ export default class extends BaseSeeder {
       { id: 'roles/resourcemanager.folderAdmin', serviceId: 'resourcemanager' },
       { id: 'roles/resourcemanager.folderViewer', serviceId: 'resourcemanager' },
       { id: 'roles/resourcemanager.folderCreator', serviceId: 'resourcemanager' },
-    ]).createMany(2)
+    ]
+
+    await RoleFactory.merge(roles).createMany(roles.length)
   }
 }

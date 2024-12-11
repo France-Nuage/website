@@ -11,15 +11,43 @@ import { DateTime } from 'luxon'
 import Token from '#models/iam/token'
 import Env from '#start/env'
 import mail from '@adonisjs/mail/services/main'
+import Organization from '#models/resource/organization'
+import Policy from '#models/iam/policy'
+import Binding from '#models/iam/binding'
+import Role from '#models/iam/role'
+import db from '@adonisjs/lucid/services/db'
 
 export default class AuthController {
   async register({ request, response }: HttpContext) {
+    const trx = await db.transaction()
     const payload = await request.validateUsing(createUserValidator)
-    const user = await User.create({ ...payload })
 
-    const token = await User.accessTokens.create(user, ['*'])
+    try {
+      const user = await User.create({ ...payload }, { client: trx })
+      const organization = await Organization.create(
+        { name: `${user.lastname}-organization` },
+        { client: trx }
+      )
+      const policy = await Policy.create({ organizationId: organization.id }, { client: trx })
+      const role = await Role.query({ client: trx })
+        .where('role__id', 'roles/resourcemanager.organizationAdmin')
+        .firstOrFail()
+      await Binding.create(
+        { memberId: user.id, policyId: policy.id, roleId: role.id },
+        { client: trx }
+      )
 
-    return response.created({ token, user })
+      await trx.commit()
+      const token = await User.accessTokens.create(user, ['*'])
+
+      return response.created({ token, user })
+    } catch (error) {
+      await trx.rollback()
+
+      return response.badRequest({
+        message: error.message,
+      })
+    }
   }
 
   async generateToken({ request, response }: HttpContext) {
@@ -59,7 +87,7 @@ export default class AuthController {
       return response.unauthorized({ error: 'User not found' })
     }
   }
-  async resetPasswordRequest({ request, response }: HttpContextContract) {
+  async resetPasswordRequest({ request, response }: HttpContext) {
     const { email } = await request.validateUsing(resetPasswordRequestValidator)
 
     const user = await User.findBy('email', email)

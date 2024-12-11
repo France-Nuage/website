@@ -8,8 +8,11 @@ import Policy from '#models/iam/policy'
 export default class Binding extends BaseModel {
   public static table = 'iam.user_resource_policy_binding'
 
+  @column({ columnName: 'binding__id', isPrimary: true })
+  declare id: string
+
   @column({ columnName: 'member__id' })
-  declare memberId: string
+  declare memberId: number
 
   @column({ columnName: 'service__id' })
   declare serviceId: string
@@ -23,7 +26,7 @@ export default class Binding extends BaseModel {
   @belongsTo(() => Role, { localKey: 'id', foreignKey: 'roleId' })
   declare role: BelongsTo<typeof Role>
 
-  @belongsTo(() => User, { localKey: 'id', foreignKey: 'userId' })
+  @belongsTo(() => User, { localKey: 'id', foreignKey: 'memberId' })
   declare user: BelongsTo<typeof User>
 
   @belongsTo(() => Service, { localKey: 'id', foreignKey: 'serviceId' })
