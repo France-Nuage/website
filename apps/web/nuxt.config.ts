@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: `france-nuage`, // Titre par défaut pour toutes les pages
+      title: 'france-nuage',
     },
   },
 });
