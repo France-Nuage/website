@@ -36,7 +36,7 @@ const __dirname = path.dirname(__filename);
   const sitemapBuffer = await streamToPromise(sitemap);
 
   // Write sitemap to the `dist` folder
-  const distPath = path.resolve(__dirname, '.nuxt/dist/sitemap.xml');
+  const distPath = path.resolve(__dirname, '.output/public/sitemap.xml');
   await writeFile(distPath, sitemapBuffer);
 
   console.log('Sitemap generated successfully in the dist folder.');
