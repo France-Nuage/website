@@ -39,5 +39,5 @@ const __dirname = path.dirname(__filename);
   const distPath = path.resolve(__dirname, '.output/public/sitemap.xml');
   await writeFile(distPath, sitemapBuffer);
 
-  console.log('Sitemap generated successfully in the dist folder.');
+  console.log('Sitemap generated successfully in the output folder.');
 })();
