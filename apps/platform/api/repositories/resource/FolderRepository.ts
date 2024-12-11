@@ -16,24 +16,24 @@ interface OrganizationResource {
 
 type PatchOrganizationData = Partial<OrganizationResource> | { resultCode: string };
 
-export const AccountRepository = function (client: any, config: Record<any, any>) {
+export const FolderRepository = function (client: any, config: Record<any, any>) {
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<OrganizationResource[]>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/accounts${apiCallParams}`, { method: 'GET' });
+      return client(`/folders${apiCallParams}`, { method: 'GET' });
     },
     get: async (
-      accountId: string,
+      folderId: string,
       params?: AllowedParams<null, null, null>,
     ): Promise<ApiResponse<OrganizationResource>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/accounts/${accountId}${apiCallParams}`);
+      return client(`/folders/${folderId}${apiCallParams}`);
     },
     post: async (body: PostOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/accounts`, {  method: 'POST', body });
+      return client(`/folders`, {  method: 'POST', body });
     },
-    patch: async (accountId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
-      return client(`/accounts/${accountId}`, {  method: 'PUT', body });
+    patch: async (folderId: string, body: PatchOrganizationData): Promise<ApiResponse<OrganizationResource>> => {
+      return client(`/folders/${folderId}`, {  method: 'PUT', body });
     },
   };
 };

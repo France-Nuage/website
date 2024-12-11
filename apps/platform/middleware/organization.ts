@@ -2,9 +2,10 @@ import { useNavigationStore } from "~/stores/navigation";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
+    console.log('organization middleware')
     const { loadOrganizations } = useNavigationStore()
     const { organizations } = storeToRefs(useNavigationStore());
-    await loadOrganizations({ includes: 'accounts.projects' })
+    await loadOrganizations({ includes: 'folders.projects' })
 
     if (!organizations.value === undefined || organizations.value.length === 0) {
         abortNavigation()

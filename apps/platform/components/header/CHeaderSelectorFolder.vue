@@ -2,25 +2,25 @@
   <c-header-selector
     :items="folders.filter((_) => _.organizationId === organization.id).map((_) => ({ value: _.id, name: _.name }))"
     :selected="selected"
-    type="account"
-    @select="onAccountSelected"
+    type="folder"
+    @select="onFolderSelected"
   />
 </template>
 
 <script setup lang="ts">
 import CHeaderSelector from "~/components/header/CHeaderSelector.vue";
-const { account, folders, organization } = storeToRefs(useNavigationStore())
+const { folder, folders, organization } = storeToRefs(useNavigationStore())
 
 const router = useRouter()
 const route = useRoute()
 const selected = computed(() => {
-  return account.value ? { name: account.value.name, value: account.value.id } : null
+  return folder.value ? { name: folder.value.name, value: folder.value.id } : null
 })
 
-const onAccountSelected = (id: string) => {
+const onFolderSelected = (id: string) => {
   router.push({ ...route, query: {
       organization: route.query.organization,
-      account: id
+      folder: id
     }
   });
 }

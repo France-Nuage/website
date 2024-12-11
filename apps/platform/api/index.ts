@@ -4,7 +4,7 @@ import {
   ProjectRepository,
   UserRepository,
   ServiceRepository,
-  AccountRepository,
+  FolderRepository,
   AccountBillingRepository,
   RoleRepository,
   PermissionRepository
@@ -17,7 +17,7 @@ const repositories: any = (client: AxiosInstance, config: Record<any, any>) => (
   projects: ProjectRepository(client, config),
   services: ServiceRepository(client, config),
   users: UserRepository(client, config),
-  accounts: AccountRepository(client, config),
+  folders: FolderRepository(client, config),
   accountBillings: AccountBillingRepository(client, config),
   roles: RoleRepository(client, config),
   permissions: PermissionRepository(client, config),
