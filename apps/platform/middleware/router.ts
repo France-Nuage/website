@@ -10,7 +10,6 @@ function addQueryParams(to, params) {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-    console.log('router middleware')
 
     const navigationStore = useNavigationStore();
     const { organization, folder, project } = storeToRefs(navigationStore);

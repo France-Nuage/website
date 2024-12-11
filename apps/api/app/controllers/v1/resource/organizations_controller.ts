@@ -27,9 +27,10 @@ export default class OrganizationsController {
   /**
    * Show individual record
    */
-  async show({ params, response, bouncer }: HttpContext) {
+  async show({ params, response, bouncer, request, auth }: HttpContext) {
     await bouncer.with(OrganizationPolicy).authorize('show')
-    const organization = await OrganizationService.get(params.id)
+    const user = await auth.getUserOrFail()
+    const organization = await OrganizationService.get(params.id, request.qs().includes, user)
 
     if (!organization) {
       return response.notFound(`Organization ${params.id} not found`)
