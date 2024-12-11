@@ -13,8 +13,8 @@ export default class Role extends BaseModel {
   @column({ isPrimary: true, columnName: 'role__id' })
   declare id: string
 
-  // @column({ isPrimary: true, columnName: 'service__id' })
-  // declare serviceId: string
+  @column({ columnName: 'service__id' })
+  declare serviceId: string
 
   @column()
   declare description: string

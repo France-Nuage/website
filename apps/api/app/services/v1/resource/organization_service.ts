@@ -13,10 +13,9 @@ export default {
       .firstOrFail()
   },
   list: async function (includes: Array<string>, user: User) {
-    return new RequestQueryBuilder(Organization.query())
-      .withIncludes(includes)
-      .withPagination(1, 10)
-      .apply()
+    const query = Organization.query()
+
+    return new RequestQueryBuilder(query).withIncludes(includes).withPagination(1, 10).apply()
   },
   create: async function (body: { [_: string]: string | number | null }, user: User) {
     const organization = await Organization.create(body)
