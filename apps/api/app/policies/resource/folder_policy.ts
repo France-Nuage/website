@@ -1,28 +1,32 @@
 import User from '#models/user'
 import Folder from '#models/resource/folder'
-import { BasePolicy } from '@adonisjs/bouncer'
 import { AuthorizerResponse } from '@adonisjs/bouncer/types'
+import BasePolicy from "#policies/BasePolicy";
+import authorization from "#services/authorization";
 
 export default class FolderPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
    */
-  index(user: User) {
-    return false
+  async index(user: User): Promise<AuthorizerResponse> {
+    await this.init()
+    return authorization.check(['resourcemanager.folders.list'], user, this.resources)
   }
 
   /**
    * Every logged-in user can show a folder
    */
-  show(user: User, folder: Folder): AuthorizerResponse {
-    return false
+  async show(user: User, folder: Folder): Promise<AuthorizerResponse> {
+    await this.init()
+    return authorization.check(['resourcemanager.folders.get'], user, this.resources)
   }
 
   /**
    * Every logged-in user can store a folder
    */
-  store(user: User): AuthorizerResponse {
-    return false
+  async store(user: User): Promise<AuthorizerResponse> {
+    await this.init()
+    return authorization.check(['resourcemanager.folders.create'], user, this.resources)
   }
 
   /**

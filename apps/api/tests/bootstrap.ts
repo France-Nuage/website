@@ -6,7 +6,9 @@ import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import testUtils from '@adonisjs/core/services/test_utils'
 import env from '#start/env'
 import { authApiClient } from '@adonisjs/auth/plugins/api_client'
-import { snapshot } from "@japa/snapshot";
+import { snapshot } from '@japa/snapshot'
+import { expectTypeOf } from '@japa/expect-type'
+import {TestUtils} from "@adonisjs/core/test_utils";
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -24,6 +26,7 @@ export const plugins: Config['plugins'] = [
   }),
   authApiClient(app),
   pluginAdonisJS(app),
+  expectTypeOf(),
 ]
 
 /**
@@ -34,8 +37,12 @@ export const plugins: Config['plugins'] = [
  * The teardown functions are executed after all the tests
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [],
+  setup: [
+    // () => TestUtils.ace().loadCommands(),
+    // () => TestUtils.db().migrate()
+  ],
   teardown: [],
+  // filters: ['auth_register', 'auth_login', 'organization_list'],
 }
 
 /**

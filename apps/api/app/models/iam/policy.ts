@@ -1,9 +1,9 @@
-import {BaseModel, belongsTo, column, manyToMany} from '@adonisjs/lucid/orm'
-import type {BelongsTo, ManyToMany} from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Organization from '#models/resource/organization'
 import Project from '#models/resource/project'
 import Folder from '#models/resource/folder'
-import User from "#models/user";
+import User from '#models/user'
 
 export default class Policy extends BaseModel {
   public static table = 'iam.resource_policy'

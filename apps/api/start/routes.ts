@@ -24,11 +24,19 @@ const ProjectsController = () => import('#controllers/v1/resource/projects_contr
 const FoldersController = () => import('#controllers/v1/resource/folders_controller')
 const AuthController = () => import('#controllers/v1/iam/auth_controller')
 const InstancesController = () => import('#controllers/v1/infrastructure/instances_controller')
+const IAMPoliciesController = () => import('#controllers/v1/iam/policy_controller')
+const MembersController = () => import('#controllers/v1/iam/member_controller')
 
 router
   .group(() => {
     router
       .group(() => {
+        router
+          .group(() => {
+            router.resource('/iam/policies', IAMPoliciesController)
+            router.resource('/iam/members', MembersController)
+          })
+          .prefix('/:resource/:resourceId')
         router.resource('organizations', OrganizationsController)
         router.resource('projects', ProjectsController)
         router.resource('folders', FoldersController)

@@ -22,9 +22,15 @@ export default {
   },
   create: async function (body: { [_: string]: string | number | null }, user: User) {
     const organization = await Organization.create(body)
-    await Policy.create({ organizationId: organization.id })
-    const role = await Role.find('roles/organization.admin')
-    await Authorization.assign(user, role, { type: 'organization', id: organization.id })
+    const policy = await Policy.create({ organizationId: organization.id })
+    const role = await Role.findOrFail('roles/resourcemanager.organizationAdmin')
+
+    await Authorization.assign({
+      user,
+      role,
+      policy,
+      resource: { type: 'organization', id: organization.id },
+    })
 
     return organization
   },

@@ -2,10 +2,8 @@ import User from '#models/user'
 import Organization from '#models/resource/organization'
 import { AuthorizerResponse } from '@adonisjs/bouncer/types'
 import authorization from '#services/authorization'
-import { inject } from '@adonisjs/core'
 import BasePolicy from '#policies/BasePolicy'
 
-@inject()
 export default class OrganizationPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
@@ -17,11 +15,9 @@ export default class OrganizationPolicy extends BasePolicy {
   /**
    * Every logged-in user can show an organization
    */
-  show(user: User): AuthorizerResponse {
-    return authorization.check(['resourcemanager.organizations.get'], user, {
-      type: 'organization',
-      id: this.ctx.params.id,
-    })
+  async show(user: User): Promise<AuthorizerResponse> {
+    await this.init()
+    return authorization.check(['resourcemanager.organizations.get'], user, this.resources)
   }
 
   /**

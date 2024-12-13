@@ -13,7 +13,7 @@ export default {
   check: async function (
     permissions: Array<String>,
     user: User,
-    resource: { type: 'organization' | 'folder' | 'project'; id?: string } | undefined
+    resources: Array<{ type: 'organization' | 'folder' | 'project'; id: string }> | [] = []
   ) {
     const bindingQuery = Binding.query()
       .where('memberId', user.id)
@@ -21,9 +21,11 @@ export default {
         roleQuery.preload('permissions')
       })
 
-    if (resource) {
+    if (resources && resources.length > 0) {
       bindingQuery.preload('policy', (policyQuery) => {
-        policyQuery.where(filterPolicyKey[resource.type], resource.id)
+        resources.forEach((resource) => {
+          policyQuery.orWhere(filterPolicyKey[resource.type], resource.id)
+        })
       })
     }
 
@@ -38,15 +40,21 @@ export default {
 
     return permissionsBinding.some((r) => permissions.includes(r))
   },
-  assign: async function (
-    user: User,
-    role: Role,
-    resource: { type: 'organization' | 'folder' | 'project'; id?: string }
-  ) {
-    const policy = Policy.query().where(filterPolicyKey[resource.type], resource.id)
+  assign: async function (config: {
+    user: User
+    role: Role
+    resource: { type: 'organization' | 'folder' | 'project'; id: string }
+    policy: Policy
+  }) {
+    const policy = config.policy
+      ? config.policy
+      : await Policy.query()
+          .where(filterPolicyKey[config.resource.type], config.resource.id)
+          .firstOrFail()
+
     return await Binding.create({
-      roleId: role.id,
-      memberId: user.id,
+      roleId: config.role.id,
+      memberId: config.user.id,
       policyId: policy.id,
     })
   },
