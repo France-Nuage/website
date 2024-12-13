@@ -117,6 +117,8 @@ export default class extends BaseSeeder {
       'deleteInternal',
       'deleteTagBinding',
       'createTagBinding',
+      'listIamRoles',
+      'exportIamRoles',
       '*',
     ]
     const services = ['*', 'iam', 'logging', 'compute', 'resourcemanager', 'observability']
@@ -224,6 +226,7 @@ export default class extends BaseSeeder {
       { type__id: 'sqlAlerts', service__id: 'logging' },
       { type__id: 'usage', service__id: 'logging' },
       { type__id: 'views', service__id: 'logging' },
+      { type__id: 'assets', service__id: 'cloudassets' },
     ]
 
     await ServiceFactory.merge(services.map((service) => ({ id: service }))).createMany(
@@ -254,6 +257,8 @@ export default class extends BaseSeeder {
       'resourcemanager.projects.getIamPolicy',
       'resourcemanager.organizations.getIamPolicy',
       'resourcemanager.folders.getIamPolicy',
+      'cloudasset.assets.listIamRoles',
+      'cloudasset.assets.exportIamRoles',
       'iam.operations.get',
       'logging.buckets.copyLogEntries',
       'logging.buckets.create',

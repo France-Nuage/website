@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import PolicyPolicy from '#policies/iam/policy_policy'
+import MemberPolicy from "#policies/iam/member_policy";
 
 const filterSQLKey = {
   organization: 'organization__id',
@@ -12,10 +13,13 @@ export default class MembersController {
   /**
    * Display a list of resource
    */
-  async index({ response, params, bouncer }: HttpContext) {
-    await bouncer.with(PolicyPolicy).authorize('index')
+  async index({ response, params, bouncer, request }: HttpContext) {
+    await bouncer.with(MemberPolicy).authorize('index')
 
-    const rows = await db
+    const page = request.input('page', 1)
+    const limit = request.input('limit', 10)
+
+    const result = await db
       .from('member.users as u')
       .join('iam.user_resource_policy_binding as b', 'u.id', 'b.member__id')
       .join('iam.resource_policy as p', 'b.policy__id', 'p.policy__id')
@@ -23,14 +27,15 @@ export default class MembersController {
       .groupBy('u.email')
       .select('u.email as member')
       .select(db.raw('array_agg(DISTINCT b.role__id) as roles'))
+      .paginate(page, limit)
 
     return response.ok({
-      bindings: rows.map((row) => ({
-        member: row.member,
-        roles: row.roles,
-      })),
-      // etag: "BwWWja0YfJA=",
-      // version: 3
+      data: {
+        bindings: result.rows,
+        // etag: "BwWWja0YfJA=",
+        // version: 3,
+      },
+      meta: result.getMeta(),
     })
   }
 
@@ -47,11 +52,21 @@ export default class MembersController {
   /**
    * Show individual record
    */
-  async show({ response, params, request }: HttpContext) {
-    return response.notImplemented({
-      params: params,
-      request: request,
-    })
+  async show({ response, params, bouncer }: HttpContext) {
+    await bouncer.with(MemberPolicy).authorize('show')
+
+    const result = await db
+      .from('member.users as u')
+      .join('iam.user_resource_policy_binding as b', 'u.id', 'b.member__id')
+      .join('iam.resource_policy as p', 'b.policy__id', 'p.policy__id')
+      .where(`p.${filterSQLKey[params.resource]}`, params.resourceId)
+      .andWhere('u.id', params.id)
+      .groupBy('u.email')
+      .select('u.email as member')
+      .select(db.raw('array_agg(DISTINCT b.role__id) as roles'))
+      .firstOrFail()
+
+    return response.ok(result)
   }
 
   /**
