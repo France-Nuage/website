@@ -1,7 +1,7 @@
 <template>
   <c-header-selector
-    v-if="account"
-    :items="projects.filter((_) => _.accountId === account.id).map((_) => ({ value: _.id, name: _.name }))"
+    v-if="folder"
+    :items="projects.filter((_) => _.folderId === folder.id).map((_) => ({ value: _.id, name: _.name }))"
     type="project"
     :selected="selected"
     @select="onChangeProject"
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import CHeaderSelector from "~/components/header/CHeaderSelector.vue";
 
-const { projects, account, project } = storeToRefs(useNavigationStore())
+const { projects, folder, project } = storeToRefs(useNavigationStore())
 const router = useRouter()
 const route = useRoute()
 const selected = computed(() => {
@@ -24,7 +24,7 @@ const selected = computed(() => {
 const onChangeProject = (id) => {
   router.push({ ...route, query: {
       organization: route.query.organization,
-      account: route.query.account,
+      folder: route.query.folder,
       project: id,
     }
   });
