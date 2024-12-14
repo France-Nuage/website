@@ -5,16 +5,8 @@
     </svg>
     <input
       type="text"
-      :class="[`flex-auto appearance-none bg-transparent pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden`]"
+      :class="[`flex-auto w-full focus:outline-none focus:border-none appearance-none bg-transparent pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 dark:border-none focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden`]"
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped>
-
-</style>
