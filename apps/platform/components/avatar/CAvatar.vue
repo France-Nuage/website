@@ -1,13 +1,13 @@
 <template>
    <span class="relative inline-block">
-     <img :class="[`size-8 rounded-full bg-gray-50 ${sizeClasses[props.size]}`]" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+     <img :class="[`rounded-full bg-gray-50 ${sizeClasses[props.size]}`]" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
      <span v-if="props.dotted" :class="[`absolute bottom-0 right-0 block size-4 rounded-full bg-green-400 ring-2 ring-white ${sizeDottedClasses[props.size]}`]" />
    </span>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   dotted?: boolean;
 }
 

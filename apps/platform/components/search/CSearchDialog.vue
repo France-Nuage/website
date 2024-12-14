@@ -3,13 +3,13 @@
     <div>
       <form action="">
         <c-search-input v-model="searchTerms" />
-        <div class="border-t border-zinc-200 bg-white empty:hidden dark:border-zinc-100/5 dark:bg-white/2.5">
-<!--              <search-results-->
-<!--                v-if="searchTerms.length > 0"-->
-<!--                :collections="collections.slice(0, 5)"-->
-<!--                :autocomplete="searchTerms"-->
-<!--                :query="searchTerms"-->
-<!--              />-->
+        <div class="border-t border-zinc-200 bg-white empty:hidden dark:border-none dark:bg-white/2.5">
+          <c-search-results
+            v-if="searchTerms.length > 0"
+            :collections="collections.slice(0, 5)"
+            :autocomplete="searchTerms"
+            :query="searchTerms"
+          />
         </div>
       </form>
     </div>
@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import CSearchInput from "~/components/search/CSearchInput.vue";
 import CModal from "~/components/modal/CModal.vue";
-// import SearchResults from "~/components/search/SearchResults.vue";
+import CSearchResults from "~/components/search/CSearchResults.vue";
 
 interface Props {
   modelValue: boolean
@@ -73,7 +73,3 @@ watch(dialogIsOpen, () => {
   emit('update:modelValue', dialogIsOpen.value)
 }, { immediate: true })
 </script>
-
-<style scoped>
-
-</style>

@@ -1,12 +1,11 @@
 <template>
   <span :class="[
-      props.pill ? 'rounded-full' : 'rounded-md',
-      props.flat ? '' : 'ring-1 ring-inset ring-gray-500/10',
-      `inline-flex items-center bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-600`, {
+    props.pill ? 'rounded-full' : 'rounded-md',
+    props.flat ? '' : 'ring-1 ring-inset ring-gray-500/10',
+    `inline-flex items-center ${variantClasses[props.variant].background} ${variantClasses[props.variant].title} px-1.5 py-0.5 text-xs font-medium gap-2`, {}]"
+  >
 
-  }]">
-
-    <svg v-if="props.dotted" :class="[`size-1.5 fill-gray-400`, {
+    <svg v-if="props.dotted" :class="[`size-1.5`, {
 
     }]" viewBox="0 0 6 6" aria-hidden="true">
       <circle cx="3" cy="3" r="3" />
@@ -32,12 +31,34 @@ interface Props {
   remove?: boolean;
   flat?: boolean;
   small?: boolean;
+  variant: 'filled' | 'success' | 'danger' | 'warning' | 'information' | 'default';
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'default'
+})
 const emit = defineEmits(['remove'])
+
+const variantClasses = {
+  default: {
+    background: 'bg-gray-100',
+    title: 'text-gray-600'
+  },
+  information: {
+    background: 'bg-blue-50 fill-blue-300 dark:bg-blue-950',
+    title: 'text-blue-800 dark:text-blue-300',
+  },
+  danger: {
+    background: 'bg-red-50 dark:bg-red-950',
+    title: 'text-red-800 dark:text-white',
+  },
+  warning: {
+    background: 'bg-orange-50',
+    title: 'text-red-800',
+  },
+  success: {
+    background: 'bg-green-50',
+    title: 'text-red-800',
+  },
+}
 </script>
-
-<style scoped>
-
-</style>
