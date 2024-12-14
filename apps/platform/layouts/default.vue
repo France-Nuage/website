@@ -115,7 +115,6 @@ import CToastList from "~/components/toast/CToastList.vue";
 const sidebarOpen = ref(false)
 
 const route = useRoute()
-const { project } = storeToRefs(useNavigationStore())
 
 const isActive = (term: string) => {
   return route.path.startsWith('/' + term)

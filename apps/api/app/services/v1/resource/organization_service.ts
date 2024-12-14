@@ -13,16 +13,24 @@ export default {
       .firstOrFail()
   },
   list: async function (includes: Array<string>, user: User) {
+    await user.load('policies')
     return new RequestQueryBuilder(Organization.query())
       .withIncludes(includes)
+      .applyWhere([['id', 'in', user.policies.map((policy: Policy) => policy.organizationId)]])
       .withPagination(1, 10)
       .apply()
   },
   create: async function (body: { [_: string]: string | number | null }, user: User) {
     const organization = await Organization.create(body)
-    await Policy.create({ organizationId: organization.id })
-    const role = await Role.find('roles/organization.admin')
-    await Authorization.assign(user, role, { type: 'organization', id: organization.id })
+    const policy = await Policy.create({ organizationId: organization.id })
+    const role = await Role.findOrFail('roles/resourcemanager.organizationAdmin')
+
+    await Authorization.assign({
+      user,
+      role,
+      policy,
+      resource: { type: 'organization', id: organization.id },
+    })
 
     return organization
   },

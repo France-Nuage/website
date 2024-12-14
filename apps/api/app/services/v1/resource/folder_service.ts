@@ -1,7 +1,10 @@
-import RequestQueryBuilder from "../../../utils/RequestQueryBuilder.js";
-import Folder from "#models/resource/folder";
-import User from "#models/user";
-import Project from "#models/resource/project";
+import RequestQueryBuilder from '../../../utils/RequestQueryBuilder.js'
+import Folder from '#models/resource/folder'
+import User from '#models/user'
+import Project from '#models/resource/project'
+import Policy from '#models/iam/policy'
+import Role from '#models/iam/role'
+import Authorization from '#services/authorization'
 
 export default {
   get: async function (id: string, includes: Array<string>) {
@@ -17,10 +20,23 @@ export default {
       .apply()
   },
   create: async function (includes) {},
-  post: async function (body) {
+  post: async function (body, user: User) {
     const folder = await Folder.create(body)
-    await Project.create({ name: 'Production', account__id: folder.id })
-    return
+    await Folder.create(body)
+    const policy = await Policy.create({
+      folderId: folder.id,
+      organizationId: folder.organizationId,
+    })
+
+    const role = await Role.findOrFail('roles/resourcemanager.folderAdmin')
+    await Authorization.assign({
+      user,
+      role,
+      policy,
+      resource: { type: 'folder', id: folder.id },
+    })
+
+    return folder
   },
   update: async function (id, body) {},
   delete: async function (id) {},

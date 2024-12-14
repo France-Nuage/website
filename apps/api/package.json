@@ -38,6 +38,7 @@
     "@adonisjs/tsconfig": "^1.4.0",
     "@japa/api-client": "^2.0.4",
     "@japa/assert": "^3.0.0",
+    "@japa/expect-type": "^2.0.2",
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
     "@japa/snapshot": "^2.0.6",
@@ -67,7 +68,9 @@
     "@aws-sdk/s3-request-presigner": "^3.696.0",
     "@vinejs/vine": "^2.1.0",
     "axios": "^1.7.8",
+    "edge.js": "^6.2.0",
     "luxon": "^3.5.0",
+    "mjml": "^4.15.3",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
     "stripe": "^17.4.0",
@@ -87,4 +90,3 @@
   },
   "prettier": "@adonisjs/prettier-config"
 }
-

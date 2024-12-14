@@ -10,7 +10,7 @@
 
     <div class="flex flex-1 gap-x-4 justify-between lg:gap-x-6 relative">
       <div class="flex items-center gap-4">
-        <c-header-selector-account />
+        <c-header-selector-folder />
         <svg class="size-5 shrink-0 text-gray-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
         </svg>
@@ -42,12 +42,8 @@ import {
 } from '@heroicons/vue/24/outline'
 import CSearch from "~/components/search/CSearch.vue";
 import CHeaderProfile from "~/components/header/CHeaderProfile.vue";
-import CHeaderSelectorAccount from "~/components/header/CHeaderSelectorAccount.vue";
+import CHeaderSelectorFolder from "~/components/header/CHeaderSelectorFolder.vue";
 import CHeaderSelectorProject from "~/components/header/CHeaderSelectorProject.vue";
 
 const sidebarOpen = ref(false)
 </script>
-
-<style scoped>
-
-</style>

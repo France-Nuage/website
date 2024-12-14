@@ -53,7 +53,7 @@ import { ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import CDropdownDivider from "~/components/dropdown/CDropdownDivider.vue";
 
 interface Props {
-  type: 'project' | 'account';
+  type: 'project' | 'folder';
   items: Array<{ name: string; value: string }>;
   selected?: { name: string; value: string } | null;
   noSelectedMessage?: string;

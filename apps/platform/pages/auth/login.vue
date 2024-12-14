@@ -7,14 +7,14 @@
     <div class="mt-10">
       <div>
 
-        <c-social-button social-provider="google" />
-        <c-separator class="my-10" label="Ou" />
+<!--        <c-social-button social-provider="google" />-->
+<!--        <c-separator class="my-10" label="Ou" />-->
 
         <form class="space-y-6" @submit.prevent="onSubmit">
 
 
-          <c-text-field v-model.trim="formData.email" id="email" required autocomplete="email" name="email" type="email" label="Email" />
-          <c-text-field v-model.trim="formData.password" id="password" required autocomplete="password" name="password" type="password" label="Password" />
+          <c-text-field v-model.trim="formData.email" id="email" required autocomplete="email" name="email" type="email" label="E-mail" />
+          <c-text-field v-model.trim="formData.password" id="password" required autocomplete="password" name="password" type="password" label="Mot de passe" />
 
           <div class="flex items-center justify-between">
             <div class="text-sm/6">
