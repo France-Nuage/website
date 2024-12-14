@@ -31,3 +31,16 @@ export const loginUserValidator = vine.compile(
     password: vine.string(),
   })
 )
+
+export const resetPasswordRequestValidator = vine.compile(
+  vine.object({
+    email: vine.string().email(),
+  })
+)
+
+export const resetPasswordValidator = vine.compile(
+  vine.object({
+    token: vine.string(),
+    password: vine.string().minLength(8).maxLength(512),
+  })
+)

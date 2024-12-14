@@ -3,7 +3,7 @@ import { ServiceFactory } from '#database/factories/iam/service_factory'
 import { VerbFactory } from '#database/factories/iam/verb_factory'
 import { TypeFactory } from '#database/factories/iam/type_factory'
 import { PermissionFactory } from '#database/factories/iam/permission_factory'
-import {RoleFactory} from "#database/factories/iam/role_factory";
+import { RoleFactory } from '#database/factories/iam/role_factory'
 
 export default class extends BaseSeeder {
   public async run() {
@@ -90,7 +90,6 @@ export default class extends BaseSeeder {
       'undeploy',
       'uninstall',
       'update',
-      'use',
       'validate',
       'validateTrust',
       'verify',
@@ -118,7 +117,9 @@ export default class extends BaseSeeder {
       'deleteInternal',
       'deleteTagBinding',
       'createTagBinding',
-      '*'
+      'listIamRoles',
+      'exportIamRoles',
+      '*',
     ]
     const services = ['*', 'iam', 'logging', 'compute', 'resourcemanager', 'observability']
     const types = [
@@ -225,6 +226,7 @@ export default class extends BaseSeeder {
       { type__id: 'sqlAlerts', service__id: 'logging' },
       { type__id: 'usage', service__id: 'logging' },
       { type__id: 'views', service__id: 'logging' },
+      { type__id: 'assets', service__id: 'cloudassets' },
     ]
 
     await ServiceFactory.merge(services.map((service) => ({ id: service }))).createMany(
@@ -245,9 +247,18 @@ export default class extends BaseSeeder {
       'resourcemanager.organizations.updatePolicyBinding',
       'resourcemanager.folders.get',
       'resourcemanager.folders.list',
+      'resourcemanager.folders.create',
+      'resourcemanager.folders.delete',
       'resourcemanager.projects.get',
-      'resourcemanager.projects.getIamPolicy',
       'resourcemanager.projects.list',
+      'resourcemanager.projects.create',
+      'resourcemanager.projects.delete',
+      'resourcemanager.projects.getIamPolicy',
+      'resourcemanager.projects.getIamPolicy',
+      'resourcemanager.organizations.getIamPolicy',
+      'resourcemanager.folders.getIamPolicy',
+      'cloudasset.assets.listIamRoles',
+      'cloudasset.assets.exportIamRoles',
       'iam.operations.get',
       'logging.buckets.copyLogEntries',
       'logging.buckets.create',
@@ -511,7 +522,7 @@ export default class extends BaseSeeder {
       })
     ).createMany(permissions.length)
 
-    await RoleFactory.merge([
+    const roles = [
       { id: 'roles/compute.admin', serviceId: 'compute' },
       { id: 'roles/iam.admin', serviceId: 'iam' },
       { id: 'roles/resourcemanager.organizationAdmin', serviceId: 'resourcemanager' },
@@ -523,6 +534,8 @@ export default class extends BaseSeeder {
       { id: 'roles/resourcemanager.folderAdmin', serviceId: 'resourcemanager' },
       { id: 'roles/resourcemanager.folderViewer', serviceId: 'resourcemanager' },
       { id: 'roles/resourcemanager.folderCreator', serviceId: 'resourcemanager' },
-    ]).createMany(2)
+    ]
+
+    await RoleFactory.merge(roles).createMany(roles.length)
   }
 }

@@ -46,7 +46,7 @@ export default defineNuxtConfig({
               'auth-login',
               'auth-forgot-password',
               'auth-reset-password',
-              'auth-subscribe'
+              'auth-subscribe',
             ].includes(page.name)) {
               page.meta ||= {}
               page.meta.middleware ||= []

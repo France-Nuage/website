@@ -1,8 +1,7 @@
 import { BaseModel, belongsTo, column, computed, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Project from '#models/resource/project'
-import Organization from '#models/resource/organization'
 
 export default class Folder extends BaseModel {
   public static table = 'resource.folders'
@@ -18,8 +17,8 @@ export default class Folder extends BaseModel {
   @column()
   declare name: string
 
-  @column({ columnName: 'project__id' })
-  declare projectId: string
+  @column({ columnName: 'organization__id' })
+  declare organizationId: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -27,6 +26,9 @@ export default class Folder extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Project, { localKey: 'id', foreignKey: 'projectId' })
-  declare project: BelongsTo<typeof Project>
+  @belongsTo(() => Folder, { localKey: 'id', foreignKey: 'organizationId' })
+  declare organization: BelongsTo<typeof Folder>
+
+  @hasMany(() => Project)
+  declare projects: HasMany<typeof Project>
 }

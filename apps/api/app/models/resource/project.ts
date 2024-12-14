@@ -17,8 +17,8 @@ export default class Project extends BaseModel {
   @column()
   declare name: string
 
-  @column({ columnName: 'account__id' })
-  declare accountId: string
+  @column({ columnName: 'folder__id' })
+  declare folderId: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -26,9 +26,9 @@ export default class Project extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Account, { localKey: 'id', foreignKey: 'accountId' })
-  declare account: BelongsTo<typeof Account>
-
-  @belongsTo(() => Folder)
+  @belongsTo(() => Folder, {
+    localKey: 'id',
+    foreignKey: 'folderId',
+  })
   declare folder: BelongsTo<typeof Folder>
 }

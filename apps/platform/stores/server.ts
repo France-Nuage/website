@@ -9,7 +9,6 @@ export const useServerStore = defineStore('server', {
 
             $api().servers.list().then(({ data }) => {
                 this.servers = data.data
-                console.log(this.servers)
             })
         },
         loadServer: async function (id: string) {
