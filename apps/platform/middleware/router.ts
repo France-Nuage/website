@@ -13,7 +13,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     const navigationStore = useNavigationStore();
     const { organization, folder, project } = storeToRefs(navigationStore);
-    const { selectOrganization, selectAccount, selectProject } = navigationStore;
+    const { selectOrganization, selectFolder, selectProject } = navigationStore;
 
     const storeOrganizationId = organization.value?.id || null;
     const storeFolderId = folder.value?.id || null;
@@ -23,8 +23,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const fromQuery = from.query || {}
 
     let nextOrganizationId = toQuery.organization || storeOrganizationId;
-    // let nextFolderId = toQuery.folder || storeFolderId;
-    // let nextProjectId = toQuery.project || storeProjectId;
+    let nextFolderId = toQuery.folder || storeFolderId;
+    let nextProjectId = toQuery.project || storeProjectId;
 
     const queryParams = {};
 
@@ -32,13 +32,13 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         queryParams.organization = nextOrganizationId;
     }
 
-    // if (nextFolderId && nextFolderId !== toQuery.folder && !(toQuery.organization !== fromQuery.organization)) {
-    //     queryParams.folder = nextFolderId;
-    // }
-    //
-    // if (nextProjectId && nextProjectId !== toQuery.project && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
-    //     queryParams.project = nextProjectId;
-    // }
+    if (nextFolderId && nextFolderId !== toQuery.folder && !(toQuery.organization !== fromQuery.organization)) {
+        queryParams.folder = nextFolderId;
+    }
+
+    if (nextProjectId && nextProjectId !== toQuery.project && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
+        queryParams.project = nextProjectId;
+    }
 
     const shouldRedirect = Object.keys(queryParams).length > 0;
 
@@ -51,11 +51,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await selectOrganization(nextOrganizationId);
     }
 
-    // if (nextFolderId && !(toQuery.organization !== fromQuery.organization)) {
-    //     await selectAccount(nextFolderId);
-    // }
-    //
-    // if (nextProjectId && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
-    //     await selectProject(nextProjectId);
-    // }
+    if (nextFolderId && !(toQuery.organization !== fromQuery.organization)) {
+        await selectFolder(nextFolderId);
+    }
+
+    if (nextProjectId && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
+        await selectProject(nextProjectId);
+    }
 });

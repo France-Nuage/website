@@ -1,6 +1,7 @@
 import { parseUri } from '../../parsers/url';
 import type { AllowedParams } from './../ApiParams';
 import type { ApiResponse } from './../ApiResponse';
+import {useNavigationStore} from "#imports";
 
 interface PostUserData {}
 
@@ -14,24 +15,32 @@ interface UserResource {
 
 type PatchUserData = Partial<UserResource> | { resultCode: string };
 
-export const MemberRepository = function (client: any, config: Record<any, any>) {
+export const IAMPolicyRepository = function (client: any, config: Record<any, any>) {
+  const { resource } = storeToRefs(useNavigationStore())
+
+  if (!resource) {
+    return;
+  }
+
+  const resourceValue: { type: string, id: string } = resource.value
+
   return {
     list: async (params?: AllowedParams<any, null, null>): Promise<ApiResponse<any>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/users${apiCallParams}`);
+      return client(`/${resourceValue.type}/${resourceValue.id}/iam/policies${apiCallParams}`);
     },
     get: async (userId: string, params?: AllowedParams<null, null, null>): Promise<ApiResponse<UserResource>> => {
       const apiCallParams = params ? parseUri(params) : '';
-      return client(`/users/${userId}${apiCallParams}`);
+      return client(`/${resourceValue.type}/${resourceValue.id}/iam/policies/${userId}${apiCallParams}`);
     },
     post: async (body: PostUserData): Promise<ApiResponse<UserResource>> => {
-      return client(`/users`, { method: 'POST' , body});
+      return client(`/${resourceValue.type}/${resourceValue.id}/iam/policies`, { method: 'POST' , body});
     },
     patch: async (userId: string, body: PatchUserData): Promise<ApiResponse<UserResource>> => {
-      return client(`/users/${userId}`, { method: 'PUT' , body });
+      return client(`/${resourceValue.type}/${resourceValue.id}/iam/policies/${userId}`, { method: 'PUT' , body });
     },
     delete: async (ids: Array<string>): Promise<Awaited<any>[]> => {
-      return Promise.all(ids.map(async (id: string) => await client(`/users/${id}`, { method: 'DELETE' })))
+      return Promise.all(ids.map(async (id: string) => await client(`/${resourceValue.type}/${resourceValue.id}/iam/policies/${id}`, { method: 'DELETE' })))
     }
   };
 };

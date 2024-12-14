@@ -6,7 +6,7 @@
         <InformationCircleIcon v-if="variant === 'information'" class="size-5 text-blue-400" aria-hidden="true" />
       </div>
       <div class="ml-3">
-        <h3 :class="[`text-sm font-medium ${variantClasses[props.variant].title}`]">{{ props.title }}</h3>
+        <h3 v-if="props.title" :class="[`text-sm font-medium ${variantClasses[props.variant].title}`]">{{ props.title }}</h3>
         <div :class="[`mt-2 text-sm ${variantClasses[props.variant].description}`]">
           <div class="space-y-1">
             <slot />
@@ -22,7 +22,7 @@ import { XCircleIcon, InformationCircleIcon } from '@heroicons/vue/20/solid'
 
 interface Props {
   title: string;
-  variant: 'filled' | 'success' | 'danger' | 'warning' | 'information';
+  variant?: 'filled' | 'success' | 'danger' | 'warning' | 'information';
 }
 
 const props = withDefaults(defineProps<Props>(), { variant: 'information' })

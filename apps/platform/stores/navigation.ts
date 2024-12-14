@@ -5,6 +5,7 @@ interface State {
     organization: any,
     folders: any,
     folder: any,
+    resource: { type: 'organization' | 'project' | 'folder', id: string } | null,
 }
 
 export const useNavigationStore = defineStore('navigation', {
@@ -15,6 +16,7 @@ export const useNavigationStore = defineStore('navigation', {
         organization: null,
         folders: [],
         folder: null,
+        resource: null
     }),
     actions: {
         loadProjects: async function () {
@@ -27,8 +29,6 @@ export const useNavigationStore = defineStore('navigation', {
         },
         loadOrganizations: async function (queryParams: any = null) {
             const { $api } = useNuxtApp()
-
-
 
             return $api().organizations.list(queryParams).then((response) => {
                 this.organizations = response.data
@@ -61,9 +61,11 @@ export const useNavigationStore = defineStore('navigation', {
                 this.projects = []
                 this.project = null
                 this.organization = response
+
+                this.resource = { type: 'organization', id: this.organization.id }
             })
         },
-        selectAccount: async function (id: string) {
+        selectFolder: async function (id: string) {
             const { $api } = useNuxtApp()
 
             return $api().folders.get(id, { includes: 'projects' }).then((response) => {
@@ -79,10 +81,14 @@ export const useNavigationStore = defineStore('navigation', {
                  * No default project selected mode.
                  */
                 this.project = null
+
+                this.resource = { type: 'folder', id: this.folder.id }
             })
         },
         selectProject: async function (id: any) {
             this.project = this.projects.find((item: any) => item.id === id)
+
+            this.resource = { type: 'project', id: this.project.id }
         },
     }
 })

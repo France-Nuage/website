@@ -4,7 +4,8 @@ export { ProjectRepository } from './resource/ProjectRepository';
 export { FolderRepository } from "./resource/FolderRepository";
 
 // iam
-export { UserRepository } from './iam/UserRepository';
+export { IAMMemberRepository } from './iam/MemberRepository';
+export { IAMPolicyRepository } from './iam/PolicyRepository';
 export { RoleRepository } from "./iam/RoleRepository";
 export { PermissionRepository } from "./iam/PermissionRepository";
 

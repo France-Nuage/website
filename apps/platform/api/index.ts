@@ -2,7 +2,8 @@ import { SecurityRepository } from './security';
 import {
   OrganizationRepository,
   ProjectRepository,
-  UserRepository,
+  IAMMemberRepository,
+  IAMPolicyRepository,
   ServiceRepository,
   FolderRepository,
   AccountBillingRepository,
@@ -12,11 +13,14 @@ import {
 import type { AxiosInstance } from 'axios';
 
 const repositories: any = (client: AxiosInstance, config: Record<any, any>) => ({
+  iam: {
+    members: IAMMemberRepository(client, config),
+    policies: IAMPolicyRepository(client, config),
+  },
   security: SecurityRepository(client, config),
   organizations: OrganizationRepository(client, config),
   projects: ProjectRepository(client, config),
   services: ServiceRepository(client, config),
-  users: UserRepository(client, config),
   folders: FolderRepository(client, config),
   accountBillings: AccountBillingRepository(client, config),
   roles: RoleRepository(client, config),
