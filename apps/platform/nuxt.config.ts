@@ -30,6 +30,12 @@ export default defineNuxtConfig({
     fallback: 'light'
   },
 
+  app: {
+    head: {
+      title: 'france-nuage',
+    },
+  },
+
   hooks: {
     'pages:extend' (pages) {
       function setMiddleware (pages: any) {

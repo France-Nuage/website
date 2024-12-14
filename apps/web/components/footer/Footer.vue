@@ -10,7 +10,7 @@
             <span class="font-semibold text-white">France Nuage</span>
           </div>
           <div class="text-sm text-gray-400">
-            <p>Email : <a href="mailto:bonjour@france-nuage.com" class="hover:text-white">bonjour@france-nuage.com</a></p>
+            <p>Email : <a href="mailto:bonjour@france-nuage.fr" class="hover:text-white">bonjour@france-nuage.fr</a></p>
             <p>Téléphone : <a href="tel:+33781479170" class="hover:text-white">+33 7 81 47 91 70</a></p>
           </div>
         </div>
