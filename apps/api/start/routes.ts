@@ -26,6 +26,7 @@ const AuthController = () => import('#controllers/v1/iam/auth_controller')
 const InstancesController = () => import('#controllers/v1/infrastructure/instances_controller')
 const IAMPoliciesController = () => import('#controllers/v1/iam/policy_controller')
 const MembersController = () => import('#controllers/v1/iam/member_controller')
+const BillingAccountController = () => import('#controllers/v1/billing/billing_accounts_controller')
 
 router
   .group(() => {
@@ -37,6 +38,11 @@ router
             router.resource('/iam/members', MembersController)
           })
           .prefix('/:resource/:resourceId')
+
+        router.group(() => {
+          router.resource('/folders/:folderId', BillingAccountController)
+        })
+
         router.resource('organizations', OrganizationsController)
         router.resource('projects', ProjectsController)
         router.resource('folders', FoldersController)
