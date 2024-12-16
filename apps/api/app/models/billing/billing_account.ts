@@ -4,19 +4,25 @@ import Organization from '#models/resource/organization'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Project from '#models/resource/project'
 
-export default class Account extends BaseModel {
+export default class BillingAccount extends BaseModel {
   public static table = 'billing.accounts'
 
   @computed()
   public get object() {
-    return 'account'
+    return 'billing_account'
   }
 
   @column({ isPrimary: true, columnName: 'account__id' })
   declare id: string
 
   @column()
-  declare name: string
+  declare displayName: string
+
+  @column()
+  declare open: boolean
+
+  @column()
+  declare currencyCode: string
 
   @column({ columnName: 'organization__id' })
   declare organizationId: string
