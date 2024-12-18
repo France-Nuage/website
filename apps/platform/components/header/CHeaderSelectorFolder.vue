@@ -4,15 +4,32 @@
     :selected="selected"
     type="folder"
     @select="onFolderSelected"
+    @add="modalIsOpen = true"
   />
+  <c-modal v-model="modalIsOpen" title="Ajouter une filial" @add="onSubmit">
+    <c-modal-body>
+      <c-text-field
+        id="name"
+        name="name"
+        type="text"
+        label="Nom de la filial"
+        v-model="formData.name"
+      />
+    </c-modal-body>
+  </c-modal>
 </template>
 
 <script setup lang="ts">
 import CHeaderSelector from "~/components/header/CHeaderSelector.vue";
+import CModal from "~/components/modal/CModal.vue";
+import CModalBody from "~/components/modal/CModalBody.vue";
+import CTextField from "~/components/forms/CTextField.vue";
 const { folder, folders, organization } = storeToRefs(useNavigationStore())
 
 const router = useRouter()
 const route = useRoute()
+const modalIsOpen = ref(false)
+const formData= ref({ name: '' })
 const selected = computed(() => {
   return folder.value ? { name: folder.value.name, value: folder.value.id } : null
 })
@@ -23,5 +40,9 @@ const onFolderSelected = (id: string) => {
       folder: id
     }
   });
+}
+
+const onSubmit = () => {
+  console.log(formData.value)
 }
 </script>
