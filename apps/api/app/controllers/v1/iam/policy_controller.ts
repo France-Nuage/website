@@ -1,5 +1,5 @@
 import { HttpContext } from '@adonisjs/core/http'
-import PolicyPolicy from '#policies/iam/policy_policy'
+import IAMPolicyPolicy from '#policies/iam/iam_policy_policy'
 import db from '@adonisjs/lucid/services/db'
 
 const filterSQLKey = {
@@ -10,7 +10,7 @@ const filterSQLKey = {
 
 export default class PoliciesController {
   async index({ response, bouncer, params, request }: HttpContext) {
-    await bouncer.with(PolicyPolicy).authorize('index')
+    await bouncer.with(IAMPolicyPolicy).authorize('index')
 
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
@@ -39,7 +39,7 @@ export default class PoliciesController {
    * Show individual record
    */
   async show({ response, params, bouncer }: HttpContext) {
-    await bouncer.with(PolicyPolicy).authorize('show')
+    await bouncer.with(IAMPolicyPolicy).authorize('show')
 
     const roleId = params.id.replace('%2F', '/')
 

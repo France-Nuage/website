@@ -3,7 +3,7 @@ import authorization from '#services/authorization'
 import User from '#models/user'
 import { AuthorizerResponse } from '@adonisjs/bouncer/types'
 
-export default class MemberPolicy extends BasePolicy {
+export default class IAMMemberPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
    */

@@ -25,8 +25,9 @@ const FoldersController = () => import('#controllers/v1/resource/folders_control
 const AuthController = () => import('#controllers/v1/iam/auth_controller')
 const InstancesController = () => import('#controllers/v1/infrastructure/instances_controller')
 const IAMPoliciesController = () => import('#controllers/v1/iam/policy_controller')
-const MembersController = () => import('#controllers/v1/iam/member_controller')
+const IAMMembersController = () => import('#controllers/v1/iam/member_controller')
 const BillingAccountController = () => import('#controllers/v1/billing/billing_accounts_controller')
+const MembersController = () => import('#controllers/v1/member/members_controller')
 
 router
   .group(() => {
@@ -37,10 +38,11 @@ router
         router.resource('projects', ProjectsController)
         router.resource('instances', InstancesController)
         router.resource('services', ServicesController)
+        router.resource('members', MembersController)
         router
           .group(() => {
             router.resource('/iam/policies', IAMPoliciesController)
-            router.resource('/iam/members', MembersController)
+            router.resource('/iam/members', IAMMembersController)
           })
           .prefix('/:resource/:resourceId')
 

@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
-import MemberPolicy from '#policies/iam/member_policy'
+import IAMMemberPolicy from '#policies/iam/iam_member_policy'
 
 const filterSQLKey = {
   organization: 'organization__id',
@@ -13,7 +13,7 @@ export default class MembersController {
    * Display a list of resource
    */
   async index({ response, params, bouncer, request }: HttpContext) {
-    await bouncer.with(MemberPolicy).authorize('index')
+    await bouncer.with(IAMMemberPolicy).authorize('index')
 
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
@@ -52,7 +52,7 @@ export default class MembersController {
    * Show individual record
    */
   async show({ response, params, bouncer }: HttpContext) {
-    await bouncer.with(MemberPolicy).authorize('show')
+    await bouncer.with(IAMMemberPolicy).authorize('show')
 
     const result = await db
       .from('member.users as u')
