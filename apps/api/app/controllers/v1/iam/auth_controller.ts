@@ -92,7 +92,7 @@ export default class AuthController {
 
     const user = await User.findBy('email', email)
     if (!user) {
-      return response.ok()
+      return response.ok({ message: 'User not found' })
     }
 
     const token = randomBytes(32).toString('hex')
@@ -115,7 +115,7 @@ export default class AuthController {
 
     return response.ok({ message: 'Un lien de réinitialisation vous a été envoyé par e-mail.' })
   }
-  async resetPasswordToken({ params, response }) {
+  async resetPasswordToken({ params, response }: HttpContext) {
     const token = await Token.findBy('token', params.token)
 
     if (!token) {

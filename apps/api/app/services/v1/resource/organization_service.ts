@@ -6,7 +6,12 @@ import Authorization from '#services/authorization'
 import Role from '#models/iam/role'
 
 export default {
-  get: async function (id: string, includes: Array<string>, user: User) {
+  get: async function (
+    id: string,
+    includes: Array<string>,
+    user: User
+  ) {
+    console.log(user.id)
     return new RequestQueryBuilder(Organization.query())
       .withIncludes(includes)
       .applyWhere([['id', '=', id]])
@@ -34,6 +39,6 @@ export default {
 
     return organization
   },
-  update: async function (id, body, user: User) {},
-  delete: async function (id, user: User) {},
+  // update: async function (id, body, user: User) {},
+  // delete: async function (id, user: User) {},
 }
