@@ -1,13 +1,13 @@
 import BasePolicy from '#policies/BasePolicy'
 import authorization from '#services/authorization'
 import User from '#models/user'
+import { AuthorizerResponse } from '@adonisjs/bouncer/types'
 
 export default class MemberPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
    */
-  async index(user: User) {
-    await this.init()
+  index(user: User): AuthorizerResponse {
     return authorization.check(
       [
         'resourcemanager.projects.getIamPolicy',
@@ -19,8 +19,7 @@ export default class MemberPolicy extends BasePolicy {
     )
   }
 
-  async show(user: User) {
-    await this.init()
+  show(user: User): AuthorizerResponse {
     return authorization.check(
       [
         'resourcemanager.projects.getIamPolicy',

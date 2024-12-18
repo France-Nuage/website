@@ -1,5 +1,5 @@
-import User from '#models/user'
-import Project from '#models/resource/project'
+// import User from '#models/user'
+// import Project from '#models/resource/project'
 import { BasePolicy } from '@adonisjs/bouncer'
 import { AuthorizerResponse } from '@adonisjs/bouncer/types'
 
@@ -7,35 +7,35 @@ export default class ProjectPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
    */
-  index(user: User) {
+  index(): AuthorizerResponse {
     return false
   }
 
   /**
    * Every logged-in user can show a project
    */
-  show(user: User, project: Project): AuthorizerResponse {
+  show(): AuthorizerResponse {
     return false
   }
 
   /**
    * Every logged-in user can store a project
    */
-  store(user: User): AuthorizerResponse {
+  store(): AuthorizerResponse {
     return false
   }
 
   /**
    * Only the project creator can update the project
    */
-  update(user: User, project: Project): AuthorizerResponse {
+  update(): AuthorizerResponse {
     return false
   }
 
   /**
    * Only the project creator can destroy the project
    */
-  destroy(user: User, project: Project): AuthorizerResponse {
+  destroy(): AuthorizerResponse {
     return false
   }
 }

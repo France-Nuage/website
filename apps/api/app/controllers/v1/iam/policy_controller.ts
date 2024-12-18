@@ -19,7 +19,7 @@ export default class PoliciesController {
       .from('member.users as u')
       .join('iam.user_resource_policy_binding as b', 'u.id', 'b.member__id')
       .join('iam.resource_policy as p', 'b.policy__id', 'p.policy__id')
-      .where(`p.${filterSQLKey[params.resource]}`, params.resourceId)
+      .where(`p.${filterSQLKey[params.resource as keyof typeof filterSQLKey]}`, params.resourceId)
       .groupBy('b.role__id')
       .select('b.role__id')
       .select(db.raw('array_agg(DISTINCT u.email) as members'))
@@ -27,7 +27,7 @@ export default class PoliciesController {
 
     return response.ok({
       data: {
-        bindings: result.rows,
+        bindings: result.all(),
         // etag: "BwWWja0YfJA=",
         // version: 3,
       },
@@ -47,7 +47,7 @@ export default class PoliciesController {
       .from('member.users as u')
       .join('iam.user_resource_policy_binding as b', 'u.id', 'b.member__id')
       .join('iam.resource_policy as p', 'b.policy__id', 'p.policy__id')
-      .where(`p.${filterSQLKey[params.resource]}`, params.resourceId)
+      .where(`p.${filterSQLKey[params.resource as keyof typeof filterSQLKey]}`, params.resourceId)
       .andWhere('b.role__id', roleId)
       .groupBy('b.role__id')
       .select('b.role__id')
