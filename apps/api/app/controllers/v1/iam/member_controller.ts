@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
-import PolicyPolicy from '#policies/iam/policy_policy'
-import MemberPolicy from "#policies/iam/member_policy";
+import MemberPolicy from '#policies/iam/member_policy'
 
 const filterSQLKey = {
   organization: 'organization__id',

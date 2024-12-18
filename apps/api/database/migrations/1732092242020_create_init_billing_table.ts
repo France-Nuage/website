@@ -4,7 +4,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createSchema('billing')
     this.schema.withSchema('billing').createTable('accounts', (table) => {
-      table.uuid('account__id', { primaryKey: true, defaultTo: this.raw('uuid_generate_v4()') })
+      table.uuid('account__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.boolean('open')
       table.string('displayName').notNullable()
       table.string('currencyCode').notNullable().comment('cannot be updated')

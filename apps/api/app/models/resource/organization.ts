@@ -18,12 +18,6 @@ export default class Organization extends BaseModel {
   @column()
   declare name: string
 
-  @column({ columnName: 'environment__id' })
-  declare environmentId: string
-
-  @column({ columnName: 'owner__id' })
-  declare ownerId: number
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
