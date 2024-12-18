@@ -1,30 +1,26 @@
 import BasePolicy from '#policies/BasePolicy'
 import authorization from '#services/authorization'
 import User from '#models/user'
+import { AuthorizerResponse } from '@adonisjs/bouncer/types'
 
 export default class BillingPolicy extends BasePolicy {
-  async index(user: User) {
-    await this.init()
+  index(user: User): AuthorizerResponse {
     return authorization.check([], user, this.resources)
   }
 
-  async show(user: User) {
-    await this.init()
+  show(user: User): AuthorizerResponse {
     return authorization.check([], user, this.resources)
   }
 
-  async store(user: User) {
-    await this.init()
+  store(user: User): AuthorizerResponse {
     return authorization.check([], user, this.resources)
   }
 
-  async update(user: User) {
-    await this.init()
+  update(user: User): AuthorizerResponse {
     return authorization.check([], user, this.resources)
   }
 
-  async destroy(user: User) {
-    await this.init()
+  destroy(user: User): AuthorizerResponse {
     return authorization.check([], user, this.resources)
   }
 }

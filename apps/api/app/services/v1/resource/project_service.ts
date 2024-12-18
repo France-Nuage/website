@@ -1,5 +1,5 @@
 import RequestQueryBuilder from '../../../utils/RequestQueryBuilder.js'
-import User from '#models/user'
+// import User from '#models/user'
 import Project from '#models/resource/project'
 
 export default {
@@ -9,14 +9,17 @@ export default {
       .applyWhere([['id', '=', id]])
       .firstOrFail()
   },
-  list: async function (includes: Array<string>, user: User) {
+  list: async function (
+    includes: Array<string>
+    // user?: User
+  ) {
     return new RequestQueryBuilder(Project.query())
       .withIncludes(includes)
       .withPagination(1, 10)
       .apply()
   },
-  create: async function (includes) {},
-  post: async function (body) {},
-  update: async function (id, body) {},
-  delete: async function (id) {},
+  // create: async function (includes) {},
+  // post: async function (body) {},
+  // update: async function (id, body) {},
+  // delete: async function (id) {},
 }

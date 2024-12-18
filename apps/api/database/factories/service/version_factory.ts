@@ -7,7 +7,7 @@ export const VersionFactory = factory
       id: faker.string.uuid(),
       name: faker.company.catchPhrase(),
       description: faker.lorem.sentence(),
-      availableAt: faker.date.soon(),
+      // availableAt: faker.date.recent(),
       serviceId: faker.string.uuid(),
     }
   })
