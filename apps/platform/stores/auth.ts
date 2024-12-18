@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     subscribe: async function (payload: UserPayloadInterface): Promise<void> {
       const { $api } = useNuxtApp()
-      return $api().security.register(payload).then(({ data }) => {
+      return $api().security.register(payload).then((data) => {
         if (data.token) {
           const token = useCookie('token');
           token.value = data?.token?.token;
@@ -39,6 +39,14 @@ export const useAuthStore = defineStore('auth', {
 
         return response;
       })
+    },
+    resetPasswordRequest: async function ({ email }: { email: string }): Promise<void> {
+      const { $api } = useNuxtApp()
+      return $api().security.resetPasswordRequest({ email: email })
+    },
+    resetPassword: async function (payload: { password: string, token: string }): Promise<void> {
+      const { $api } = useNuxtApp()
+      return $api().security.resetPassword(payload)
     },
     logUserOut: function () {
       const token = useCookie('token');

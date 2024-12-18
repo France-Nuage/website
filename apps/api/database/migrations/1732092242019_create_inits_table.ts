@@ -34,20 +34,6 @@ export default class extends BaseSchema {
         .inTable('resource.organizations')
     })
 
-    this.schema.createSchema('billing')
-    this.schema.withSchema('billing').createTable('accounts', (table) => {
-      table.uuid('account__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
-      table.string('stripe_customer__id')
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
-
-      table.uuid('organization__id')
-      table
-        .foreign('organization__id')
-        .references('organization__id')
-        .inTable('resource.organizations')
-    })
-
     this.schema.withSchema('resource').createTable('projects', (table) => {
       table.uuid('project__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name')
@@ -55,16 +41,22 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
-      table.uuid('account__id')
       table.uuid('folder__id')
-
-      table.foreign('account__id').references('account__id').inTable('billing.accounts')
       table.foreign('folder__id').references('folder__id').inTable('resource.folders')
     })
 
     this.schema.withSchema('iam').createTable('services', (table) => {
-      table.string('service__id', 63).unique().primary()
+      table.string('service__id', 63).primary()
       table.string('description')
+    })
+
+    this.schema.withSchema('iam').createTable('tokens', (table) => {
+      table.uuid('id')
+      table.string('email').notNullable().index()
+      table.string('token').notNullable().unique()
+      table.timestamp('expires_at').notNullable()
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
     })
 
     this.schema.withSchema('iam').createTable('types', (table) => {
@@ -85,6 +77,7 @@ export default class extends BaseSchema {
     })
 
     this.schema.withSchema('iam').createTable('permissions', (table) => {
+      table.uuid('permission__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table.string('type__id', 63)
       table
         .string('service__id', 63)
@@ -98,13 +91,14 @@ export default class extends BaseSchema {
         .inTable('iam.verbs')
         .onDelete('restrict')
         .onDelete('cascade')
-      table.primary(['service__id', 'type__id', 'verb__id'])
       table
         .foreign(['service__id', 'type__id'])
         .references(['service__id', 'type__id'])
         .inTable('iam.types')
         .onDelete('restrict')
         .onUpdate('cascade')
+
+      table.unique(['service__id', 'type__id', 'verb__id'])
     })
 
     this.schema.withSchema('iam').createTable('roles', (table) => {
@@ -118,30 +112,29 @@ export default class extends BaseSchema {
       table.string('description')
       table.string('title')
 
-      table.primary(['service__id', 'role__id'])
+      table.primary(['role__id'])
+      table.unique(['service__id', 'role__id'])
     })
 
     this.schema.withSchema('iam').createTable('role__permission', (table) => {
-      table.string('permission_service__id')
-      table.string('permission_type__id')
-      table.string('permission_verb__id')
-
-      table.string('service__id')
       table.string('role__id')
+      table.uuid('permission__id')
 
       table
-        .foreign(['permission_service__id', 'permission_type__id', 'permission_verb__id'])
-        .references(['service__id', 'type__id', 'verb__id'])
+        .foreign('permission__id')
+        .references('permission__id')
         .inTable('iam.permissions')
         .onDelete('restrict')
         .onUpdate('cascade')
 
       table
-        .foreign(['service__id', 'role__id'])
-        .references(['service__id', 'role__id'])
+        .foreign('role__id')
+        .references('role__id')
         .inTable('iam.roles')
         .onDelete('restrict')
         .onUpdate('cascade')
+
+      table.unique(['role__id', 'permission__id'])
     })
 
     this.schema.withSchema('iam').createTable('resource_policy', (table) => {
@@ -164,9 +157,12 @@ export default class extends BaseSchema {
         .inTable('resource.projects')
         .onDelete('cascade')
         .onUpdate('cascade')
+
+      table.unique(['organization__id', 'folder__id', 'project__id'])
     })
 
     this.schema.withSchema('iam').createTable('user_resource_policy_binding', (table) => {
+      table.uuid('binding__id', { primaryKey: true }).defaultTo(this.raw('uuid_generate_v4()'))
       table
         .uuid('policy__id')
         .references('policy__id')
@@ -398,7 +394,6 @@ export default class extends BaseSchema {
     this.schema.withSchema('infrastructure').dropTable('regions')
     this.schema.dropSchema('infrastructure')
 
-    this.schema.withSchema('billing').dropTable('accounts')
     this.schema.dropSchema('stripe')
   }
 }

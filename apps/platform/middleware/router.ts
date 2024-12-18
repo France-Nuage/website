@@ -10,20 +10,21 @@ function addQueryParams(to, params) {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+
     const navigationStore = useNavigationStore();
-    const { organization, account, project } = storeToRefs(navigationStore);
-    const { selectOrganization, selectAccount, selectProject } = navigationStore;
+    const { organization, folder, project } = storeToRefs(navigationStore);
+    const { selectOrganization, selectFolder, selectProject } = navigationStore;
 
     const storeOrganizationId = organization.value?.id || null;
-    const storeAccountId = account.value?.id || null;
+    const storeFolderId = folder.value?.id || null;
     const storeProjectId = project.value?.id || null;
 
     const toQuery = to.query || {};
     const fromQuery = from.query || {}
 
     let nextOrganizationId = toQuery.organization || storeOrganizationId;
-    let nextAccountId = toQuery.account || storeAccountId;
-        let nextProjectId = toQuery.project || storeProjectId;
+    let nextFolderId = toQuery.folder || storeFolderId;
+    let nextProjectId = toQuery.project || storeProjectId;
 
     const queryParams = {};
 
@@ -31,11 +32,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         queryParams.organization = nextOrganizationId;
     }
 
-    if (nextAccountId && nextAccountId !== toQuery.account && !(toQuery.organization !== fromQuery.organization)) {
-        queryParams.account = nextAccountId;
+    if (nextFolderId && nextFolderId !== toQuery.folder && !(toQuery.organization !== fromQuery.organization)) {
+        queryParams.folder = nextFolderId;
     }
 
-    if (nextProjectId && nextProjectId !== toQuery.project && !(toQuery.account !== fromQuery.account) && !(toQuery.organization !== fromQuery.organization)) {
+    if (nextProjectId && nextProjectId !== toQuery.project && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
         queryParams.project = nextProjectId;
     }
 
@@ -50,11 +51,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await selectOrganization(nextOrganizationId);
     }
 
-    if (nextAccountId && !(toQuery.organization !== fromQuery.organization)) {
-        await selectAccount(nextAccountId);
+    if (nextFolderId && !(toQuery.organization !== fromQuery.organization)) {
+        await selectFolder(nextFolderId);
     }
 
-    if (nextProjectId && !(toQuery.account !== fromQuery.account) && !(toQuery.organization !== fromQuery.organization)) {
+    if (nextProjectId && !(toQuery.folder !== fromQuery.folder) && !(toQuery.organization !== fromQuery.organization)) {
         await selectProject(nextProjectId);
     }
 });

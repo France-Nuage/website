@@ -7,8 +7,8 @@
     <div class="mt-10">
       <div>
 
-        <c-social-button social-provider="google" />
-        <c-separator class="my-10" label="Ou" />
+<!--        <c-social-button social-provider="google" />-->
+<!--        <c-separator class="my-10" label="Ou" />-->
 
         <form class="space-y-6" @submit.prevent="onSubmit">
 

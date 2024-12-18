@@ -1,10 +1,11 @@
 // resource
 export { OrganizationRepository } from './resource/OrganizationRepository';
 export { ProjectRepository } from './resource/ProjectRepository';
-export { AccountRepository } from "./resource/AccountRepository";
+export { FolderRepository } from "./resource/FolderRepository";
 
 // iam
-export { UserRepository } from './iam/UserRepository';
+export { IAMMemberRepository } from './iam/MemberRepository';
+export { IAMPolicyRepository } from './iam/PolicyRepository';
 export { RoleRepository } from "./iam/RoleRepository";
 export { PermissionRepository } from "./iam/PermissionRepository";
 

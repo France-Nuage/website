@@ -7,11 +7,12 @@ export default class FoldersController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response, bouncer }: HttpContext) {
+  async store({ request, response, bouncer, auth }: HttpContext) {
     await bouncer.with(FolderPolicy).authorize('store')
+    const user = await auth.getUserOrFail()
     const payload = await request.validateUsing(createFolderValidator)
 
-    return response.created(await FolderService.post({ ...payload }))
+    return response.created(await FolderService.post({ ...payload }, user))
   }
 
   /**

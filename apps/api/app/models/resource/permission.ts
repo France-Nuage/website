@@ -1,7 +1,7 @@
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
-import { DateTime } from 'luxon'
 import Role from '#models/iam/role'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import RolePermission from "#models/iam/role_permission";
 
 export default class Permission extends BaseModel {
   public static table = 'iam.permissions'
@@ -21,8 +21,12 @@ export default class Permission extends BaseModel {
   @column({ isPrimary: true, columnName: 'verb__id' })
   declare verbId: string
 
-  @manyToMany(() => Role, {
+  @manyToMany(() => Role,{
     pivotTable: 'iam.role__permission',
+    localKey: 'id',
+    pivotForeignKey: 'permission__id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'role__id',
   })
   declare roles: ManyToMany<typeof Role>
 }

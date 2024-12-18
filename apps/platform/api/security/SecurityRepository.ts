@@ -29,20 +29,34 @@ export const SecurityRepository = function (client, config: Record<any, any>) {
           token.value = response.token?.token;
           return response;
         })
-        .catch((e) => e.message),
+        .catch((e) => e.message)
+    ,
     me: async () => {
         return client('/auth/me');
     },
     register: async (credentials: AllowedRegisterCredentials) =>
-       client('/auth/register', {
-          method: 'POST',
-          body: {
-              lastname: credentials.firstname,
-              firstname: credentials.firstname,
-              email: credentials.email,
-              password: credentials.password,
-          }
-      }),
+        client('/auth/register', {
+            method: 'POST',
+            body: {
+                lastname: credentials.firstname,
+                firstname: credentials.firstname,
+                email: credentials.email,
+                password: credentials.password,
+            }
+        })
+    ,
+    resetPasswordRequest: async (body) =>
+        client(`/auth/reset-password-request`, {
+            method: 'POST',
+            body
+        })
+    ,
+    resetPassword: async (body) => {
+        return client(`/auth/reset-password`, {
+            method: 'POST',
+            body
+        })
+    }
   };
 };
 

@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+
   // make authenticated state reactive
   const { authenticated } = storeToRefs(useAuthStore());
   // get token from cookies

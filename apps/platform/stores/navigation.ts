@@ -3,8 +3,9 @@ interface State {
     project: any,
     organizations: any,
     organization: any,
-    accounts: any,
-    account: any,
+    folders: any,
+    folder: any,
+    resource: { type: 'organization' | 'project' | 'folder', id: string } | null,
 }
 
 export const useNavigationStore = defineStore('navigation', {
@@ -13,8 +14,9 @@ export const useNavigationStore = defineStore('navigation', {
         project: null,
         organizations: [],
         organization: null,
-        accounts: [],
-        account: null,
+        folders: [],
+        folder: null,
+        resource: null
     }),
     actions: {
         loadProjects: async function () {
@@ -28,16 +30,13 @@ export const useNavigationStore = defineStore('navigation', {
         loadOrganizations: async function (queryParams: any = null) {
             const { $api } = useNuxtApp()
 
-            console.log('load organizations')
-
             return $api().organizations.list(queryParams).then((response) => {
                 this.organizations = response.data
-
                 // this.organization = response.data[0]
 
-                // this.accounts = this.organization.accounts
-                // this.account = this.organization.accounts[0]
-                // this.projects = this.account?.projects ? this.account.projects[0] : []
+                // this.folders = this.organization.folders
+                // this.folder = this.organization.folders[0]
+                // this.projects = this.folder?.projects ? this.folder.projects[0] : []
                 // this.project = this.projects.length > 0 ? this.projects[0] : null
 
                 return response
@@ -46,30 +45,32 @@ export const useNavigationStore = defineStore('navigation', {
         selectOrganization: async function (id: string) {
             const { $api } = useNuxtApp()
 
-            return $api().organizations.get(id, { includes: 'accounts.projects' }).then((response) => {
-                this.accounts = response.accounts
+            return $api().organizations.get(id, { includes: 'folders.projects' }).then((response) => {
+                this.folders = response.folders
                 /**
-                 * Default account and project selected mode.
+                 * Default folder and project selected mode.
                  */
-                // this.account = response.accounts[0]
-                // this.projects = this.account.projects ? this.account.projects.map((item) => ({...item, accountId: this.account.id})) : []
+                // this.folder = response.folders[0]
+                // this.projects = this.folder.projects ? this.folder.projects.map((item) => ({...item, folderId: this.folder.id})) : []
                 // this.project = this.projects.length > 0 ? this.projects[0] : null
 
                 /**
-                 * No default account and project selected mode.
+                 * No default folder and project selected mode.
                  */
-                this.account = null
+                this.folder = null
                 this.projects = []
                 this.project = null
                 this.organization = response
+
+                this.resource = { type: 'organization', id: this.organization.id }
             })
         },
-        selectAccount: async function (id: string) {
+        selectFolder: async function (id: string) {
             const { $api } = useNuxtApp()
 
-            return $api().accounts.get(id, { includes: 'projects' }).then((response) => {
-                this.account = response
-                this.projects = this.account.projects ? this.account.projects.map((item) => ({...item, accountId: this.account.id})) : []
+            return $api().folders.get(id, { includes: 'projects' }).then((response) => {
+                this.folder = response
+                this.projects = this.folder.projects ? this.folder.projects.map((item) => ({...item, folderId: this.folder.id})) : []
 
                 /**
                  * Default project selected mode.
@@ -80,10 +81,14 @@ export const useNavigationStore = defineStore('navigation', {
                  * No default project selected mode.
                  */
                 this.project = null
+
+                this.resource = { type: 'folder', id: this.folder.id }
             })
         },
         selectProject: async function (id: any) {
             this.project = this.projects.find((item: any) => item.id === id)
+
+            this.resource = { type: 'project', id: this.project.id }
         },
     }
 })
