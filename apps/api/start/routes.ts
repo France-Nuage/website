@@ -32,6 +32,11 @@ router
   .group(() => {
     router
       .group(() => {
+        router.resource('folders', FoldersController)
+        router.resource('organizations', OrganizationsController)
+        router.resource('projects', ProjectsController)
+        router.resource('instances', InstancesController)
+        router.resource('services', ServicesController)
         router
           .group(() => {
             router.resource('/iam/policies', IAMPoliciesController)
@@ -43,11 +48,6 @@ router
           router.resource('/folders/:folderId', BillingAccountController)
         })
 
-        router.resource('organizations', OrganizationsController)
-        router.resource('projects', ProjectsController)
-        router.resource('folders', FoldersController)
-        router.resource('instances', InstancesController)
-        router.resource('services', ServicesController)
         router.get('/auth/me', [AuthController, 'me'])
       })
       .middleware([middleware.auth()])
