@@ -16,7 +16,7 @@
       >
         <c-modal-header v-if="!props.noHeader || props.title" :title="props.title!" :description="props.description" />
         <slot />
-        <c-modal-footer v-if="!noFooter" @add="onAdd" @cancel="onCancel" />
+        <c-modal-footer v-if="!noFooter" @add="onAdd" @cancel="onCancel" :loading="props.loading"/>
       </DialogPanel>
     </div>
   </Dialog>
@@ -33,6 +33,7 @@ interface Props {
   noFooter?: boolean;
   title?: string;
   description?: string;
+  loading?: boolean;
 }
 
 const props = defineProps<Props>()

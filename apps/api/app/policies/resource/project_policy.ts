@@ -1,28 +1,28 @@
-// import User from '#models/user'
-// import Project from '#models/resource/project'
-import { BasePolicy } from '@adonisjs/bouncer'
+import User from '#models/user'
 import { AuthorizerResponse } from '@adonisjs/bouncer/types'
+import authorization from '#services/authorization'
+import BasePolicy from '#policies/BasePolicy'
 
 export default class ProjectPolicy extends BasePolicy {
   /**
    * Every logged-in user can list an organization
    */
-  index(): AuthorizerResponse {
-    return false
+  index(user: User): AuthorizerResponse {
+    return authorization.check(['resourcemanager.projects.list'], user, this.resources)
   }
 
   /**
-   * Every logged-in user can show a project
+   * Every logged-in user can show a folder
    */
-  show(): AuthorizerResponse {
-    return false
+  show(user: User): AuthorizerResponse {
+    return authorization.check(['resourcemanager.projects.get'], user, this.resources)
   }
 
   /**
-   * Every logged-in user can store a project
+   * Every logged-in user can store a folder
    */
-  store(): AuthorizerResponse {
-    return false
+  store(user: User): AuthorizerResponse {
+    return authorization.check(['resourcemanager.projects.create'], user, this.resources)
   }
 
   /**

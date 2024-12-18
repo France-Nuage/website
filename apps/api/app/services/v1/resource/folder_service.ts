@@ -22,8 +22,7 @@ export default {
       .withPagination(1, 10)
       .apply()
   },
-  // create: async function (includes) {},
-  post: async function (body: any, user: User) {
+  create: async function (body: { [_: string]: string | number | null }, user: User) {
     const folder = await Folder.create(body)
     await Folder.create(body)
     const policy = await Policy.create({
