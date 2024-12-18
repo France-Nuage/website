@@ -3,7 +3,6 @@
 
     <div v-if="resource" class="flex flex-col gap-4">
       <h1 class="mb-2">Autorisation pour {{ resource.type }} {{ navigationStore.$state[resource.type].name  }}</h1>
-
       <c-table
         name="organization_member"
         :headers="headers"
@@ -111,7 +110,7 @@ const headers = [
   { key: "roles", label: "Rôles" },
 ]
 
-const clickOnRow = (event) => {
+const clickOnRow = () => {
   isOpen.value = true
 }
 
