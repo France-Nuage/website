@@ -63,7 +63,7 @@
     <c-sidebar>
 
       <c-sidebar-navigation-group>
-        <button class="text-white text-sm text-start flex items-center gap-2" @click="$router.go(-1)">
+        <button class="text-white text-sm text-start flex items-center gap-2" @click="$router.push('/')">
           <Icon :name="`solar:backspace-bold-duotone`" size="1.3rem" style="color: #c1c1c1" />
           <span>Retour</span>
         </button>

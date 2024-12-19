@@ -99,9 +99,7 @@ export const useNavigationStore = defineStore('navigation', {
             }
 
             return apis[resource.type].post(body).then((response) => {
-                console.log(response)
                 return response
-                // this[`${resource.type}s`].push(response)
             })
         },
         updateResource: async function (id, body, resource: Resource) {
@@ -113,7 +111,6 @@ export const useNavigationStore = defineStore('navigation', {
             }
 
             return apis[resource?.type].patch(id, body).then((response) => {
-                console.log(response)
                 return response
             })
         }

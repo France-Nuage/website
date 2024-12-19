@@ -4,15 +4,15 @@
   <TabGroup>
     <c-tab-list>
       <c-tab>Général</c-tab>
-      <c-tab>Facturation</c-tab>
+<!--      <c-tab>Facturation</c-tab>-->
     </c-tab-list>
     <TabPanels>
       <TabPanel class="w-6/12">
         <general />
       </TabPanel>
-      <TabPanel>
-        <billing />
-      </TabPanel>
+<!--      <TabPanel>-->
+<!--        <billing />-->
+<!--      </TabPanel>-->
     </TabPanels>
   </TabGroup>
 </template>
@@ -22,7 +22,6 @@ import { TabGroup, TabPanels, TabPanel } from '@headlessui/vue'
 import CTabList from "~/components/tabs/CTabList.vue";
 import CTab from "~/components/tabs/CTab.vue";
 import General from "~/pages/settings/organizations/[id]/local-components/general.vue";
-import Billing from "~/pages/settings/local-components/fragments/billing.vue";
 
 const { organization } = storeToRefs(useNavigationStore())
 </script>
