@@ -11,7 +11,6 @@ export default {
     includes: Array<string>,
     user: User
   ) {
-    console.log(user.id)
     return new RequestQueryBuilder(Organization.query())
       .withIncludes(includes)
       .applyWhere([['id', '=', id]])
